@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import "./style.css";
 
-const heroImageUrl = ""; // トップ画像を表示したい場合は、ここに画像URLを入れてください。
+const heroImageUrl = "/top.png"; // トップ画像を表示したい場合は、ここに画像URLを入れてください。
 
 const locationTree = {
   indoor: {
