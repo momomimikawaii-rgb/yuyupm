@@ -116,7 +116,11 @@ function buildPrompt({ locationType, locationOption, selected, custom }) {
 
   return `${identityRule}
 
-${locationKind}の「${location}」で、${items}に囲まれたペットの可愛い静止画。${containerSentence}背景には${wallpaper}を入れて、壁や奥の空間まで可愛く作り込んでください。ペットは${outfitColor}の${outfit}を着ています。服はペットの体型に自然に合っていて、顔や目や鼻口まわりを隠さないでください。色合いは${color}。光や明るさは${lighting}。雰囲気は${mood}。ペットは${pose}。背景は明るく、やさしい光に包まれていて、可愛いけれどペットの顔を邪魔しない。${brightLock}全体が地味にならないように、レース、リボン、花、スウィーツ、壁飾りを画面内にバランスよく配置し、華やかでごちゃかわいい密度のある一枚にしてください。${aspectInstruction}ふんわり上品で夢かわいい一枚にしてください。`;
+${locationKind}の「${location}」で、${items}に囲まれたペットの可愛い静止画。${containerSentence}背景には${wallpaper}を入れて、壁や奥の空間まで可愛く作り込んでください。ペットは${outfitColor}の${outfit}を着ています。服はペットの体型に自然に合っていて、顔や目や鼻口まわりを隠さないでください。色合いは${color}。光や明るさは${lighting}。雰囲気は${mood}。ペットは${pose}。背景は明るく、やさしい光に包まれていて、可愛いけれどペットの顔を邪魔しない。${brightLock}${
+  locationType === "indoor"
+    ? "全体が地味にならないように、レース、リボン、花、スウィーツ、壁飾りを画面内にバランスよく配置し、華やかでごちゃかわいい密度のある一枚にしてください。"
+    : "自然の景色や花畑の美しさを活かしつつ、リボンや花飾り、小物をさりげなく配置して、夢かわいく華やかな世界観にしてください。人工物を増やしすぎず、自然な可愛さを大切にしてください。"
+}${aspectInstruction}ふんわり上品で夢かわいい一枚にしてください。`;
 }
 
 async function copyTextSafely(text, fallbackElement) {
