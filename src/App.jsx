@@ -112,7 +112,7 @@ function buildPrompt({ locationType, locationOption, selected, custom }) {
   const aspectInstruction = getSizeInstruction(size);
   const locationKind = locationType ? locationTree[locationType].label : "屋内または屋外";
   const containerSentence = containerScene ? `ペットは「${containerScene}」という主役ギミックで表現してください。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。` : "";
-  const brightLock = "黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく、白ピンク・藤色・水色などのやさしい色合いを維持してください。";
+  const brightLock = "黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく、選択した色合いや世界観を維持してください。";
 
   return `${identityRule}
 
