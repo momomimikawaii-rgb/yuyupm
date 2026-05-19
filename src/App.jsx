@@ -231,7 +231,17 @@ function App() {
                       return <button key={option} onClick={() => toggleOption(category.id, option)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
-                  <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
+
+{category.id === "lighting" && (
+  <div className="mb-4 rounded-2xl border border-pink-200 bg-pink-50 p-3 text-xs leading-relaxed text-slate-700">
+    黒い子・濃い茶色の子・グレー系の子は、
+    背景や全体の色味まで暗く引っ張られやすいです。
+    夢かわ・白ピンク系にしたい場合は、
+    「明るくハイキー」「白っぽくふんわり発光」推奨です。
+  </div>
+)}
+
+<label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
               );
