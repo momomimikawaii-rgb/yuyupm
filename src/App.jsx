@@ -226,7 +226,53 @@ function App() {
                 <span>場所を選んで、小物・服・色・雰囲気を盛るだけ。苺、レース、リボン、パールをたっぷり入れても、ペットのお顔だけは最優先で守るプロンプトになります。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
               </div>
             </section>
+<section className="card">
+  <div className="card-head">
+    <h2>🌸 ゆゆ姫5月のおすすめ</h2>
+  </div>
 
+  <div
+    style={{
+      display: "flex",
+      gap: "16px",
+      alignItems: "center",
+      flexWrap: "wrap",
+    }}
+  >
+    <img
+      src="/ajisai-road.png"
+      alt="雨の日のあじさいロード"
+      style={{
+        width: "140px",
+        borderRadius: "20px",
+        cursor: "pointer",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
+      }}
+      onClick={() => window.open("/ajisai-road.png", "_blank")}
+    />
+
+    <div style={{ flex: 1 }}>
+      <h3 style={{ marginBottom: "8px" }}>
+        雨の日のあじさいロード
+      </h3>
+
+      <p style={{ marginBottom: "12px" }}>
+        あじさい・お天気雨・虹・フリル傘の、
+        透明感たっぷりな夢かわ世界。
+      </p>
+
+      <button
+        className="main-button"
+        onClick={() => {
+          navigator.clipboard.writeText(`ここに修正版プロンプト全文`);
+          alert("おすすめプロンプトをコピーしました🌸");
+        }}
+      >
+        このおすすめをコピー
+      </button>
+    </div>
+  </div>
+</section>
             <section className="card">
               <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
