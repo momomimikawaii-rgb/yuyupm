@@ -578,7 +578,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const outfitColor = joinValues(selected, custom, "outfitColor");
   const shoes = joinValues(selected, custom, "shoes");
   const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
-  const lighting = translateLighting(joinValues(selected, custom, "lighting", "明るくハイキー、透明感のある明るい光"));
+  const lighting = translateLighting(joinValues(selected, custom, "lighting", "おまかせ"));
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
   const hasStageGimmickInPrompt =
     (selected.containerScene || []).length > 0 &&
@@ -907,7 +907,7 @@ function App() {
             </section>
 
             <section className="card">
-              <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
+              <h2><span>01</span>　<LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
                   const Icon = value.icon;
@@ -917,7 +917,7 @@ function App() {
               </div>
               {locationType === "indoor" && (
                 <>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の世界観</h3>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>02　屋内の世界観</h3>
                   <div className="chips">
                     {indoorWorlds.map((world) => {
                       const active = indoorWorldId === world.id;
@@ -928,7 +928,7 @@ function App() {
                     <strong>{indoorWorlds.find((item) => item.id === indoorWorldId)?.title}</strong>
                     <span>{indoorWorlds.find((item) => item.id === indoorWorldId)?.description}</span>
                   </div>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の場所</h3>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>03　屋内の場所</h3>
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
@@ -944,7 +944,7 @@ function App() {
             {locationType === "outdoor" && (
               <section className="card">
                 <div className="card-head">
-                  <h2>🌍 屋外の世界観</h2>
+                  <h2><span>02</span>　🌍 屋外の世界観</h2>
                   <button className="outline-button" onClick={() => setWorldOpen((prev) => !prev)}>{worldOpen ? "閉じる" : "開く"}</button>
                 </div>
                 {worldOpen && (
@@ -961,7 +961,7 @@ function App() {
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category, index) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={index + 3 + activeWorld.subCategories.length} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={index + 4} />
                       ))}
                     </div>
                   </div>
