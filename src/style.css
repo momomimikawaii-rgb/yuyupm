@@ -366,7 +366,7 @@ textarea:focus {
 
 
 @media (min-width: 921px) {
-  .right {
+  .result-card {
     position: sticky;
     top: 16px;
     align-self: start;
@@ -401,5 +401,61 @@ textarea:focus {
   .card {
     padding: 16px;
     border-radius: 26px;
+  }
+}
+
+
+.sister-site-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 24px;
+  border: 1px solid #ddd6fe;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(245, 243, 255, 0.92), rgba(240, 249, 255, 0.92));
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.14);
+}
+
+.sister-site-card div {
+  display: grid;
+  gap: 4px;
+  line-height: 1.6;
+}
+
+.sister-site-card strong {
+  color: #7c3aed;
+  font-size: 15px;
+}
+
+.sister-site-card span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.sister-site-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 9px 13px;
+  border-radius: 999px;
+  background: #a78bfa;
+  color: white;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(167, 139, 250, 0.22);
+}
+
+.sister-site-card a:hover {
+  background: #8b5cf6;
+}
+
+@media (max-width: 560px) {
+  .sister-site-card {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

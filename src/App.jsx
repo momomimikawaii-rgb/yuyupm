@@ -13,6 +13,7 @@ import {
   PlusCircle,
   Shirt,
   Sun,
+  ExternalLink,
 } from "lucide-react";
 import "./style.css";
 
@@ -255,6 +256,60 @@ const multiCategories = [
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
   { id: "size", title: "画像サイズ", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
 ];
+
+
+const sectionNumbers = {
+  locationType: 1,
+  indoorWorld: 2,
+  outdoorWorld: 2,
+  indoorPlace: 3,
+
+  gardenType: 3,
+  mainFlower: 4,
+  subFlowers: 5,
+  flowerDensity: 6,
+  castlePlace: 3,
+  castleMood: 4,
+  castleDecor: 5,
+  fantasyPlace: 3,
+  fantasyMood: 4,
+  fantasyFlowers: 5,
+  fantasyLight: 6,
+  seaPlace: 3,
+  seaMood: 4,
+  seaDecor: 5,
+  cityPlace: 3,
+  cityTime: 4,
+  cityLight: 5,
+  naturePlace: 3,
+  natureMood: 4,
+  alicePlace: 3,
+  aliceContainer: 4,
+  aliceItems: 5,
+  aliceMood: 6,
+
+  outfit: 7,
+  headAccessory: 8,
+  shoes: 9,
+  outfitColor: 10,
+  containerScene: 11,
+  pose: 12,
+  items: 13,
+  wallpaper: 14,
+  wallDecor: 15,
+  color: 16,
+  lighting: 17,
+  mood: 18,
+  density: 19,
+  textOverlay: 20,
+  size: 21,
+  fallingItems: 22,
+  effectAmount: 23,
+};
+
+function formatNumber(number) {
+  return String(number).padStart(2, "0");
+}
 
 const customFieldLabels = {
   location: "その他の場所",
@@ -708,7 +763,7 @@ async function copyTextSafely(text, fallbackElement) {
 function OptionGroup({ category, selected, custom, onToggle, onCustomChange, number }) {
   return (
     <div>
-      <h3 style={{ marginBottom: "10px" }}>{number ? `${String(number).padStart(2, "0")}　${category.title}` : category.title}</h3>
+      <h3 style={{ marginBottom: "10px" }}>{number ? `${formatNumber(number)}　${category.title}` : category.title}</h3>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -879,6 +934,16 @@ function App() {
                 <strong>ゆゆ姫ワールドの作り方</strong>
                 <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
               </div>
+
+              <div className="sister-site-card">
+                <div>
+                  <strong>🌈 姉妹サイト</strong>
+                  <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
+                </div>
+                <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
+                  汎用版を開く <ExternalLink size={15} />
+                </a>
+              </div>
             </section>
 
             <section className="card">
@@ -907,7 +972,7 @@ function App() {
             </section>
 
             <section className="card">
-              <h2><span>01</span>　<LocationIcon size={20} /> 場所を選ぶ</h2>
+              <h2><span>{formatNumber(sectionNumbers.locationType)}</span>　<LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
                   const Icon = value.icon;
@@ -917,7 +982,7 @@ function App() {
               </div>
               {locationType === "indoor" && (
                 <>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>02　屋内の世界観</h3>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>{formatNumber(sectionNumbers.indoorWorld)}　屋内の世界観</h3>
                   <div className="chips">
                     {indoorWorlds.map((world) => {
                       const active = indoorWorldId === world.id;
@@ -928,7 +993,7 @@ function App() {
                     <strong>{indoorWorlds.find((item) => item.id === indoorWorldId)?.title}</strong>
                     <span>{indoorWorlds.find((item) => item.id === indoorWorldId)?.description}</span>
                   </div>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>03　屋内の場所</h3>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>{formatNumber(sectionNumbers.indoorPlace)}　屋内の場所</h3>
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
@@ -944,7 +1009,7 @@ function App() {
             {locationType === "outdoor" && (
               <section className="card">
                 <div className="card-head">
-                  <h2><span>02</span>　🌍 屋外の世界観</h2>
+                  <h2><span>{formatNumber(sectionNumbers.outdoorWorld)}</span>　🌍 屋外の世界観</h2>
                   <button className="outline-button" onClick={() => setWorldOpen((prev) => !prev)}>{worldOpen ? "閉じる" : "開く"}</button>
                 </div>
                 {worldOpen && (
@@ -957,11 +1022,11 @@ function App() {
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
                     {activeWorld.subCategories.map((category, index) => (
-                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={index + 3} />
+                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={sectionNumbers[category.id]} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category, index) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={index + 4} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={sectionNumbers[category.id]} />
                       ))}
                     </div>
                   </div>
