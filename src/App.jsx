@@ -13,6 +13,7 @@ import {
   PlusCircle,
   Shirt,
   Sun,
+  ExternalLink,
 } from "lucide-react";
 import "./style.css";
 
@@ -256,7 +257,6 @@ const multiCategories = [
   { id: "size", title: "画像サイズ", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
 ];
 
-
 const sectionNumbers = {
   locationType: 1,
   indoorWorld: 2,
@@ -392,7 +392,6 @@ function splitCustomText(value) {
   if (!value) return [];
   return value.split(/[、,\n]/).map((item) => item.trim()).filter(Boolean);
 }
-
 
 function isSingleCategory(key) {
   const multiCategory = multiCategories.find((category) => category.id === key);
@@ -931,7 +930,17 @@ function App() {
               </div>
               <div className="notice">
                 <strong>ゆゆ姫ワールドの作り方</strong>
-                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
+                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。</span>
+              </div>
+
+              <div className="sister-site-card">
+                <div>
+                  <strong>🌈 姉妹サイト</strong>
+                  <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
+                </div>
+                <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
+                  汎用版を開く <ExternalLink size={15} />
+                </a>
               </div>
             </section>
 
@@ -1038,7 +1047,7 @@ function App() {
                       return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
-                  {category.id === "lighting" && <div className="notice" style={{ marginBottom: "12px" }}>黒い子・濃い茶色の子・グレー系の子は、背景や全体の色味まで暗く引っ張られやすいです。夢かわ・白ピンク系にしたい場合は「明るくハイキー」「白っぽくふんわり発光」推奨です。</div>}
+                  {category.id === "lighting" && <div className="notice" style={{ marginBottom: "12px" }}></div>}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
