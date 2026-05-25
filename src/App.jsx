@@ -18,11 +18,6 @@ import "./style.css";
 
 const heroImageUrl = "/top.png";
 
-
-function formatSectionTitle(index, title) {
-  return `${String(index + 1).padStart(2, "0")}　${title}`;
-}
-
 const identityRule =
   "アップロードされたペットの顔・表情・毛色・模様・目の形・鼻と口まわり・耳の位置・毛並み・体格を最優先で保持してください。犬・猫・ハムスターなど、元写真のペットの種類と本人らしさを守り、別の子に変えないでください。可愛く整える場合も、元写真の本人らしさを崩さないことを最重要にしてください。白目やまつ毛など、元写真にない要素は勝手に追加しないでください。";
 
@@ -714,7 +709,7 @@ async function copyTextSafely(text, fallbackElement) {
 function OptionGroup({ category, selected, custom, onToggle, onCustomChange }) {
   return (
     <div>
-      <h3 style={{ marginBottom: "10px" }}>{formatSectionTitle(index, category.title)}</h3>
+      <h3 style={{ marginBottom: "10px" }}>{category.title}</h3>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -962,11 +957,11 @@ function App() {
                       })}
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
-                    {activeWorld.subCategories.map((category, index) => (
+                    {activeWorld.subCategories.map((category) => (
                       <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
-                      {sceneEffects.map((category, index) => (
+                      {sceneEffects.map((category) => (
                         <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                       ))}
                     </div>
@@ -983,7 +978,7 @@ function App() {
               const CategoryIcon = category.icon;
               return (
                 <section key={category.id} className="card">
-                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {formatSectionTitle(index, category.title)}</h2>
+                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
