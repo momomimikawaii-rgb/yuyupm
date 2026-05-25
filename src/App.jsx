@@ -13,7 +13,6 @@ import {
   PlusCircle,
   Shirt,
   Sun,
-  ExternalLink,
 } from "lucide-react";
 import "./style.css";
 
@@ -934,16 +933,6 @@ function App() {
                 <strong>ゆゆ姫ワールドの作り方</strong>
                 <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
               </div>
-
-              <div className="sister-site-card">
-                <div>
-                  <strong>🌈 姉妹サイト</strong>
-                  <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
-                </div>
-                <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
-                  汎用版を開く <ExternalLink size={15} />
-                </a>
-              </div>
             </section>
 
             <section className="card">
@@ -1021,11 +1010,11 @@ function App() {
                       })}
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
-                    {activeWorld.subCategories.map((category, index) => (
+                    {activeWorld.subCategories.map((category) => (
                       <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={sectionNumbers[category.id]} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
-                      {sceneEffects.map((category, index) => (
+                      {sceneEffects.map((category) => (
                         <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={sectionNumbers[category.id]} />
                       ))}
                     </div>
@@ -1042,7 +1031,7 @@ function App() {
               const CategoryIcon = category.icon;
               return (
                 <section key={category.id} className="card">
-                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
+                  <h2>{formatNumber(sectionNumbers[category.id])}　{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
