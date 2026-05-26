@@ -918,39 +918,43 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>
-
-<div className="sister-site-card">
-            <div>
-              <strong>🌈 姉妹サイト</strong>
-              <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
-            </div>
-            <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
-              汎用版を開く <ExternalLink size={15} />
-            </a>
-          </div>
-            </section>
-
-            <section className="card">
-          <div className="card-head">
-            <h2>🌸 ゆゆ姫のおすすめ</h2>
-            <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
-          </div>
-          {recommendedOpen && (
-            <div style={{ display: "grid", gap: "14px" }}>
-              {recommendedPrompts.map((item) => (
-                <div key={item.id} style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap", padding: "12px", borderRadius: "24px", background: "rgba(255,255,255,0.72)", border: "1px solid rgba(251,207,232,0.9)" }}>
-                  <img src={item.image} alt={item.title} style={{ width: "140px", borderRadius: "20px", cursor: "pointer", boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }} onClick={() => setModalImage(item.image)} />
-                  <div style={{ flex: 1, minWidth: "220px" }}>
-                    <div style={{ fontSize: "13px", color: "#9d4edd", fontWeight: 800, marginBottom: "4px" }}>{item.label}</div>
-                    <h3 style={{ marginBottom: "8px" }}>{item.title}</h3>
-                    <p style={{ marginBottom: "12px" }}>{item.description}</p>
-                    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-                      <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
-                      {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
-                    </div>
-                  </div>}
+          {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
+
+        <div className="sister-site-card">
+          <div>
+            <strong>🌈 姉妹サイト</strong>
+            <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
+          </div>
+          <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
+            汎用版を開く <ExternalLink size={15} />
+          </a>
+        </div>
+
+        <section className="card recommended-wide">
+                      <div className="card-head">
+                        <h2>🌸 ゆゆ姫のおすすめ</h2>
+                        <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
+                      </div>
+                      {recommendedOpen && (
+                        <div style={{ display: "grid", gap: "14px" }}>
+                          {recommendedPrompts.map((item) => (
+                            <div key={item.id} style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap", padding: "12px", borderRadius: "24px", background: "rgba(255,255,255,0.72)", border: "1px solid rgba(251,207,232,0.9)" }}>
+                              <img src={item.image} alt={item.title} style={{ width: "140px", borderRadius: "20px", cursor: "pointer", boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }} onClick={() => setModalImage(item.image)} />
+                              <div style={{ flex: 1, minWidth: "220px" }}>
+                                <div style={{ fontSize: "13px", color: "#9d4edd", fontWeight: 800, marginBottom: "4px" }}>{item.label}</div>
+                                <h3 style={{ marginBottom: "8px" }}>{item.title}</h3>
+                                <p style={{ marginBottom: "12px" }}>{item.description}</p>
+                                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                                  <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
+                                  {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </section>
 
         <div className="grid">
           <div className="left">
@@ -963,13 +967,8 @@ function App() {
                 <strong>ゆゆ姫ワールドの作り方</strong>
                 <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。</span>
               </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </section>
-
-            <section className="card">
+<section className="card">
               <h2><span>{formatNumber(sectionNumbers.locationType)}</span>　<LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
@@ -1047,7 +1046,6 @@ function App() {
                       return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
-                  {category.id === "lighting" && <div className="notice" style={{ marginBottom: "12px" }}></div>}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
