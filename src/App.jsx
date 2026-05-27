@@ -250,65 +250,12 @@ const multiCategories = [
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"] },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
   { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "ワインレッド", "白×金"] },
-  { id: "lighting", title: "光・明るさ", icon: Sun, single: true, options: ["おまかせ", "明るい昼", "夕方", "夜でも顔明るく"] },
+  { id: "lighting", title: "光・明るさ", icon: Sun, single: true, options: ["おまかせ（世界観に合わせる）", "明るくハイキー", "白っぽくふんわり発光", "透明感のある明るい光", "やさしい昼間の光", "夕暮れのやわらかい光", "夜景風", "月明かり風", "神々しい光", "星降るような光", "ゴシックに合う明るいドラマチック光", "黒×ピンクに合う甘辛い光", "月明かり風だけど顔は明るい", "ダークメルヘンだけど暗くしない光", "夜景風だけどペットは明るい"] },
   { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
   { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
-  { id: "size", title: "画像サイズ", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
+  { id: "size", title: "縦横の比率", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
 ];
-
-const sectionNumbers = {
-  locationType: 1,
-  indoorWorld: 2,
-  outdoorWorld: 2,
-  indoorPlace: 3,
-
-  gardenType: 3,
-  mainFlower: 4,
-  subFlowers: 5,
-  flowerDensity: 6,
-  castlePlace: 3,
-  castleMood: 4,
-  castleDecor: 5,
-  fantasyPlace: 3,
-  fantasyMood: 4,
-  fantasyFlowers: 5,
-  fantasyLight: 6,
-  seaPlace: 3,
-  seaMood: 4,
-  seaDecor: 5,
-  cityPlace: 3,
-  cityTime: 4,
-  cityLight: 5,
-  naturePlace: 3,
-  natureMood: 4,
-  alicePlace: 3,
-  aliceContainer: 4,
-  aliceItems: 5,
-  aliceMood: 6,
-
-  outfit: 7,
-  headAccessory: 8,
-  shoes: 9,
-  outfitColor: 10,
-  containerScene: 11,
-  pose: 12,
-  items: 13,
-  wallpaper: 14,
-  wallDecor: 15,
-  color: 16,
-  lighting: 17,
-  mood: 18,
-  density: 19,
-  textOverlay: 20,
-  size: 21,
-  fallingItems: 22,
-  effectAmount: 23,
-};
-
-function formatNumber(number) {
-  return String(number).padStart(2, "0");
-}
 
 const customFieldLabels = {
   location: "その他の場所",
@@ -324,7 +271,7 @@ const customFieldLabels = {
   lighting: "その他の光・明るさ",
   mood: "その他の雰囲気",
   pose: "その他のポーズ",
-  size: "その他の画像サイズ",
+  size: "その他の縦横の比率",
 };
 
 const customPlaceholders = {
@@ -384,7 +331,7 @@ const recommendedPrompts = [
     label: "ゆゆ姫5月のおすすめ",
     image: "/ajisai-road.png",
     description: "あじさい・お天気雨・虹・フリル傘の、透明感たっぷりな夢かわ世界。",
-    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。画像サイズは4:5の縦長。ふんわり上品で夢かわいい一枚にしてください。`,
+    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。縦横の比率は4:5の縦長。ふんわり上品で夢かわいい一枚にしてください。`,
   },
 ];
 
@@ -392,6 +339,7 @@ function splitCustomText(value) {
   if (!value) return [];
   return value.split(/[、,\n]/).map((item) => item.trim()).filter(Boolean);
 }
+
 
 function isSingleCategory(key) {
   const multiCategory = multiCategories.find((category) => category.id === key);
@@ -438,11 +386,11 @@ function getSingleValue(selected, custom, key, fallback = "") {
 }
 
 function getSizeInstruction(size) {
-  if (size.includes("1:1") || size.includes("正方形")) return "画像サイズは1:1の正方形。";
-  if (size.includes("4:5")) return "画像サイズは4:5の縦長。";
-  if (size.includes("9:16")) return "画像サイズは9:16の縦長。";
-  if (size.includes("16:9")) return "画像サイズは16:9の横長。";
-  return size ? `画像サイズは${size}。` : "";
+  if (size.includes("1:1") || size.includes("正方形")) return "縦横の比率は1:1の正方形。";
+  if (size.includes("4:5")) return "縦横の比率は4:5の縦長。";
+  if (size.includes("9:16")) return "縦横の比率は9:16の縦長。";
+  if (size.includes("16:9")) return "縦横の比率は16:9の横長。";
+  return size ? `縦横の比率は${size}。` : "";
 }
 
 function translateOutfit(outfit) {
@@ -452,24 +400,25 @@ function translateOutfit(outfit) {
 
 function translateLighting(lighting) {
   if (!lighting) return "";
-
   const translations = {
-    "おまかせ":
-      "選んだ世界観に自然に合う光。ペットの顔・目・鼻口まわりは見やすく保ち、背景に合う明るさへ自動調整してください。",
-    "明るい昼":
-      "明るい昼間の自然光。全体を明るく清潔感のある光にしてください。",
-    "夕方":
-      "夕方のやわらかい暖色光。ロマンチックで自然な空気感にしてください。",
-    "夜でも顔明るく":
-      "夜景や暗めの背景でも、ペットの顔・目・鼻口まわりは暗くせず、見やすく明るくしてください。",
+    "おまかせ（世界観に合わせる）":
+      "選んだ世界観・場所・服に自然に合う光。ペットの顔は明るく見やすく保ち、背景の雰囲気に合わせて光を調整してください。",
+    "ゴシックに合う明るいドラマチック光":
+      "黒や紫、黒ピンクなどのゴシックな世界観に合う、明るさを保ったドラマチックな光。暗く沈ませず、ペットの顔は見やすく、背景だけ少し幻想的でゴシックにしてください。",
+    "黒×ピンクに合う甘辛い光":
+      "黒とピンクの甘辛い世界観に合う、可愛さと少しダークな雰囲気を両立した光。ペットの顔は暗くせず、ピンクの差し色がきれいに見える明るさにしてください。",
+    "月明かり風だけど顔は明るい":
+      "月明かりのような幻想的な光。ただしペットの顔・目・鼻口まわりは明るく見やすく保ち、暗く沈ませないでください。",
+    "ダークメルヘンだけど暗くしない光":
+      "少しダークメルヘンな雰囲気に合う光。背景は幻想的でも、全体を暗くしすぎず、ペットの顔は明るく可愛く見えるようにしてください。",
+    "夜景風だけどペットは明るい":
+      "夜景風の背景に合う光。ただしペット本体は暗くせず、顔と毛並みがはっきり見えるように明るく照らしてください。",
   };
 
-  const base = lighting
+  return lighting
     .split("、")
     .map((item) => translations[item] || item)
     .join("、");
-
-  return `${base} 黒い子・濃い茶色の子・グレー系の子でも、ペットの毛色に背景全体が暗く引きずられないようにしてください。背景は選んだ世界観本来の明るさ・色合い・空気感を維持してください。`;
 }
 
 function translateColor(color) {
@@ -631,7 +580,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const outfitColor = joinValues(selected, custom, "outfitColor");
   const shoes = joinValues(selected, custom, "shoes");
   const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
-  const lighting = translateLighting(joinValues(selected, custom, "lighting", "おまかせ"));
+  const lighting = translateLighting(joinValues(selected, custom, "lighting", "明るくハイキー、透明感のある明るい光"));
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
   const hasStageGimmickInPrompt =
     (selected.containerScene || []).length > 0 &&
@@ -758,10 +707,10 @@ async function copyTextSafely(text, fallbackElement) {
   return { ok: false };
 }
 
-function OptionGroup({ category, selected, custom, onToggle, onCustomChange, number }) {
+function OptionGroup({ category, selected, custom, onToggle, onCustomChange }) {
   return (
     <div>
-      <h3 style={{ marginBottom: "10px" }}>{number ? `${formatNumber(number)}　${category.title}` : category.title}</h3>
+      <h3 style={{ marginBottom: "10px" }}>{category.title}</h3>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -918,6 +867,9 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
+          <div className="update-time">
+            最終更新：2026/05/27 23:44
+          </div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -937,23 +889,23 @@ function App() {
                         <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
                       </div>
                       {recommendedOpen && (
-                <div className="recommended-grid">
-                  {recommendedPrompts.map((item) => (
-                    <div key={item.id} className="recommended-item">
-                      <img className="recommended-thumb" src={item.image} alt={item.title} onClick={() => setModalImage(item.image)} />
-                      <div className="recommended-body">
-                        <div className="recommended-label">{item.label}</div>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                        <div className="recommended-actions">
-                          <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
-                          {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
+                        <div className="recommended-grid">
+                          {recommendedPrompts.map((item) => (
+                            <div key={item.id} className="recommended-item">
+                              <img className="recommended-thumb" src={item.image} alt={item.title} onClick={() => setModalImage(item.image)} />
+                              <div className="recommended-body">
+                                <div className="recommended-label">{item.label}</div>
+                                <h3>{item.title}</h3>
+                                <p>{item.description}</p>
+                                <div className="recommended-actions">
+                                  <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
+                                  {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+                      )}
                     </section>
 
         <div className="grid">
@@ -969,7 +921,7 @@ function App() {
               </div>
             </section>
 <section className="card">
-              <h2><span>{formatNumber(sectionNumbers.locationType)}</span>　<LocationIcon size={20} /> 場所を選ぶ</h2>
+              <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
                   const Icon = value.icon;
@@ -979,7 +931,7 @@ function App() {
               </div>
               {locationType === "indoor" && (
                 <>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>{formatNumber(sectionNumbers.indoorWorld)}　屋内の世界観</h3>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の世界観</h3>
                   <div className="chips">
                     {indoorWorlds.map((world) => {
                       const active = indoorWorldId === world.id;
@@ -990,7 +942,7 @@ function App() {
                     <strong>{indoorWorlds.find((item) => item.id === indoorWorldId)?.title}</strong>
                     <span>{indoorWorlds.find((item) => item.id === indoorWorldId)?.description}</span>
                   </div>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>{formatNumber(sectionNumbers.indoorPlace)}　屋内の場所</h3>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の場所</h3>
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
@@ -1006,7 +958,7 @@ function App() {
             {locationType === "outdoor" && (
               <section className="card">
                 <div className="card-head">
-                  <h2><span>{formatNumber(sectionNumbers.outdoorWorld)}</span>　🌍 屋外の世界観</h2>
+                  <h2>🌍 屋外の世界観</h2>
                   <button className="outline-button" onClick={() => setWorldOpen((prev) => !prev)}>{worldOpen ? "閉じる" : "開く"}</button>
                 </div>
                 {worldOpen && (
@@ -1019,11 +971,11 @@ function App() {
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
                     {activeWorld.subCategories.map((category) => (
-                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={sectionNumbers[category.id]} />
+                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} number={sectionNumbers[category.id]} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                       ))}
                     </div>
                   </div>
@@ -1039,7 +991,7 @@ function App() {
               const CategoryIcon = category.icon;
               return (
                 <section key={category.id} className="card">
-                  <h2>{formatNumber(sectionNumbers[category.id])}　{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
+                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
