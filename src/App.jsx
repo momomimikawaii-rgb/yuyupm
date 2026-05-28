@@ -272,8 +272,67 @@ const multiCategories = [
     "ひよこのきぐるみ",
     "小鳥のきぐるみ"
   ] },
-  { id: "headAccessory", title: "頭飾り・アクセサリー", options: ["なし", "大きなリボン", "細い垂れリボン", "ヘッドドレス", "ボンネット", "麦わら帽子", "花冠", "ティアラ", "サングラス", "うさ耳カチューシャ", "苺モチーフの髪飾り", "レースのカチューシャ", "お花付きリボン", "藤の花飾り", "レース付き麦わら帽子", "ベレー帽", "ふわふわイヤーマフ", "天使の輪っか", "小さな王冠", "猫耳ヘッドドレス", "黒レースヘッドドレス", "コウモリリボン", "猫耳ゴスカチューシャ", "リス耳フード", "モモンガ耳フード", "ひよこ帽子", "うさ耳フード", "小鳥の羽飾り", "くま耳フード"] },
-  { id: "shoes", title: "靴・足元", single: true, options: ["なし", "ピンクのリボン付きシューズ", "白レースの小さな靴", "藤色のリボンシューズ", "淡い水色の靴", "苺モチーフの靴", "可愛いピンクのレインブーツ", "小さな赤い長靴", "パール付きシューズ", "バレエシューズ風", "ふわふわブーツ", "足元に小さなリボンだけ"] },
+  { id: "headAccessory", title: "頭装備", options: [
+    "なし",
+    "おまかせ",
+    "大きなリボン",
+    "細い垂れリボン",
+    "カチューシャ",
+    "ヘッドドレス",
+    "ボンネット",
+    "ベレー帽",
+    "麦わら帽子",
+    "かぶりもの",
+    "ティアラ"
+  ] },
+  { id: "headDecor", title: "頭装備の飾り", options: [
+    "おまかせ",
+    "花",
+    "リボン",
+    "レース",
+    "フリル",
+    "パール",
+    "苺",
+    "薔薇",
+    "猫耳",
+    "くま耳",
+    "きつね耳",
+    "うさぎ耳",
+    "垂れ耳うさぎ"
+  ] },
+  { id: "accessory", title: "アクセサリー", options: [
+    "なし",
+    "おまかせ",
+    "首飾り",
+    "チョーカー",
+    "ネックレス",
+    "ブローチ",
+    "リボンタイ",
+    "サングラス",
+    "眼鏡",
+    "魔法ステッキ",
+    "バッグ"
+  ] },
+  { id: "shoes", title: "靴の形", single: true, options: [
+    "なし",
+    "おまかせ",
+    "レース靴",
+    "バレエシューズ",
+    "ブーツ",
+    "ローファー",
+    "長靴",
+    "サンダル"
+  ] },
+  { id: "shoeDecor", title: "靴の飾り", options: [
+    "おまかせ",
+    "リボン",
+    "レース",
+    "フリル",
+    "花",
+    "パール",
+    "ハート",
+    "星"
+  ] },
   { id: "outfitColor", title: "服セットの色合い（3色まで）", maxSelect: 3, options: [
     "おまかせ",
     "白",
@@ -368,9 +427,12 @@ const customFieldLabels = {
   wallpaper: "その他の壁紙",
   wallDecor: "その他の壁飾り",
   outfit: "その他の服・衣装",
-  headAccessory: "その他の頭飾り・アクセサリー",
+  headAccessory: "その他の頭装備",
+  headDecor: "その他の頭装備の飾り",
+  accessory: "その他のアクセサリー",
   outfitColor: "その他の服セットの色合い",
-  shoes: "その他の靴・足元",
+  shoes: "その他の靴の形",
+  shoeDecor: "その他の靴の飾り",
   color: "その他の全体色",
   lighting: "その他の光・明るさ",
   mood: "その他の雰囲気",
@@ -384,9 +446,12 @@ const customPlaceholders = {
   wallpaper: "例：ピンクの薔薇柄壁紙、白い腰壁、レース模様の壁紙",
   wallDecor: "例：額縁の天使画、ドライフラワーのスワッグ、リボンガーランド",
   outfit: "例：フェネックのきぐるみ、寄宿学校風制服、苺のお姫さまドレス",
-  headAccessory: "例：苺リボン、天使のヘッドドレス、白レースボンネット",
+  headAccessory: "例：白レースボンネット、花付きヘッドドレス、垂れリボン",
+  headDecor: "例：花、リボン、猫耳、垂れ耳うさぎ",
+  accessory: "例：サングラス、チョーカー、魔法ステッキ、バッグ",
   outfitColor: "例：黒×金、水色×ピンク×藤色、白×ベビーピンク",
-  shoes: "例：白いレース靴、ピンクの長靴、足元に小さなリボンだけ",
+  shoes: "例：レース靴、ローファー、ふわふわブーツ",
+  shoeDecor: "例：リボン、レース、花、パール",
   color: "例：白多めのピンク、淡い藤色、ミルキーなパステルカラー",
   lighting: "例：白く明るいスタジオ光、淡い逆光、きらきらした朝の光",
   mood: "例：甘くて上品、絵本みたい、ふわふわキラキラ",
@@ -671,6 +736,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const noContainer = hasNoneSelected(selected, "containerScene");
   const noOutfit = hasNoneSelected(selected, "outfit");
   const noHeadAccessory = hasNoneSelected(selected, "headAccessory");
+  const noAccessory = hasNoneSelected(selected, "accessory");
   const noShoes = hasNoneSelected(selected, "shoes");
 
   const items = joinValues(selected, custom, "items");
@@ -679,8 +745,11 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const wallDecor = joinValues(selected, custom, "wallDecor", "");
   const outfit = translateOutfit(joinValues(selected, custom, "outfit"));
   const headAccessory = joinValues(selected, custom, "headAccessory");
+  const headDecor = joinValues(selected, custom, "headDecor");
+  const accessory = joinValues(selected, custom, "accessory");
   const outfitColor = joinValues(selected, custom, "outfitColor");
   const shoes = joinValues(selected, custom, "shoes");
+  const shoeDecor = joinValues(selected, custom, "shoeDecor");
   const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
   const lighting = translateLighting(joinValues(selected, custom, "lighting", "おまかせ"));
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
@@ -726,8 +795,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     : "";
 
   const outfitSentence = outfit && !noOutfit ? `ペットは${outfit}を着ています。${outfitColor ? `服セットの色合いは${outfitColor}を自然に組み合わせてください。靴や小物の色も、選んだ服セットの色合いになじむように調整してください。` : ""}服はペットの体型に自然に合っていて、顔や目や鼻口まわりを隠さないでください。${animalCostumeShapeRule}${boardingSchoolShapeRule}` : "必要以上に服を追加せず、元写真の自然な魅力を尊重してください。";
-  const headAccessorySentence = headAccessory && !noHeadAccessory ? `頭には${headAccessory}を付けています。頭飾りやアクセサリーは、顔・目・鼻口まわりを隠さないようにしてください。` : "";
-  const shoesSentence = shoes && !noShoes ? `足元には${shoes}を合わせています。靴や足元の飾りは小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。` : "";
+  const headAccessorySentence = headAccessory && !noHeadAccessory ? `頭には${headAccessory}を付けています。${headDecor ? `飾りとして${headDecor}を自然に組み合わせてください。` : ""}頭装備は、顔・目・鼻口まわりを隠さないようにしてください。` : "";
+  const accessorySentence = accessory && !noAccessory ? `アクセサリーとして${accessory}を自然に合わせてください。アクセサリーは小さめにして、ペットの顔や体型の可愛さを邪魔しないようにしてください。` : "";
+  const shoesSentence = shoes && !noShoes ? `足元には${shoes}を合わせています。${shoeDecor ? `靴の飾りとして${shoeDecor}を自然に付けてください。` : ""}靴や足元の飾りは小さめにして、服セットの色合いになじむようにしてください。` : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
   const selectedOutdoorWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId);
@@ -769,6 +839,7 @@ ${baseScene}
 【服・アクセサリー・足元】
 ${outfitSentence}
 ${headAccessorySentence}
+${accessorySentence}
 ${shoesSentence}
 
 【舞台ギミック・小物】
