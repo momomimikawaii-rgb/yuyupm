@@ -662,3 +662,93 @@ textarea:focus {
   font-weight: 900;
   text-shadow: none;
 }
+
+
+/* --- final fix: sister link, instagram, color chips --- */
+.sister-site-link {
+  display: block !important;
+  width: fit-content !important;
+  max-width: min(760px, 100%) !important;
+  margin: 14px auto 22px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #7c3aed !important;
+  font-size: 14px !important;
+  font-weight: 900 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+}
+
+.sister-site-link:hover {
+  text-decoration: underline !important;
+}
+
+.instagram-card {
+  margin-top: 18px !important;
+  padding: 18px !important;
+  border-radius: 28px !important;
+  border: 1px solid #fbcfe8 !important;
+  background: rgba(255,255,255,0.82) !important;
+  text-align: center !important;
+  box-shadow: 0 10px 26px rgba(167,139,250,0.12) !important;
+}
+
+.instagram-card h3 {
+  margin: 0 0 14px !important;
+  color: #7c3aed !important;
+  font-size: 28px !important;
+  font-weight: 900 !important;
+}
+
+.instagram-link {
+  display: inline-block !important;
+  text-decoration: none !important;
+}
+
+.instagram-image {
+  width: min(280px, 100%) !important;
+  border-radius: 24px !important;
+  background: white !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12) !important;
+}
+
+.color-chip-wrap {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin: 8px 0 16px !important;
+}
+
+.color-chip-wrap .color-chip {
+  appearance: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  max-width: 38px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  padding: 0 !important;
+  border-radius: 999px !important;
+  border: 2px solid rgba(71,85,105,0.32) !important;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.75), 0 4px 12px rgba(167,139,250,.18) !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+
+.color-chip-wrap .color-chip-auto {
+  width: auto !important;
+  max-width: none !important;
+  min-width: 86px !important;
+  padding: 0 12px !important;
+  font-size: 12px !important;
+}
+
+.color-chip-wrap .color-chip-auto span {
+  color: #7c3aed !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}

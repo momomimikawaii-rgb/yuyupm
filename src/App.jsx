@@ -342,7 +342,6 @@ const multiCategories = [
     "ベビーピンク",
     "くすみピンク",
     "赤",
-    "ワインレッド",
     "水色",
     "ミント",
     "藤色",
@@ -359,7 +358,7 @@ const multiCategories = [
   { id: "items", title: "小物・飾り", options: ["なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"] },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
-  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "ワインレッド", "白×金"] },
+  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫",  "白×金"] },
   { id: "lighting", title: "光・明るさ", icon: Sun, single: true, options: ["おまかせ", "明るい昼", "夕方", "夜でも顔明るく"] },
   { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
   { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
@@ -414,7 +413,10 @@ const sectionNumbers = {
   size: 21,
   fallingItems: 22,
   effectAmount: 23,
-};
+
+  headDecor: 9,
+  accessory: 10,
+  shoeDecor: 12,};
 
 function formatNumber(number) {
   return String(number).padStart(2, "0");
@@ -919,8 +921,7 @@ const outfitColorPalette = [
   { name: "ベビーピンク", color: "#fce7f3" },
   { name: "くすみピンク", color: "#d8a7b1" },
   { name: "赤", color: "#ef4444" },
-  { name: "ワインレッド", color: "#7f1d1d" },
-  { name: "水色", color: "#bae6fd" },
+  { name: "水色", color: "#7dd3fc" },
   { name: "ミント", color: "#a7f3d0" },
   { name: "藤色", color: "#c4b5fd" },
   { name: "ラベンダー", color: "#ddd6fe" },
@@ -1133,15 +1134,9 @@ function App() {
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
-        <div className="sister-site-card">
-          <div>
-            <strong>🌈 姉妹サイト</strong>
-            <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
-          </div>
-          <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
-            汎用版を開く <ExternalLink size={15} />
-          </a>
-        </div>
+        <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
+          🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ
+        </a>
 
         <section className="card recommended-wide">
                       <div className="card-head">
@@ -1294,6 +1289,23 @@ function App() {
               <textarea ref={textAreaRef} value={prompt} readOnly aria-label="生成されたプロンプト" />
             </section>
             <section className="card small-card"><strong>固定ルール：</strong>ペットの顔・毛色・目・鼻口まわりを最優先で守る文を、どの出力にも自動で入れています。</section>
+
+            <div className="instagram-card">
+              <h3>Instagramも見てね</h3>
+              <a
+                href="https://www.instagram.com/momomimiyuyu/"
+                target="_blank"
+                rel="noreferrer"
+                className="instagram-link"
+              >
+                <img
+                  src="/instagram_momomimiyuyu.png"
+                  alt="Instagram QR"
+                  className="instagram-image"
+                />
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
