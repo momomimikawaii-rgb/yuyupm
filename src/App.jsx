@@ -12,7 +12,6 @@ import {
   Trees,
   PlusCircle,
   Shirt,
-  Sun,
   ExternalLink,
 } from "lucide-react";
 import "./style.css";
@@ -250,11 +249,10 @@ const multiCategories = [
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"] },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
   { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "ワインレッド", "白×金"] },
-  { id: "lighting", title: "光・明るさ", icon: Sun, single: true, options: ["おまかせ（世界観に合わせる）", "明るくハイキー", "白っぽくふんわり発光", "透明感のある明るい光", "やさしい昼間の光", "夕暮れのやわらかい光", "夜景風", "月明かり風", "神々しい光", "星降るような光", "ゴシックに合う明るいドラマチック光", "黒×ピンクに合う甘辛い光", "月明かり風だけど顔は明るい", "ダークメルヘンだけど暗くしない光", "夜景風だけどペットは明るい"] },
   { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
   { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
-  { id: "size", title: "縦横の比率", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
+  { id: "size", title: "画像サイズ", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
 ];
 
 const customFieldLabels = {
@@ -268,10 +266,9 @@ const customFieldLabels = {
   outfitColor: "その他の服の色",
   shoes: "その他の靴・足元",
   color: "その他の全体色",
-  lighting: "その他の光・明るさ",
   mood: "その他の雰囲気",
   pose: "その他のポーズ",
-  size: "その他の縦横の比率",
+  size: "その他の画像サイズ",
 };
 
 const customPlaceholders = {
@@ -284,7 +281,6 @@ const customPlaceholders = {
   outfitColor: "例：白×藤色、苺ミルクピンク、淡いクリーム色",
   shoes: "例：白いレース靴、ピンクの長靴、足元に小さなリボンだけ",
   color: "例：白多めのピンク、淡い藤色、ミルキーなパステルカラー",
-  lighting: "例：白く明るいスタジオ光、淡い逆光、きらきらした朝の光",
   mood: "例：甘くて上品、絵本みたい、ふわふわキラキラ",
   density: "例：余白多め、背景はすっきり、花や小物は多め",
   textOverlay: "例：Happy Birthday（短い英語推奨）",
@@ -331,7 +327,7 @@ const recommendedPrompts = [
     label: "ゆゆ姫5月のおすすめ",
     image: "/ajisai-road.png",
     description: "あじさい・お天気雨・虹・フリル傘の、透明感たっぷりな夢かわ世界。",
-    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。縦横の比率は4:5の縦長。ふんわり上品で夢かわいい一枚にしてください。`,
+    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。画像サイズは4:5の縦長。ふんわり上品で夢かわいい一枚にしてください。`,
   },
 ];
 
@@ -386,11 +382,11 @@ function getSingleValue(selected, custom, key, fallback = "") {
 }
 
 function getSizeInstruction(size) {
-  if (size.includes("1:1") || size.includes("正方形")) return "縦横の比率は1:1の正方形。";
-  if (size.includes("4:5")) return "縦横の比率は4:5の縦長。";
-  if (size.includes("9:16")) return "縦横の比率は9:16の縦長。";
-  if (size.includes("16:9")) return "縦横の比率は16:9の横長。";
-  return size ? `縦横の比率は${size}。` : "";
+  if (size.includes("1:1") || size.includes("正方形")) return "画像サイズは1:1の正方形。";
+  if (size.includes("4:5")) return "画像サイズは4:5の縦長。";
+  if (size.includes("9:16")) return "画像サイズは9:16の縦長。";
+  if (size.includes("16:9")) return "画像サイズは16:9の横長。";
+  return size ? `画像サイズは${size}。` : "";
 }
 
 function translateOutfit(outfit) {
@@ -398,27 +394,12 @@ function translateOutfit(outfit) {
   return outfit.split("、").map((item) => outfitTranslations[item] || item).join("、");
 }
 
-function translateLighting(lighting) {
-  if (!lighting) return "";
-  const translations = {
-    "おまかせ（世界観に合わせる）":
-      "選んだ世界観・場所・服に自然に合う光。ペットの顔は明るく見やすく保ち、背景の雰囲気に合わせて光を調整してください。",
-    "ゴシックに合う明るいドラマチック光":
-      "黒や紫、黒ピンクなどのゴシックな世界観に合う、明るさを保ったドラマチックな光。暗く沈ませず、ペットの顔は見やすく、背景だけ少し幻想的でゴシックにしてください。",
-    "黒×ピンクに合う甘辛い光":
-      "黒とピンクの甘辛い世界観に合う、可愛さと少しダークな雰囲気を両立した光。ペットの顔は暗くせず、ピンクの差し色がきれいに見える明るさにしてください。",
-    "月明かり風だけど顔は明るい":
-      "月明かりのような幻想的な光。ただしペットの顔・目・鼻口まわりは明るく見やすく保ち、暗く沈ませないでください。",
-    "ダークメルヘンだけど暗くしない光":
-      "少しダークメルヘンな雰囲気に合う光。背景は幻想的でも、全体を暗くしすぎず、ペットの顔は明るく可愛く見えるようにしてください。",
-    "夜景風だけどペットは明るい":
-      "夜景風の背景に合う光。ただしペット本体は暗くせず、顔と毛並みがはっきり見えるように明るく照らしてください。",
-  };
+function getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color, mood }) {
+  const sceneHint = locationType === "indoor"
+    ? `屋内世界観ID:${indoorWorldId}、場所:${locationOption}`
+    : `屋外世界観ID:${outdoorWorldId}、場所:${locationOption}`;
 
-  return lighting
-    .split("、")
-    .map((item) => translations[item] || item)
-    .join("、");
+  return `光・明るさはユーザーに選ばせず、選んだ世界観・場所・色合い・雰囲気に合わせて自動調整してください。${sceneHint}に最も似合う、ペットが一番可愛く見える自然で上品な光にしてください。夢かわ・ロリータ・薔薇・花畑・お姫さま系では、明るく清潔感があり、白や淡いピンクがきれいに見えるふんわり柔らかな光にしてください。海・水辺・空・透明感のある世界では、明るく澄んだ青空感と透明感を保ってください。夜景・月明かり・ゴシック・ダークメルヘン系の場合も、背景の雰囲気は残しつつ、ペットの顔・目・鼻口まわり・毛並みは暗くせず、はっきり可愛く見える明るさに補正してください。黒い子・濃い茶色の子・グレー系の子でも、ペットの毛色に背景全体が暗く引きずられないようにしてください。ペット本来の毛色は保ちつつ、背景は選んだ世界観本来の明るさ・色合い・空気感を維持してください。強すぎる白飛び、暗い沈み込み、不自然な発光、顔が影で見えにくくなる表現は避けてください。`;
 }
 
 function translateColor(color) {
@@ -580,7 +561,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const outfitColor = joinValues(selected, custom, "outfitColor");
   const shoes = joinValues(selected, custom, "shoes");
   const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
-  const lighting = translateLighting(joinValues(selected, custom, "lighting", "明るくハイキー、透明感のある明るい光"));
+  const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color, mood });
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
   const hasStageGimmickInPrompt =
     (selected.containerScene || []).length > 0 &&
@@ -707,13 +688,10 @@ async function copyTextSafely(text, fallbackElement) {
   return { ok: false };
 }
 
-function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
+function OptionGroup({ category, selected, custom, onToggle, onCustomChange }) {
   return (
     <div>
-      <div className="category-head">
-        <h3>{category.title}</h3>
-        <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
-      </div>
+      <h3 style={{ marginBottom: "10px" }}>{category.title}</h3>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -828,19 +806,6 @@ function App() {
     setCopyStatus("idle");
   };
 
-  const resetCategory = (categoryId) => {
-    setSelected((prev) => {
-      const next = { ...prev };
-      delete next[categoryId];
-      return next;
-    });
-    setCustom((prev) => {
-      const next = { ...prev };
-      delete next[categoryId];
-      return next;
-    });
-  };
-
   const LocationIcon = locationTree[locationType]?.icon || Home;
   const activeWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId) || outdoorWorlds[0];
 
@@ -884,7 +849,7 @@ function App() {
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
           <div className="update-time">
-            最終更新：2026/05/28 00:18
+            最終更新：2026/05/28 00:55
           </div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
@@ -892,31 +857,6 @@ function App() {
         <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
           🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ <ExternalLink size={15} />
         </a>
-
-        <section className="card recommended-wide">
-                      <div className="card-head">
-                        <h2>🌸 ゆゆ姫のおすすめ</h2>
-                        <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
-                      </div>
-                      {recommendedOpen && (
-                        <div className="recommended-grid">
-                          {recommendedPrompts.map((item) => (
-                            <div key={item.id} className="recommended-item">
-                              <img className="recommended-thumb" src={item.image} alt={item.title} onClick={() => setModalImage(item.image)} />
-                              <div className="recommended-body">
-                                <div className="recommended-label">{item.label}</div>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                                <div className="recommended-actions">
-                                  <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
-                                  {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </section>
 
         <div className="grid">
           <div className="left">
@@ -927,14 +867,37 @@ function App() {
               </div>
               <div className="notice">
                 <strong>ゆゆ姫ワールドの作り方</strong>
-                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。</span>
+                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
               </div>
             </section>
-<section className="card">
-              <div className="card-head category-card-head">
-                <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
-                <button type="button" className="category-reset" onClick={() => { setLocationType("indoor"); setLocationOption("お姫さまの部屋"); }}>リセット</button>
+
+            <section className="card">
+              <div className="card-head">
+                <h2>🌸 ゆゆ姫のおすすめ</h2>
+                <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
               </div>
+              {recommendedOpen && (
+                <div style={{ display: "grid", gap: "14px" }}>
+                  {recommendedPrompts.map((item) => (
+                    <div key={item.id} style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap", padding: "12px", borderRadius: "24px", background: "rgba(255,255,255,0.72)", border: "1px solid rgba(251,207,232,0.9)" }}>
+                      <img src={item.image} alt={item.title} style={{ width: "140px", borderRadius: "20px", cursor: "pointer", boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }} onClick={() => setModalImage(item.image)} />
+                      <div style={{ flex: 1, minWidth: "220px" }}>
+                        <div style={{ fontSize: "13px", color: "#9d4edd", fontWeight: 800, marginBottom: "4px" }}>{item.label}</div>
+                        <h3 style={{ marginBottom: "8px" }}>{item.title}</h3>
+                        <p style={{ marginBottom: "12px" }}>{item.description}</p>
+                        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                          <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
+                          {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section className="card">
+              <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
                   const Icon = value.icon;
@@ -944,10 +907,7 @@ function App() {
               </div>
               {locationType === "indoor" && (
                 <>
-                  <div className="category-head" style={{ marginTop: "14px" }}>
-                  <h3>屋内の世界観</h3>
-                  <button type="button" className="category-reset" onClick={() => setIndoorWorldId("dreamLolita")}>リセット</button>
-                </div>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の世界観</h3>
                   <div className="chips">
                     {indoorWorlds.map((world) => {
                       const active = indoorWorldId === world.id;
@@ -958,10 +918,7 @@ function App() {
                     <strong>{indoorWorlds.find((item) => item.id === indoorWorldId)?.title}</strong>
                     <span>{indoorWorlds.find((item) => item.id === indoorWorldId)?.description}</span>
                   </div>
-                  <div className="category-head" style={{ marginTop: "14px" }}>
-                  <h3>屋内の場所</h3>
-                  <button type="button" className="category-reset" onClick={() => setLocationOption(activeIndoorWorld?.places?.[0] || "お姫さまの部屋")}>リセット</button>
-                </div>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の場所</h3>
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
@@ -977,10 +934,7 @@ function App() {
             {locationType === "outdoor" && (
               <section className="card">
                 <div className="card-head">
-                  <div className="card-head category-card-head">
                   <h2>🌍 屋外の世界観</h2>
-                  <button type="button" className="category-reset" onClick={() => setOutdoorWorldId("flowerGarden")}>リセット</button>
-                </div>
                   <button className="outline-button" onClick={() => setWorldOpen((prev) => !prev)}>{worldOpen ? "閉じる" : "開く"}</button>
                 </div>
                 {worldOpen && (
@@ -993,11 +947,11 @@ function App() {
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
                     {activeWorld.subCategories.map((category) => (
-                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
+                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                       ))}
                     </div>
                   </div>
@@ -1013,16 +967,14 @@ function App() {
               const CategoryIcon = category.icon;
               return (
                 <section key={category.id} className="card">
-                  <div className="card-head category-card-head">
-                    <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
-                    <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
-                  </div>
+                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
                       return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
+                  {category.id === "lighting" && <div className="notice" style={{ marginBottom: "12px" }}>黒い子・濃い茶色の子・グレー系の子は、背景や全体の色味まで暗く引っ張られやすいです。夢かわ・白ピンク系にしたい場合は「明るくハイキー」「白っぽくふんわり発光」推奨です。</div>}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
@@ -1039,6 +991,24 @@ function App() {
               <textarea ref={textAreaRef} value={prompt} readOnly aria-label="生成されたプロンプト" />
             </section>
             <section className="card small-card"><strong>固定ルール：</strong>ペットの顔・毛色・目・鼻口まわりを最優先で守る文を、どの出力にも自動で入れています。</section>
+
+            <div className="instagram-card">
+              <h3>Instagramも見てね</h3>
+
+              <a
+                href="https://www.instagram.com/momomimiyuyu/"
+                target="_blank"
+                rel="noreferrer"
+                className="instagram-link"
+              >
+                <img
+                  src="/instagram_momomimiyuyu.png"
+                  alt="Instagram QR"
+                  className="instagram-image"
+                />
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
