@@ -19,7 +19,7 @@ textarea {
 .page {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   padding: 24px;
   background: radial-gradient(circle at top left, #fff1f8 0, #fffafd 30%, #f4ecff 62%, #eaf8ff 100%);
 }
@@ -483,4 +483,67 @@ textarea:focus {
     height: 88px;
     border-radius: 18px;
   }
+}
+
+
+.sister-site-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  max-width: min(760px, 100%);
+  margin: 14px auto 22px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid #fbcfe8;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 24px rgba(167, 139, 250, 0.14);
+  color: #7c3aed;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.sister-site-link:hover {
+  color: #8b5cf6;
+  text-decoration: underline;
+}
+
+
+.category-head,
+.category-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.category-head h3 {
+  margin: 0;
+  color: #7c3aed;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.category-card-head h2 {
+  margin: 0;
+}
+
+.category-reset {
+  flex-shrink: 0;
+  border: 1px solid #ddd6fe;
+  background: #fff;
+  color: #7c3aed;
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.category-reset:hover {
+  background: #f5f3ff;
 }

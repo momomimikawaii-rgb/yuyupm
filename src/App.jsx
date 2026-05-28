@@ -707,10 +707,13 @@ async function copyTextSafely(text, fallbackElement) {
   return { ok: false };
 }
 
-function OptionGroup({ category, selected, custom, onToggle, onCustomChange }) {
+function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
   return (
     <div>
-      <h3 style={{ marginBottom: "10px" }}>{category.title}</h3>
+      <div className="category-head">
+        <h3>{category.title}</h3>
+        <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
+      </div>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -825,6 +828,19 @@ function App() {
     setCopyStatus("idle");
   };
 
+  const resetCategory = (categoryId) => {
+    setSelected((prev) => {
+      const next = { ...prev };
+      delete next[categoryId];
+      return next;
+    });
+    setCustom((prev) => {
+      const next = { ...prev };
+      delete next[categoryId];
+      return next;
+    });
+  };
+
   const LocationIcon = locationTree[locationType]?.icon || Home;
   const activeWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId) || outdoorWorlds[0];
 
@@ -868,20 +884,14 @@ function App() {
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
           <div className="update-time">
-            最終更新：2026/05/27 23:44
+            最終更新：2026/05/28 00:18
           </div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
-        <div className="sister-site-card">
-          <div>
-            <strong>🌈 姉妹サイト</strong>
-            <span>夢かわ以外も作りたい時は、汎用版プロンプト工房へ。</span>
-          </div>
-          <a href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
-            汎用版を開く <ExternalLink size={15} />
-          </a>
-        </div>
+        <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
+          🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ <ExternalLink size={15} />
+        </a>
 
         <section className="card recommended-wide">
                       <div className="card-head">
@@ -921,7 +931,10 @@ function App() {
               </div>
             </section>
 <section className="card">
-              <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
+              <div className="card-head category-card-head">
+                <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
+                <button type="button" className="category-reset" onClick={() => { setLocationType("indoor"); setLocationOption("お姫さまの部屋"); }}>リセット</button>
+              </div>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
                   const Icon = value.icon;
@@ -931,7 +944,10 @@ function App() {
               </div>
               {locationType === "indoor" && (
                 <>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の世界観</h3>
+                  <div className="category-head" style={{ marginTop: "14px" }}>
+                  <h3>屋内の世界観</h3>
+                  <button type="button" className="category-reset" onClick={() => setIndoorWorldId("dreamLolita")}>リセット</button>
+                </div>
                   <div className="chips">
                     {indoorWorlds.map((world) => {
                       const active = indoorWorldId === world.id;
@@ -942,7 +958,10 @@ function App() {
                     <strong>{indoorWorlds.find((item) => item.id === indoorWorldId)?.title}</strong>
                     <span>{indoorWorlds.find((item) => item.id === indoorWorldId)?.description}</span>
                   </div>
-                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の場所</h3>
+                  <div className="category-head" style={{ marginTop: "14px" }}>
+                  <h3>屋内の場所</h3>
+                  <button type="button" className="category-reset" onClick={() => setLocationOption(activeIndoorWorld?.places?.[0] || "お姫さまの部屋")}>リセット</button>
+                </div>
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
@@ -958,7 +977,10 @@ function App() {
             {locationType === "outdoor" && (
               <section className="card">
                 <div className="card-head">
+                  <div className="card-head category-card-head">
                   <h2>🌍 屋外の世界観</h2>
+                  <button type="button" className="category-reset" onClick={() => setOutdoorWorldId("flowerGarden")}>リセット</button>
+                </div>
                   <button className="outline-button" onClick={() => setWorldOpen((prev) => !prev)}>{worldOpen ? "閉じる" : "開く"}</button>
                 </div>
                 {worldOpen && (
@@ -971,11 +993,11 @@ function App() {
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
                     {activeWorld.subCategories.map((category) => (
-                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
+                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
                       ))}
                     </div>
                   </div>
@@ -991,7 +1013,10 @@ function App() {
               const CategoryIcon = category.icon;
               return (
                 <section key={category.id} className="card">
-                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
+                  <div className="card-head category-card-head">
+                    <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
+                    <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
+                  </div>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
