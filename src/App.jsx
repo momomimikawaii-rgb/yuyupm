@@ -252,7 +252,7 @@ const multiCategories = [
   { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
   { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
-  { id: "size", title: "画像サイズ", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
+  { id: "size", title: "縦横の比率", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
 ];
 
 const customFieldLabels = {
@@ -268,7 +268,7 @@ const customFieldLabels = {
   color: "その他の全体色",
   mood: "その他の雰囲気",
   pose: "その他のポーズ",
-  size: "その他の画像サイズ",
+  size: "その他の縦横の比率",
 };
 
 const customPlaceholders = {
@@ -327,7 +327,7 @@ const recommendedPrompts = [
     label: "ゆゆ姫5月のおすすめ",
     image: "/ajisai-road.png",
     description: "あじさい・お天気雨・虹・フリル傘の、透明感たっぷりな夢かわ世界。",
-    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。画像サイズは4:5の縦長。ふんわり上品で夢かわいい一枚にしてください。`,
+    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。縦横の比率は4:5の縦長。ふんわり上品で夢かわいい一枚にしてください。`,
   },
 ];
 
@@ -382,11 +382,11 @@ function getSingleValue(selected, custom, key, fallback = "") {
 }
 
 function getSizeInstruction(size) {
-  if (size.includes("1:1") || size.includes("正方形")) return "画像サイズは1:1の正方形。";
-  if (size.includes("4:5")) return "画像サイズは4:5の縦長。";
-  if (size.includes("9:16")) return "画像サイズは9:16の縦長。";
-  if (size.includes("16:9")) return "画像サイズは16:9の横長。";
-  return size ? `画像サイズは${size}。` : "";
+  if (size.includes("1:1") || size.includes("正方形")) return "縦横の比率は1:1の正方形。";
+  if (size.includes("4:5")) return "縦横の比率は4:5の縦長。";
+  if (size.includes("9:16")) return "縦横の比率は9:16の縦長。";
+  if (size.includes("16:9")) return "縦横の比率は16:9の横長。";
+  return size ? `縦横の比率は${size}。` : "";
 }
 
 function translateOutfit(outfit) {
@@ -561,8 +561,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const outfitColor = joinValues(selected, custom, "outfitColor");
   const shoes = joinValues(selected, custom, "shoes");
   const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
-  const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color, mood });
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
+  const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color, mood });
   const hasStageGimmickInPrompt =
     (selected.containerScene || []).length > 0 &&
     !selected.containerScene.includes("なし");
@@ -849,7 +849,7 @@ function App() {
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
           <div className="update-time">
-            最終更新：2026/05/28 00:55
+            最終更新：2026/05/28 01:07
           </div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
