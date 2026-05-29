@@ -777,7 +777,76 @@ function getDisplayTitle(category) {
   return `${category.title}（${getSelectionNote(category)}）`;
 }
 
+function hasSpecificSelection(selected, categoryId) {
+  return (selected[categoryId] || []).some((item) => !isAutoValue(item));
+}
+
+function hasSelection(selected, categoryId, value) {
+  return (selected[categoryId] || []).includes(value);
+}
+
+function isCategoryDisabledById(categoryId, selected) {
+  if (categoryId === "headDecor") {
+    return !hasSpecificSelection(selected, "headShape");
+  }
+
+  if (categoryId === "earType") {
+    return isCategoryDisabledById("headDecor", selected) || !hasSelection(selected, "headDecor", "耳");
+  }
+
+  if (categoryId === "shoeDecor") {
+    return !hasSpecificSelection(selected, "shoeShape");
+  }
+
+  if (["clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(categoryId)) {
+    return hasSelection(selected, "clothingShape", "なし");
+  }
+
+  return false;
+}
+
+function getDisabledPlaceholder(category) {
+  if (category.id === "headDecor") return "帽子の形を選ぶと使えます";
+  if (category.id === "earType") return "頭装備の飾りで『耳』を選ぶと使えます";
+  if (category.id === "shoeDecor") return "靴の形を選ぶと使えます";
+  if (["clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(category.id)) return "服の形が『なし』以外の時に使えます";
+  return "この項目は、関連する項目を選ぶと使えます";
+}
+
+function normalizeDependentSelections(nextSelected) {
+  let normalized = { ...nextSelected };
+  const dependentIds = [
+    "headDecor",
+    "earType",
+    "shoeDecor",
+    "clothingDecor",
+    "fruitPattern",
+    "flowerPattern",
+    "otherPattern",
+    "outfitColorChips",
+  ];
+
+  for (const categoryId of dependentIds) {
+    if (isCategoryDisabledById(categoryId, normalized)) {
+      normalized[categoryId] = getDefaultSelected(categoryId);
+    }
+  }
+
+  return normalized;
+}
+
+function removeDisabledCustomValues(customValues, selected) {
+  const next = { ...customValues };
+  Object.keys(next).forEach((categoryId) => {
+    if (isCategoryDisabledById(categoryId, selected)) {
+      delete next[categoryId];
+    }
+  });
+  return next;
+}
+
 function isCategoryDisabled(category, selected) {
+  if (isCategoryDisabledById(category.id, selected)) return true;
   if (!category.dependsOn) return false;
   return !(selected[category.dependsOn.id] || []).includes(category.dependsOn.value);
 }
@@ -836,7 +905,7 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
       <label>
         <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
       </label>
-      <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? "頭装備の飾りで『耳』を選ぶと使えます" : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
+      <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
     </div>
   );
 }
@@ -875,18 +944,24 @@ function App() {
     setSelected((prev) => {
       const current = prev[categoryId] || [];
       const exists = current.includes(option);
+      let next;
+
       if (single) {
         if (!exists) {
           setCustom((customPrev) => ({ ...customPrev, [categoryId]: "" }));
         }
-        return { ...prev, [categoryId]: exists ? getDefaultSelected(categoryId) : [option] };
+        next = { ...prev, [categoryId]: exists ? getDefaultSelected(categoryId) : [option] };
+      } else if (option === "なし" || option === "おまかせ") {
+        next = { ...prev, [categoryId]: exists ? getDefaultSelected(categoryId) : [option] };
+      } else {
+        const withoutAuto = current.filter((item) => item !== "なし" && item !== "おまかせ");
+        if (maxSelect && !exists && withoutAuto.length >= maxSelect) return prev;
+        next = { ...prev, [categoryId]: exists ? withoutAuto.filter((item) => item !== option) : [...withoutAuto, option] };
       }
-      if (option === "なし" || option === "おまかせ") {
-        return { ...prev, [categoryId]: exists ? getDefaultSelected(categoryId) : [option] };
-      }
-      const withoutAuto = current.filter((item) => item !== "なし" && item !== "おまかせ");
-      if (maxSelect && !exists && withoutAuto.length >= maxSelect) return prev;
-      return { ...prev, [categoryId]: exists ? withoutAuto.filter((item) => item !== option) : [...withoutAuto, option] };
+
+      const normalized = normalizeDependentSelections(next);
+      setCustom((customPrev) => removeDisabledCustomValues(customPrev, normalized));
+      return normalized;
     });
   };
 
@@ -906,13 +981,16 @@ function App() {
   };
 
   const updateCustom = (key, value) => {
+    if (isCategoryDisabledById(key, selected)) return;
     setFeaturedPrompt("");
     setCustom((prev) => ({ ...prev, [key]: value }));
 
     if (value.trim()) {
       setSelected((prev) => {
         if (isSingleCategory(key) || (prev[key] || []).includes("なし") || (prev[key] || []).includes("おまかせ")) {
-          return { ...prev, [key]: [] };
+          const normalized = normalizeDependentSelections({ ...prev, [key]: [] });
+          setCustom((customPrev) => removeDisabledCustomValues(customPrev, normalized));
+          return normalized;
         }
         return prev;
       });
@@ -964,12 +1042,13 @@ function App() {
   const resetCategory = (categoryId) => {
     setFeaturedPrompt("");
     setSelected((prev) => {
-      return { ...prev, [categoryId]: getDefaultSelected(categoryId) };
-    });
-    setCustom((prev) => {
-      const next = { ...prev };
-      delete next[categoryId];
-      return next;
+      const normalized = normalizeDependentSelections({ ...prev, [categoryId]: getDefaultSelected(categoryId) });
+      setCustom((customPrev) => {
+        const next = removeDisabledCustomValues(customPrev, normalized);
+        delete next[categoryId];
+        return next;
+      });
+      return normalized;
     });
   };
 
@@ -1005,7 +1084,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 16:35</div>
+          <div className="update-time">最終更新：2026/05/29 16:08</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 

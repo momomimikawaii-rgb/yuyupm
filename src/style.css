@@ -714,10 +714,13 @@ input:disabled {
   max-width: 160px;
   padding: 5px 8px;
   border-radius: 999px;
-  background: rgba(51, 65, 85, 0.95);
-  color: white;
+  background: rgba(255, 255, 255, 0.96);
+  color: #334155;
+  border: 1px solid rgba(196, 181, 253, 0.75);
+  box-shadow: 0 4px 12px rgba(100, 116, 139, 0.16);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   white-space: nowrap;
   pointer-events: none;
 }
@@ -785,4 +788,32 @@ input:disabled {
     height: auto;
     max-height: 260px;
   }
+}
+
+
+/* --- 20260529 16:08 dependency lock fixes --- */
+.option-group.disabled {
+  opacity: 0.5;
+}
+
+.option-group.disabled .category-head h3::after {
+  content: "（先に関連項目を選択）";
+  margin-left: 6px;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.option-group.disabled .chip,
+.option-group.disabled .color-chip,
+.option-group.disabled input,
+.chip:disabled,
+.color-chip:disabled,
+input:disabled {
+  cursor: not-allowed !important;
+}
+
+.option-group.disabled .chip:hover,
+.option-group.disabled .color-chip:hover {
+  transform: none;
 }
