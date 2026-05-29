@@ -302,8 +302,8 @@ const shoeCategories = [
 ];
 
 const multiCategories = [
-  { id: "containerScene", title: "ペットのポーズ・ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "カメラ目線でちょこんと座る", "窓辺でふんわり", "クッションでくつろぐ", "前足をそろえる", "ペットがスノーボールの中に入っている", "ペットが大きな透明シャボン玉の中に入っている", "ペットがアンティークなティーカップの中に入っている", "ペットが可愛いガラスのグラスの中に入っている", "ペットが苺のバスケットの中に入っている", "ペットが花かごの中に入っている", "ペットが大きなプレゼント箱の中に入っている", "ペットがレースのベビーベッドに入っている", "ペットがマカロン型クッションの上にいる", "ペットが小さな馬車の中にいる"], customPlaceholder: "例：宝石箱の中に入る、透明な香水瓶の中に入る、窓辺で座る" },
-  { id: "gesture", title: "ペットのしぐさ", defaultValue: "おまかせ", options: ["おまかせ", "小首をかしげる", "お花をくんくん", "スウィーツを食べる", "ケーキを見つめる", "にっこり笑っているように見える"], customPlaceholder: "例：マカロンを見つめる、リボンを見上げる" },
+  { id: "containerScene", title: "ペットのポーズ・ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ちょこんと座る", "窓辺", "クッション", "前足そろえ", "スノードームの中", "シャボン玉の中", "ティーカップの中", "グラスの中", "苺バスケットの中", "花かごの中", "プレゼント箱の中", "ベビーベッド", "マカロンクッションの上", "馬車の中"], customPlaceholder: "例：宝石箱の中、透明な香水瓶の中、窓辺" },
+  { id: "gesture", title: "ペットのしぐさ", defaultValue: "おまかせ", options: ["おまかせ", "首かしげ", "お花くんくん", "スイーツを食べる", "ケーキを見る", "笑顔"], customPlaceholder: "例：マカロンを見る、リボンを見上げる、ぺろっ" },
   { id: "items", title: "小物・飾り", defaultValue: "おまかせ", options: ["おまかせ", "なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"], customPlaceholder: "例：小さな王冠、ピンクの魔法ステッキ" },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
@@ -503,6 +503,47 @@ function translateTextOverlay(textOverlay) {
   return `画像内に「${textOverlay}」という短い文字を、選んだ世界観・背景・服・色合いに合うフォント風デザインで、背景の邪魔にならない位置に自然に入れてください。ゴシックならゴシック調、クラシカルならクラシカル調、海や空なら爽やかな雰囲気など、文字の素材感と装飾も世界観に合わせてください。文字が崩れる場合は、文字なしでも自然に見える構図にしてください。`;
 }
 
+function translateContainerScene(scene) {
+  if (!scene) return "";
+  const translations = {
+    "ちょこんと座る": "ペットがちょこんと可愛く座っています",
+    "窓辺": "ペットが可愛い窓辺にふんわり配置されています",
+    "クッション": "ペットが可愛いクッションの上でくつろいでいます",
+    "前足そろえ": "ペットが前足をそろえて上品に座っています",
+    "スノードームの中": "ペットが透明なスノードームの中に入っています",
+    "シャボン玉の中": "ペットが大きな透明シャボン玉の中に入っています",
+    "ティーカップの中": "ペットがアンティークで可愛いティーカップの中に入っています",
+    "グラスの中": "ペットが可愛いガラスのグラスの中に入っています",
+    "苺バスケットの中": "ペットが苺のバスケットの中に入っています",
+    "花かごの中": "ペットが花かごの中に入っています",
+    "プレゼント箱の中": "ペットが大きなプレゼント箱の中に入っています",
+    "ベビーベッド": "ペットがレースのベビーベッドの中にいます",
+    "マカロンクッションの上": "ペットがマカロン型クッションの上にいます",
+    "馬車の中": "ペットが小さな馬車の中にいます",
+  };
+
+  return scene
+    .split("、")
+    .map((item) => translations[item] || item)
+    .join("。");
+}
+
+function translateGesture(gesture) {
+  if (!gesture) return "";
+  const translations = {
+    "首かしげ": "小首をかしげる",
+    "お花くんくん": "お花をくんくんする",
+    "スイーツを食べる": "スイーツを可愛く食べる",
+    "ケーキを見る": "ケーキを見つめる",
+    "笑顔": "にっこり笑っているように見える",
+  };
+
+  return gesture
+    .split("、")
+    .map((item) => translations[item] || item)
+    .join("、");
+}
+
 function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   const world = indoorWorlds.find((item) => item.id === indoorWorldId) || indoorWorlds[0];
   const place = customLocation?.trim() || locationOption || world.places[0];
@@ -676,11 +717,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     : "靴や足元は、服と背景に合わせて自然におまかせしてください。";
 
   const itemSentence = items ? `選んだ小物（${items}）は、世界観になじむ程度にさりげなく取り入れてください。` : "小物は選んだ世界観に合わせて自然におまかせしてください。";
-  const isContainerGimmick = containerScene?.includes("入っている") || containerScene?.includes("上にいる");
-  const containerSentence = containerScene
-    ? isContainerGimmick
-      ? `ペットは「${containerScene}」という主役ギミックで表現してください。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
-      : `ペットのポーズや配置は「${containerScene}」を基本にしてください。背景や小物と自然に合うようにしてください。`
+  const containerDescription = translateContainerScene(containerScene);
+  const containerSentence = containerDescription
+    ? `ペットの配置・ポーズ・舞台ギミックは、${containerDescription}。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。背景や小物と自然に合うようにしてください。`
     : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
@@ -710,7 +749,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const brightLock = "黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく、選択した色合いや世界観を維持してください。";
   const adaptiveDesignRule = "入れ物・家具・小物・舞台装飾は、選んだ世界観・服・色合いに自然になじむデザインにしてください。色・素材・装飾は、背景や世界観に合わせて可愛く調整してください。";
 
-  const gestureSection = gesture ? `ペットのしぐさは${gesture}。` : "";
+  const gestureDescription = translateGesture(gesture);
+  const gestureSection = gestureDescription ? `ペットのしぐさは${gestureDescription}。` : "";
   const scenePoseSection = [sceneEffectSentence, gestureSection].filter(Boolean).join("\n");
   const scenePoseBlock = scenePoseSection ? `\n\n【情景演出・ポーズ】\n${scenePoseSection}` : "";
 
@@ -1084,7 +1124,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 16:08</div>
+          <div className="update-time">最終更新：2026/05/29 17:05</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
