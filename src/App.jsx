@@ -242,13 +242,13 @@ const multiCategories = [
   { id: "outfit", title: "服・衣装", icon: Shirt, single: true, options: ["なし", "夏のフリルワンピース", "ごちゃかわロリータワンピース", "お姫さまドレス", "苺柄ワンピース", "レースたっぷりワンピース", "アイドル衣装", "カフェ店員さん風エプロン", "ふわふわケープ", "ヘッドドレス付きドレス", "リボンたっぷりドレス", "クラシカルロリータ", "妖精みたいなチュールドレス", "ピンクハウス系", "ゴスロリドレス", "パンクロック衣装", "白馬の王子様衣装", "黒いロングコート", "黒を基調としたイギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "リスのきぐるみ", "モモンガのきぐるみ", "ひよこのきぐるみ", "うさぎのきぐるみ", "小鳥のきぐるみ", "くまのきぐるみ"] },
   { id: "headAccessory", title: "頭飾り・アクセサリー", options: ["なし", "大きなリボン", "細い垂れリボン", "ヘッドドレス", "ボンネット", "麦わら帽子", "花冠", "ティアラ", "サングラス", "うさ耳カチューシャ", "苺モチーフの髪飾り", "レースのカチューシャ", "お花付きリボン", "藤の花飾り", "レース付き麦わら帽子", "ベレー帽", "ふわふわイヤーマフ", "天使の輪っか", "小さな王冠", "猫耳ヘッドドレス", "黒レースヘッドドレス", "コウモリリボン", "猫耳ゴスカチューシャ", "リス耳フード", "モモンガ耳フード", "ひよこ帽子", "うさ耳フード", "小鳥の羽飾り", "くま耳フード"] },
   { id: "shoes", title: "靴・足元", single: true, options: ["なし", "ピンクのリボン付きシューズ", "白レースの小さな靴", "藤色のリボンシューズ", "淡い水色の靴", "苺モチーフの靴", "可愛いピンクのレインブーツ", "小さな赤い長靴", "パール付きシューズ", "バレエシューズ風", "ふわふわブーツ", "足元に小さなリボンだけ"] },
-  { id: "outfitColor", title: "服の色", single: true, options: ["白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "苺ミルク色", "パウダーピンク", "パステルイエロー", "白レース多め", "ピンク×白フリル", "藤色×白フリル", "淡いミントグリーン", "黒×ピンク", "黒×紫", "ワインレッド", "黒×赤", "白×金"] },
+  { id: "outfitColor", title: "服の色", single: true, options: ["白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "苺ミルク色", "パウダーピンク", "パステルイエロー", "白レース多め", "ピンク×白フリル", "藤色×白フリル", "淡いミントグリーン", "黒×ピンク", "黒×紫",  "黒×赤", "白×金"] },
   { id: "containerScene", title: "入れ物・舞台ギミック", single: true, options: ["なし", "ペットがスノーボールの中に入っている", "ペットが大きな透明シャボン玉の中に入っている", "ペットがアンティークなティーカップの中に入っている", "ペットが可愛いガラスのグラスの中に入っている", "ペットが苺のバスケットの中に入っている", "ペットが花かごの中に入っている", "ペットが大きなプレゼント箱の中に入っている", "ペットがレースのベビーベッドに入っている", "ペットがマカロン型クッションの上にいる", "ペットが小さな馬車の中にいる"] },
   { id: "pose", title: "ペットのポーズ・しぐさ", options: ["カメラ目線", "ちょこんと座る", "小首をかしげる", "お花をくんくん", "スウィーツを食べる", "ケーキを見つめる", "窓辺でふんわり", "クッションでくつろぐ", "前足をそろえる", "にっこり笑っているように見える"] },
   { id: "items", title: "小物・飾り", options: ["なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"] },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
-  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "ワインレッド", "白×金"] },
+  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫",  "白×金"] },
   { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
   { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
@@ -688,10 +688,10 @@ async function copyTextSafely(text, fallbackElement) {
   return { ok: false };
 }
 
-function OptionGroup({ category, selected, custom, onToggle, onCustomChange }) {
+function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
   return (
     <div>
-      <h3 style={{ marginBottom: "10px" }}>{category.title}</h3>
+      <div className="category-head"><h3>{category.title}</h3><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -806,6 +806,21 @@ function App() {
     setCopyStatus("idle");
   };
 
+  const resetCategory = (categoryId) => {
+    setFeaturedPrompt("");
+    setSelected((prev) => {
+      const next = { ...prev };
+      delete next[categoryId];
+      return next;
+    });
+    setCustom((prev) => {
+      const next = { ...prev };
+      delete next[categoryId];
+      return next;
+    });
+  };
+
+
   const LocationIcon = locationTree[locationType]?.icon || Home;
   const activeWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId) || outdoorWorlds[0];
 
@@ -848,17 +863,14 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">
-            最終更新：2026/05/28 01:07
-          </div>
+          <div className="update-time">最終更新：2026/05/29 09:31</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
         <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
-          🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ <ExternalLink size={15} />
+          🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ
         </a>
-
-        <div className="grid">
+<div className="grid">
           <div className="left">
             <section className="card">
               <div className="card-head">
@@ -877,15 +889,15 @@ function App() {
                 <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
               </div>
               {recommendedOpen && (
-                <div style={{ display: "grid", gap: "14px" }}>
+                <div className="recommended-grid">
                   {recommendedPrompts.map((item) => (
-                    <div key={item.id} style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap", padding: "12px", borderRadius: "24px", background: "rgba(255,255,255,0.72)", border: "1px solid rgba(251,207,232,0.9)" }}>
-                      <img src={item.image} alt={item.title} style={{ width: "140px", borderRadius: "20px", cursor: "pointer", boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }} onClick={() => setModalImage(item.image)} />
-                      <div style={{ flex: 1, minWidth: "220px" }}>
-                        <div style={{ fontSize: "13px", color: "#9d4edd", fontWeight: 800, marginBottom: "4px" }}>{item.label}</div>
-                        <h3 style={{ marginBottom: "8px" }}>{item.title}</h3>
-                        <p style={{ marginBottom: "12px" }}>{item.description}</p>
-                        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                    <div key={item.id} className="recommended-item">
+                      <img className="recommended-thumb" src={item.image} alt={item.title} onClick={() => setModalImage(item.image)} />
+                      <div className="recommended-body">
+                        <div className="recommended-label">{item.label}</div>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                        <div className="recommended-actions">
                           <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
                           {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
                         </div>
@@ -947,11 +959,11 @@ function App() {
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
                     {activeWorld.subCategories.map((category) => (
-                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
+                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
                       ))}
                     </div>
                   </div>
@@ -967,7 +979,7 @@ function App() {
               const CategoryIcon = category.icon;
               return (
                 <section key={category.id} className="card">
-                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
+                  <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
@@ -980,6 +992,14 @@ function App() {
                 </section>
               );
             })}
+
+            <section className="card instagram-card">
+              <h2>Instagramも見てね</h2>
+              <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noreferrer" className="instagram-link">
+                <img src="/instagram_momomimiyuyu.png" alt="Instagram QR" className="instagram-image" />
+              </a>
+            </section>
+
           </div>
 
           <div className="right">
@@ -991,25 +1011,7 @@ function App() {
               <textarea ref={textAreaRef} value={prompt} readOnly aria-label="生成されたプロンプト" />
             </section>
             <section className="card small-card"><strong>固定ルール：</strong>ペットの顔・毛色・目・鼻口まわりを最優先で守る文を、どの出力にも自動で入れています。</section>
-
-            <div className="instagram-card">
-              <h3>Instagramも見てね</h3>
-
-              <a
-                href="https://www.instagram.com/momomimiyuyu/"
-                target="_blank"
-                rel="noreferrer"
-                className="instagram-link"
-              >
-                <img
-                  src="/instagram_momomimiyuyu.png"
-                  alt="Instagram QR"
-                  className="instagram-image"
-                />
-              </a>
-            </div>
-
-          </div>
+</div>
         </div>
       </div>
     </div>
