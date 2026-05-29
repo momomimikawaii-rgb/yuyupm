@@ -178,9 +178,10 @@ h1 {
 }
 
 .right {
-  position: sticky;
-  top: 16px;
+  position: static;
   align-self: start;
+  min-width: 0;
+  overflow: visible;
 }
 
 .card {
@@ -321,8 +322,8 @@ h3 {
 
 .color-chip-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  gap: 8px;
   margin-bottom: 16px;
 }
 
@@ -330,11 +331,11 @@ h3 {
   display: grid;
   justify-items: center;
   gap: 6px;
-  min-height: 74px;
+  min-height: 58px;
   border: 1px solid #fbcfe8;
   background: #fff;
-  border-radius: 20px;
-  padding: 9px 8px;
+  border-radius: 16px;
+  padding: 7px 6px;
   color: #475569;
   box-shadow: 0 4px 14px rgba(167, 139, 250, 0.08);
 }
@@ -345,14 +346,14 @@ h3 {
 }
 
 .color-chip-swatch {
-  width: 34px;
-  height: 34px;
+  width: 26px;
+  height: 26px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.45);
 }
 
 .color-chip-name {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   line-height: 1.2;
   text-align: center;
@@ -589,4 +590,27 @@ textarea:focus {
   .instagram-image {
     width: min(220px, 100%);
   }
+}
+
+.option-group.disabled {
+  opacity: 0.48;
+}
+
+.option-group.disabled .chip,
+.option-group.disabled .color-chip,
+.option-group.disabled input {
+  cursor: not-allowed;
+}
+
+.chip:disabled,
+.color-chip:disabled,
+input:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+}
+
+.chip:disabled:hover,
+.color-chip:disabled:hover {
+  transform: none;
 }
