@@ -148,8 +148,7 @@ h1 {
 }
 
 .right {
-  position: sticky;
-  top: 16px;
+  position: static;
 }
 
 .card {
@@ -735,4 +734,19 @@ textarea:focus {
   color: #7c3aed !important;
   font-size: 12px !important;
   font-weight: 900 !important;
+}
+
+
+/* ===== 20260529 cleanup ===== */
+.right {
+  position: static !important;
+}
+
+.instagram-card {
+  overflow: visible !important;
+}
+
+.result-card textarea {
+  max-height: 70vh !important;
+  overflow-y: auto !important;
 }
