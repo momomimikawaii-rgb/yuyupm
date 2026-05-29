@@ -241,29 +241,36 @@ const outfitTranslations = {
 const colorChipOptions = [
   { name: "おまかせ", value: "linear-gradient(135deg, #fff1f8, #ede9fe, #e0f2fe)" },
   { name: "白", value: "#ffffff" },
+  { name: "アイボリー", value: "#fffaf0" },
   { name: "クリーム", value: "#fff7d6" },
-  { name: "生成り", value: "#f7ead2" },
-  { name: "ミルキーピンク", value: "#ffd6e7" },
-  { name: "くすみピンク", value: "#e8b7c8" },
-  { name: "桜ピンク", value: "#ffc7dd" },
-  { name: "濃いピンク", value: "#f472b6" },
+  { name: "ベージュ", value: "#ead8bd" },
+  { name: "ミルクティー", value: "#d8c1a3" },
+  { name: "キャメル", value: "#c77f2f" },
+  { name: "茶", value: "#8b5a3c" },
+  { name: "ベビーピンク", value: "#ffd6e8" },
+  { name: "くすみピンク", value: "#d8a2b0" },
+  { name: "ピンク", value: "#ff7ab6" },
+  { name: "濃いピンク", value: "#db2777" },
   { name: "赤", value: "#ef4444" },
-  { name: "ワイン", value: "#8a1538" },
+  { name: "葡萄色", value: "#5b3a68" },
   { name: "オレンジ", value: "#fb923c" },
-  { name: "淡い黄色", value: "#fff3a3" },
-  { name: "金", value: "#d6a430" },
-  { name: "ミント", value: "#c8f7e1" },
-  { name: "エメラルド", value: "#34d399" },
-  { name: "水色", value: "#bfe9ff" },
-  { name: "青", value: "#60a5fa" },
+  { name: "黄色", value: "#ffd84d" },
+  { name: "薄い黄色", value: "#fff59d" },
+  { name: "からし色", value: "#c99a00" },
+  { name: "水色", value: "#67c7f0" },
+  { name: "青", value: "#2563eb" },
   { name: "紺", value: "#1e3a8a" },
-  { name: "藤色", value: "#d8c7ff" },
-  { name: "ラベンダー", value: "#cdb4ff" },
-  { name: "紫", value: "#8b5cf6" },
-  { name: "茶色", value: "#92400e" },
+  { name: "黄緑", value: "#a3e635" },
+  { name: "緑", value: "#3fa65b" },
+  { name: "モスグリーン", value: "#556b2f" },
+  { name: "藤色", value: "#c4b5fd" },
+  { name: "紫", value: "#9333ea" },
+  { name: "紅桔梗色", value: "#4f46a5" },
+  { name: "蕎麦切色", value: "#c8cec4" },
   { name: "グレー", value: "#9ca3af" },
-  { name: "銀", value: "#d1d5db" },
   { name: "黒", value: "#111827" },
+  { name: "金", value: "#d4a72c" },
+  { name: "銀", value: "#c7cbd1" },
 ];
 
 const clothingCategories = [
@@ -276,7 +283,7 @@ const clothingCategories = [
 ];
 
 const outfitColorCategories = [
-  { id: "outfitColorChips", title: "服セットの色", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions },
+  { id: "outfitColorChips", title: "服セットの色合い", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "色合い自由記入" },
 ];
 
 const headCategories = [
@@ -638,36 +645,27 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
 
   const clothingParts = [];
   if (clothingSeason) clothingParts.push(`季節は${clothingSeason}`);
-  else clothingParts.push(describeAutoFallback("服の季節"));
-
   if (clothingShape) clothingParts.push(`服の形は${clothingShape}`);
-  else clothingParts.push(describeAutoFallback("服の形"));
-
   if (clothingDecor) clothingParts.push(`服の装飾は${clothingDecor}`);
-  else clothingParts.push(describeAutoFallback("服の装飾"));
-
-  const patterns = [
-    fruitPattern ? `果物柄は${fruitPattern}` : "果物柄は必要に応じて背景や服に合わせて自然に調整",
-    flowerPattern ? `花柄は${flowerPattern}` : "花柄は必要に応じて背景や服に合わせて自然に調整",
-    otherPattern ? `その他柄は${otherPattern}` : "その他柄は必要に応じて使いすぎず自然に調整",
-  ];
-
-  if (outfitColors) clothingParts.push(`服セットの色は${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
-  else clothingParts.push("服セットの色は、背景・季節・世界観に合わせて自動で可愛く調整する");
+  if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
+  if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
+  if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
+  if (outfitColors) clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
 
   const noClothes = clothingShape === "なし";
   const clothingSentence = noClothes
     ? "服は追加せず、元写真の自然な魅力を尊重してください。"
-    : `ペットの服は次の条件で自然に作ってください。${clothingParts.join("。") }。${patterns.join("。") }。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。`;
+    : clothingParts.length
+      ? `ペットの服は次の条件で自然に作ってください。${clothingParts.join("。") }。未指定の服要素は、背景・季節・世界観に合わせて自動で可愛く調整してください。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。`
+      : "服は、選んだ背景・季節・世界観に合わせて自動で可愛く調整してください。ペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。";
 
   const headParts = [];
   if (headShape) headParts.push(`帽子・頭装備の形は${headShape}`);
-  else headParts.push(describeAutoFallback("帽子・頭装備"));
   if (headDecor) headParts.push(`頭装備の飾りは${headDecor}`);
   if (headDecor.includes("耳") && earType) headParts.push(`耳モチーフは${earType}`);
   const headSentence = headParts.length
     ? `${headParts.join("。") }。頭装備はペットの顔・目・鼻口まわりを隠さない位置と大きさにしてください。`
-    : "";
+    : "頭装備は、必要な場合だけ背景や服に合わせて自然に追加してください。顔・目・鼻口まわりは隠さないでください。";
 
   const accessorySentence = accessories
     ? `アクセサリーは${accessories}。頭装備とは分離して扱い、首元・胸元・手元・小物として自然に配置してください。サングラスを選んだ場合もアクセサリーとして扱ってください。`
@@ -798,8 +796,9 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
       </div>
 
       {isColorChips ? (
-        <div className="color-chip-grid">
-          {category.options.map((option) => {
+        <>
+          <div className="color-chip-grid">
+            {category.options.map((option) => {
             const active = selectedValues.includes(option.name);
             return (
               <button
@@ -810,13 +809,17 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
                 disabled={disabled}
                 onClick={() => !disabled && onToggle(category.id, option.name, false, category.maxSelect)}
                 className={`color-chip ${active ? "active" : ""}`}
+                data-label={option.name}
               >
                 <span className="color-chip-swatch" style={{ background: option.value }} />
+                {active && <span className="color-chip-check">✓</span>}
                 <span className="color-chip-name">{option.name}</span>
               </button>
             );
-          })}
-        </div>
+            })}
+          </div>
+          <div className="color-chip-help">おまかせ、または最大3色まで選択可能。色の名前はチップにカーソルを重ねると表示されます。</div>
+        </>
       ) : (
         <div className="chips">
           {category.options.map((option) => {
@@ -923,11 +926,18 @@ function App() {
 
   const allSelected = useMemo(() => {
     if (featuredPrompt) return ["おすすめテンプレート使用中"];
-    const base = Object.values(selected).flat();
-    const customValues = Object.values(custom).flatMap(splitCustomText);
+    const base = Object.values(selected).flat().filter((item) => !isAutoValue(item));
+    const customValues = Object.values(custom).flatMap(splitCustomText).filter((item) => !isAutoValue(item));
     const locationLabel = locationType === "indoor" ? `${indoorWorlds.find((item) => item.id === indoorWorldId)?.title} / ${locationOption}` : outdoorWorlds.find((item) => item.id === outdoorWorldId)?.title;
     return [locationTree[locationType]?.label, locationLabel, ...base, ...customValues].filter(Boolean);
   }, [selected, custom, locationType, locationOption, featuredPrompt, outdoorWorldId, indoorWorldId]);
+
+  const selectedSummary = useMemo(() => {
+    if (!allSelected.length) return "まだ未選択。初期おすすめで作成中。";
+    const visible = allSelected.slice(0, 8).join(" / ");
+    const rest = allSelected.length - 8;
+    return rest > 0 ? `${visible} / ほか${rest}件` : visible;
+  }, [allSelected]);
 
   const copyPrompt = async () => {
     const result = await copyTextSafely(prompt, textAreaRef.current);
@@ -995,27 +1005,14 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 15:55</div>
+          <div className="update-time">最終更新：2026/05/29 16:35</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
         <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
           🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ
         </a>
-<div className="grid">
-          <div className="left">
-            <section className="card">
-              <div className="card-head">
-                <h2><Heart size={20} /> ゆゆ姫ワールド</h2>
-                <button className="outline-button" onClick={reset}><RefreshCcw size={16} /> リセット</button>
-              </div>
-              <div className="notice">
-                <strong>ゆゆ姫ワールドの作り方</strong>
-                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
-              </div>
-            </section>
-
-            <section className="card">
+            <section className="card recommended-wide">
               <div className="card-head">
                 <h2>🌸 ゆゆ姫のおすすめ</h2>
                 <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
@@ -1038,6 +1035,20 @@ function App() {
                   ))}
                 </div>
               )}
+            </section>
+
+
+<div className="grid">
+          <div className="left">
+            <section className="card">
+              <div className="card-head">
+                <h2><Heart size={20} /> ゆゆ姫ワールド</h2>
+                <button className="outline-button" onClick={reset}><RefreshCcw size={16} /> リセット</button>
+              </div>
+              <div className="notice">
+                <strong>ゆゆ姫ワールドの作り方</strong>
+                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
+              </div>
             </section>
 
             <section className="card">
@@ -1151,7 +1162,7 @@ function App() {
               <div className="card-head"><h2>完成文</h2><button className="main-button" onClick={copyPrompt}><Copy size={16} /> {copyStatus === "copied" ? "コピー済み" : "コピー"}</button></div>
               {copyStatus === "manual" && <div className="message warn"><AlertCircle size={16} /><span>自動コピーがブロックされました。下の文章を選択済みにしたので、Ctrl+C または長押しコピーしてください。</span></div>}
               {copyStatus === "copied" && <div className="message ok"><CheckCircle2 size={16} /><span>コピーできました。</span></div>}
-              <div className="selected">選択中：{allSelected.length ? allSelected.join(" / ") : "まだ未選択。初期おすすめで作成中。"}</div>
+              <div className="selected">選択中：{selectedSummary}</div>
               <textarea ref={textAreaRef} value={prompt} readOnly aria-label="生成されたプロンプト" />
             </section>
             <section className="card small-card"><strong>固定ルール：</strong>ペットの顔・毛色・目・鼻口まわりを最優先で守る文を、どの出力にも自動で入れています。</section>
