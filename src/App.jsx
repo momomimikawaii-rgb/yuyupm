@@ -238,55 +238,92 @@ const outfitTranslations = {
   "くまのきぐるみ": "くまをモチーフにした、ふわふわで可愛いきぐるみ。丸い耳と、まるくころんとしたぬいぐるみのような雰囲気を大切にしてください。",
 };
 
-const multiCategories = [
-  { id: "outfit", title: "服・衣装", icon: Shirt, single: true, options: ["なし", "夏のフリルワンピース", "ごちゃかわロリータワンピース", "お姫さまドレス", "苺柄ワンピース", "レースたっぷりワンピース", "アイドル衣装", "カフェ店員さん風エプロン", "ふわふわケープ", "ヘッドドレス付きドレス", "リボンたっぷりドレス", "クラシカルロリータ", "妖精みたいなチュールドレス", "ピンクハウス系", "ゴスロリドレス", "パンクロック衣装", "白馬の王子様衣装", "黒いロングコート", "黒を基調としたイギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "リスのきぐるみ", "モモンガのきぐるみ", "ひよこのきぐるみ", "うさぎのきぐるみ", "小鳥のきぐるみ", "くまのきぐるみ"] },
-  { id: "headAccessory", title: "頭飾り・アクセサリー", options: ["なし", "大きなリボン", "細い垂れリボン", "ヘッドドレス", "ボンネット", "麦わら帽子", "花冠", "ティアラ", "サングラス", "うさ耳カチューシャ", "苺モチーフの髪飾り", "レースのカチューシャ", "お花付きリボン", "藤の花飾り", "レース付き麦わら帽子", "ベレー帽", "ふわふわイヤーマフ", "天使の輪っか", "小さな王冠", "猫耳ヘッドドレス", "黒レースヘッドドレス", "コウモリリボン", "猫耳ゴスカチューシャ", "リス耳フード", "モモンガ耳フード", "ひよこ帽子", "うさ耳フード", "小鳥の羽飾り", "くま耳フード"] },
-  { id: "shoes", title: "靴・足元", single: true, options: ["なし", "ピンクのリボン付きシューズ", "白レースの小さな靴", "藤色のリボンシューズ", "淡い水色の靴", "苺モチーフの靴", "可愛いピンクのレインブーツ", "小さな赤い長靴", "パール付きシューズ", "バレエシューズ風", "ふわふわブーツ", "足元に小さなリボンだけ"] },
-  { id: "outfitColor", title: "服の色", single: true, options: ["白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "苺ミルク色", "パウダーピンク", "パステルイエロー", "白レース多め", "ピンク×白フリル", "藤色×白フリル", "淡いミントグリーン", "黒×ピンク", "黒×紫",  "黒×赤", "白×金"] },
-  { id: "containerScene", title: "入れ物・舞台ギミック", single: true, options: ["なし", "ペットがスノーボールの中に入っている", "ペットが大きな透明シャボン玉の中に入っている", "ペットがアンティークなティーカップの中に入っている", "ペットが可愛いガラスのグラスの中に入っている", "ペットが苺のバスケットの中に入っている", "ペットが花かごの中に入っている", "ペットが大きなプレゼント箱の中に入っている", "ペットがレースのベビーベッドに入っている", "ペットがマカロン型クッションの上にいる", "ペットが小さな馬車の中にいる"] },
-  { id: "pose", title: "ペットのポーズ・しぐさ", options: ["カメラ目線", "ちょこんと座る", "小首をかしげる", "お花をくんくん", "スウィーツを食べる", "ケーキを見つめる", "窓辺でふんわり", "クッションでくつろぐ", "前足をそろえる", "にっこり笑っているように見える"] },
-  { id: "items", title: "小物・飾り", options: ["なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"] },
-  { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"] },
-  { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
-  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫",  "白×金"] },
-  { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
-  { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
-  { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
-  { id: "size", title: "縦横の比率", single: true, options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"] },
+const colorChipOptions = [
+  { name: "おまかせ", value: "linear-gradient(135deg, #fff1f8, #ede9fe, #e0f2fe)" },
+  { name: "白", value: "#ffffff" },
+  { name: "クリーム", value: "#fff7d6" },
+  { name: "ミルキーピンク", value: "#ffd6e7" },
+  { name: "くすみピンク", value: "#e8b7c8" },
+  { name: "桜ピンク", value: "#ffc7dd" },
+  { name: "水色", value: "#bfe9ff" },
+  { name: "藤色", value: "#d8c7ff" },
+  { name: "ラベンダー", value: "#cdb4ff" },
+  { name: "ミント", value: "#c8f7e1" },
+  { name: "淡い黄色", value: "#fff3a3" },
+  { name: "赤", value: "#ef4444" },
+  { name: "黒", value: "#111827" },
+  { name: "金", value: "#d6a430" },
+  { name: "銀", value: "#d1d5db" },
 ];
 
-const customFieldLabels = {
-  location: "その他の場所",
-  items: "その他の小物",
-  containerScene: "その他の入れ物・舞台ギミック",
-  wallpaper: "その他の壁紙",
-  wallDecor: "その他の壁飾り",
-  outfit: "その他の服・衣装",
-  headAccessory: "その他の頭飾り・アクセサリー",
-  outfitColor: "その他の服の色",
-  shoes: "その他の靴・足元",
-  color: "その他の全体色",
-  mood: "その他の雰囲気",
-  pose: "その他のポーズ",
-  size: "その他の縦横の比率",
-};
+const clothingCategories = [
+  { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
+  { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
+  { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍"] },
+  { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花", "自由記入"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
+  { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー", "自由記入"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
+  { id: "otherPattern", title: "その他柄", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "チェック", "水玉", "ヒョウ柄", "ストライプ", "唐草", "ボタニカル", "千鳥", "自由記入"], customPlaceholder: "例：星柄、ハート柄、クラシカルな総柄" },
+  { id: "outfitColorChips", title: "服セットの色（3色まで選択可能）", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions },
+];
 
-const customPlaceholders = {
-  items: "例：小さな王冠、ピンクの魔法ステッキ、苺のティアラ",
-  containerScene: "例：宝石箱の中に入る、透明な香水瓶の中に入る、苺パフェグラスに入る",
-  wallpaper: "例：ピンクの薔薇柄壁紙、白い腰壁、レース模様の壁紙",
-  wallDecor: "例：額縁の天使画、ドライフラワーのスワッグ、リボンガーランド",
-  outfit: "例：寄宿学校風制服、リスのきぐるみ、モモンガのきぐるみ、苺のお姫さまドレス",
-  headAccessory: "例：苺リボン、天使のヘッドドレス、白レースボンネット",
-  outfitColor: "例：白×藤色、苺ミルクピンク、淡いクリーム色",
-  shoes: "例：白いレース靴、ピンクの長靴、足元に小さなリボンだけ",
-  color: "例：白多めのピンク、淡い藤色、ミルキーなパステルカラー",
-  mood: "例：甘くて上品、絵本みたい、ふわふわキラキラ",
-  density: "例：余白多め、背景はすっきり、花や小物は多め",
-  textOverlay: "例：Happy Birthday（短い英語推奨）",
-  pose: "例：マカロンを見つめる、前足でカップを持つ、リボンを見上げる",
-  size: "例：横長3:2、縦長2:3、ワイドバナー用",
-};
+const headCategories = [
+  { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
+  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
+  { id: "earType", title: "耳を選んだ場合", single: true, defaultValue: "おまかせ", options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
+];
+
+const accessoryCategories = [
+  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "ネックレス", "首リボン", "ブローチ", "バッグ", "サングラス"], customPlaceholder: "例：パールの首飾り、ハートのバッグ、小さな王冠ブローチ" },
+];
+
+const shoeCategories = [
+  { id: "shoeShape", title: "靴の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ローファー", "ブーツ", "スニーカー", "サンダル", "パンプス", "バレエシューズ"], customPlaceholder: "例：白いレース靴、ピンクの長靴" },
+  { id: "shoeDecor", title: "靴の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "レース", "花", "パール"] },
+];
+
+const multiCategories = [
+  { id: "containerScene", title: "入れ物・舞台ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ペットがスノーボールの中に入っている", "ペットが大きな透明シャボン玉の中に入っている", "ペットがアンティークなティーカップの中に入っている", "ペットが可愛いガラスのグラスの中に入っている", "ペットが苺のバスケットの中に入っている", "ペットが花かごの中に入っている", "ペットが大きなプレゼント箱の中に入っている", "ペットがレースのベビーベッドに入っている", "ペットがマカロン型クッションの上にいる", "ペットが小さな馬車の中にいる"], customPlaceholder: "例：宝石箱の中に入る、透明な香水瓶の中に入る" },
+  { id: "pose", title: "ペットのポーズ・しぐさ", defaultValue: "おまかせ", options: ["おまかせ", "カメラ目線", "ちょこんと座る", "小首をかしげる", "お花をくんくん", "スウィーツを食べる", "ケーキを見つめる", "窓辺でふんわり", "クッションでくつろぐ", "前足をそろえる", "にっこり笑っているように見える"], customPlaceholder: "例：マカロンを見つめる、前足でカップを持つ" },
+  { id: "items", title: "小物・飾り", defaultValue: "おまかせ", options: ["おまかせ", "なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"], customPlaceholder: "例：小さな王冠、ピンクの魔法ステッキ" },
+  { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ", options: ["おまかせ", "おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
+  { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
+  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
+  { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, defaultValue: "おまかせ", options: ["おまかせ", "ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"], customPlaceholder: "例：甘くて上品、絵本みたい" },
+  { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
+  { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
+  { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
+];
+
+const uiSections = [
+  { id: "clothing", title: "服UI", categories: clothingCategories },
+  { id: "head", title: "頭装備", categories: headCategories },
+  { id: "accessory", title: "アクセサリー", categories: accessoryCategories },
+  { id: "shoes", title: "靴", categories: shoeCategories },
+];
+
+const allCategoryDefinitions = [
+  ...clothingCategories,
+  ...headCategories,
+  ...accessoryCategories,
+  ...shoeCategories,
+  ...multiCategories,
+  ...sceneEffects,
+  ...outdoorWorlds.flatMap((world) => world.subCategories || []),
+];
+
+const initialSelected = Object.fromEntries(
+  allCategoryDefinitions
+    .filter((category) => category.defaultValue)
+    .map((category) => [category.id, [category.defaultValue]])
+);
+
+const customFieldLabels = Object.fromEntries(
+  allCategoryDefinitions.map((category) => [category.id, category.title])
+);
+
+const customPlaceholders = Object.fromEntries(
+  allCategoryDefinitions.map((category) => [category.id, category.customPlaceholder || "カンマ、読点、改行で複数追加できます"])
+);
 
 const recommendedPrompts = [
   {
@@ -337,48 +374,54 @@ function splitCustomText(value) {
 }
 
 
+function findCategoryDefinition(key) {
+  return allCategoryDefinitions.find((category) => category.id === key);
+}
+
 function isSingleCategory(key) {
-  const multiCategory = multiCategories.find((category) => category.id === key);
-  if (multiCategory?.single) return true;
-
-  const sceneCategory = sceneEffects.find((category) => category.id === key);
-  if (sceneCategory?.single) return true;
-
-  for (const world of outdoorWorlds) {
-    const found = world.subCategories?.find((category) => category.id === key);
-    if (found?.single) return true;
-  }
-
-  return key === "location";
+  const category = findCategoryDefinition(key);
+  return Boolean(category?.single) || key === "location";
 }
 
 function hasNoneSelected(selected, key) {
   return (selected[key] || []).includes("なし");
 }
 
-function getValues(selected, custom, key) {
+function isAutoValue(item) {
+  return item === "おまかせ" || item === "なし" || item === "自由記入" || item === "おまかせ（屋内世界観に合わせる）";
+}
+
+function getValues(selected, custom, key, { keepAuto = false } = {}) {
   const customValues = splitCustomText(custom[key]);
   const selectedValues = selected[key] || [];
 
-  // 1個選択の項目は、自由記入欄がある場合、ボタン選択と混ぜずに自由記入を優先します。
   if (isSingleCategory(key) && customValues.length) {
-    return customValues.filter((item) => item !== "なし");
+    return customValues.filter((item) => keepAuto || !isAutoValue(item));
   }
 
-  return [...selectedValues, ...customValues].filter((item) => item !== "なし");
+  return [...selectedValues, ...customValues].filter((item) => keepAuto || !isAutoValue(item));
 }
 
-function joinValues(selected, custom, key, fallback = "") {
-  const values = getValues(selected, custom, key);
+function joinValues(selected, custom, key, fallback = "", options = {}) {
+  const values = getValues(selected, custom, key, options);
   return values.length ? values.join("、") : fallback;
 }
 
-function getSingleValue(selected, custom, key, fallback = "") {
+function getSingleValue(selected, custom, key, fallback = "", options = {}) {
   const customValues = splitCustomText(custom[key]);
   if (customValues.length) return customValues[0];
 
-  const values = (selected[key] || []).filter((item) => item !== "なし");
+  const values = (selected[key] || []).filter((item) => options.keepAuto || !isAutoValue(item));
   return values.length ? values[values.length - 1] : fallback;
+}
+
+function getDefaultSelected(categoryId) {
+  const defaultValue = findCategoryDefinition(categoryId)?.defaultValue;
+  return defaultValue ? [defaultValue] : [];
+}
+
+function describeAutoFallback(label) {
+  return `${label}は、選んだ背景・季節・世界観に合わせて自然におまかせしてください。`;
 }
 
 function getSizeInstruction(size) {
@@ -546,27 +589,30 @@ function buildSceneEffects({ selected, custom }) {
 }
 
 function buildPrompt({ locationType, locationOption, selected, custom, outdoorWorldId, indoorWorldId }) {
-  const noItems = hasNoneSelected(selected, "items");
-  const noContainer = hasNoneSelected(selected, "containerScene");
-  const noOutfit = hasNoneSelected(selected, "outfit");
-  const noHeadAccessory = hasNoneSelected(selected, "headAccessory");
-  const noShoes = hasNoneSelected(selected, "shoes");
-
   const items = joinValues(selected, custom, "items");
   const containerScene = joinValues(selected, custom, "containerScene");
-  const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "おまかせ（屋内世界観に合わせる）" : ""));
-  const wallDecor = joinValues(selected, custom, "wallDecor", "");
-  const outfit = translateOutfit(joinValues(selected, custom, "outfit"));
-  const headAccessory = joinValues(selected, custom, "headAccessory");
-  const outfitColor = joinValues(selected, custom, "outfitColor");
-  const shoes = joinValues(selected, custom, "shoes");
-  const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
+  const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "選んだ屋内世界観に自然に合う壁紙や壁面デザイン" : ""));
+  const wallDecor = joinValues(selected, custom, "wallDecor", locationType === "indoor" ? "選んだ屋内世界観に合う壁飾り" : "");
+
+  const clothingSeason = getSingleValue(selected, custom, "clothingSeason", "");
+  const clothingShape = getSingleValue(selected, custom, "clothingShape", "");
+  const clothingDecor = joinValues(selected, custom, "clothingDecor");
+  const fruitPattern = joinValues(selected, custom, "fruitPattern");
+  const flowerPattern = joinValues(selected, custom, "flowerPattern");
+  const otherPattern = joinValues(selected, custom, "otherPattern");
+  const outfitColors = joinValues(selected, custom, "outfitColorChips");
+  const headShape = getSingleValue(selected, custom, "headShape", "");
+  const headDecor = joinValues(selected, custom, "headDecor");
+  const earType = getSingleValue(selected, custom, "earType", "");
+  const accessories = joinValues(selected, custom, "accessories");
+  const shoeShape = getSingleValue(selected, custom, "shoeShape", "");
+  const shoeDecor = joinValues(selected, custom, "shoeDecor");
+
+  const color = translateColor(joinValues(selected, custom, "color", "選んだ世界観・服・小物に合うやさしい色合い"));
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
   const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color, mood });
-  const hasStageGimmickInPrompt =
-    (selected.containerScene || []).length > 0 &&
-    !selected.containerScene.includes("なし");
 
+  const hasStageGimmickInPrompt = Boolean(containerScene);
   const isUpsideDownStairsInPrompt =
     locationType === "outdoor" &&
     outdoorWorldId === "alice" &&
@@ -575,9 +621,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const pose = hasStageGimmickInPrompt || isUpsideDownStairsInPrompt
     ? ""
     : joinValues(selected, custom, "pose", "カメラ目線でちょこんと可愛く座る");
-  const density = getSingleValue(selected, custom, "density", "おまかせ（世界観に合わせる）");
-  const textOverlay = getSingleValue(selected, custom, "textOverlay", "なし");
-  const size = joinValues(selected, custom, "size", "正方形 1:1");
+  const density = getSingleValue(selected, custom, "density", "おまかせ", { keepAuto: true });
+  const textOverlay = getSingleValue(selected, custom, "textOverlay", "なし", { keepAuto: true });
+  const size = joinValues(selected, custom, "size", "正方形 1:1", { keepAuto: true });
   const aspectInstruction = getSizeInstruction(size);
 
   const baseScene =
@@ -585,28 +631,49 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
       ? `${buildIndoorScene({ indoorWorldId, locationOption, customLocation: custom.location })}${wallpaper ? `壁紙は${wallpaper}。` : ""}${wallDecor ? `壁飾りは${wallDecor}を自然に配置してください。` : ""}壁や奥の空間まで可愛く作り込んでください。`
       : `屋外の「${outdoorWorlds.find((item) => item.id === outdoorWorldId)?.title || "ワールド"}」で、${buildOutdoorScene({ selected, custom, outdoorWorldId })}背景は、選んだ屋外ワールドに合う自然な奥行き・空気感・光を大切にしてください。`;
 
-  const itemSentence = locationType === "outdoor" && items && !noItems ? `選んだ小物（${items}）は、世界観になじむ程度にさりげなく取り入れてください。` : "";
-  const containerSentence = containerScene && !noContainer ? `ペットは「${containerScene}」という主役ギミックで表現してください。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。` : "";
-  const animalCostumeKeywords = ["リスのきぐるみ", "モモンガのきぐるみ", "ひよこのきぐるみ", "うさぎのきぐるみ", "小鳥のきぐるみ", "くまのきぐるみ"];
-  const boardingSchoolKeywords = ["黒いロングコート", "黒を基調としたイギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服"];
-  const isAnimalCostume =
-    animalCostumeKeywords.some((keyword) => outfit.includes(keyword)) ||
-    /(?:きぐるみ|キグルミ|着ぐるみ|着ぐるみ服|被り物|小動物風)/.test(outfit);
-  const isBoardingSchoolOutfit =
-    boardingSchoolKeywords.some((keyword) => outfit.includes(keyword)) ||
-    /(?:寄宿学校|学院|制服|ロングコート|ブレザー|黒リボン|学生風)/.test(outfit);
+  const clothingParts = [];
+  if (clothingSeason) clothingParts.push(`季節は${clothingSeason}`);
+  else clothingParts.push(describeAutoFallback("服の季節"));
 
-  const animalCostumeShapeRule = isAnimalCostume
-    ? "小動物きぐるみは、体型をまるくころんとしたぬいぐるみのようなシルエットにしてください。胴体は丸く、手足は短めで可愛く、全体を小さな小動物らしくふわふわに見せてください。ただし、顔・目・鼻口まわりは元写真のペット本人らしさを保ち、きぐるみで隠しすぎないでください。"
+  if (clothingShape) clothingParts.push(`服の形は${clothingShape}`);
+  else clothingParts.push(describeAutoFallback("服の形"));
+
+  if (clothingDecor) clothingParts.push(`服の装飾は${clothingDecor}`);
+  else clothingParts.push(describeAutoFallback("服の装飾"));
+
+  const patterns = [
+    fruitPattern ? `果物柄は${fruitPattern}` : "果物柄は必要に応じて背景や服に合わせて自然に調整",
+    flowerPattern ? `花柄は${flowerPattern}` : "花柄は必要に応じて背景や服に合わせて自然に調整",
+    otherPattern ? `その他柄は${otherPattern}` : "その他柄は必要に応じて使いすぎず自然に調整",
+  ];
+
+  if (outfitColors) clothingParts.push(`服セットの色は${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
+  else clothingParts.push("服セットの色は、背景・季節・世界観に合わせて自動で可愛く調整する");
+
+  const noClothes = clothingShape === "なし";
+  const clothingSentence = noClothes
+    ? "服は追加せず、元写真の自然な魅力を尊重してください。"
+    : `ペットの服は次の条件で自然に作ってください。${clothingParts.join("。") }。${patterns.join("。") }。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。`;
+
+  const headParts = [];
+  if (headShape) headParts.push(`帽子・頭装備の形は${headShape}`);
+  else headParts.push(describeAutoFallback("帽子・頭装備"));
+  if (headDecor) headParts.push(`頭装備の飾りは${headDecor}`);
+  if (headDecor.includes("耳") && earType) headParts.push(`耳モチーフは${earType}`);
+  const headSentence = headParts.length
+    ? `${headParts.join("。") }。頭装備はペットの顔・目・鼻口まわりを隠さない位置と大きさにしてください。`
     : "";
 
-  const boardingSchoolShapeRule = isBoardingSchoolOutfit
-    ? "寄宿学校・学院系の衣装を選んだ場合は、体型を細身で中性的な学院生風にしてください。大人の高身長モデルのようにしないでください。幼すぎる子ども体型にもせず、小柄〜中くらいの、上品で少年少女らしいシルエットにしてください。手足は長すぎず、全体のバランスは静かな映画感のあるクラシカルな寄宿学校風に整えてください。"
-    : "";
+  const accessorySentence = accessories
+    ? `アクセサリーは${accessories}。頭装備とは分離して扱い、首元・胸元・手元・小物として自然に配置してください。サングラスを選んだ場合もアクセサリーとして扱ってください。`
+    : "アクセサリーは、選んだ服や背景に合うものを必要な範囲で自然におまかせしてください。";
 
-  const outfitSentence = outfit && !noOutfit ? `ペットは${outfit}を着ています。${outfitColor ? `衣装の色は${outfitColor}を基調としています。` : ""}服はペットの体型に自然に合っていて、顔や目や鼻口まわりを隠さないでください。${animalCostumeShapeRule}${boardingSchoolShapeRule}` : "必要以上に服を追加せず、元写真の自然な魅力を尊重してください。";
-  const headAccessorySentence = headAccessory && !noHeadAccessory ? `頭には${headAccessory}を付けています。頭飾りやアクセサリーは、顔・目・鼻口まわりを隠さないようにしてください。` : "";
-  const shoesSentence = shoes && !noShoes ? `足元には${shoes}を合わせています。靴や足元の飾りは小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。` : "";
+  const shoeSentence = shoeShape || shoeDecor
+    ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
+    : "靴や足元は、服と背景に合わせて自然におまかせしてください。";
+
+  const itemSentence = items ? `選んだ小物（${items}）は、世界観になじむ程度にさりげなく取り入れてください。` : "小物は選んだ世界観に合わせて自然におまかせしてください。";
+  const containerSentence = containerScene ? `ペットは「${containerScene}」という主役ギミックで表現してください。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。` : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
   const selectedOutdoorWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId);
@@ -614,13 +681,13 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const clearOutdoorWorlds = ["sea", "fantasy"];
 
   let densitySentence = "";
-  if (density === "すっきり透明感") {
+  if (density === "すっきり") {
     densitySentence = "小物や装飾を増やしすぎず、余白と透明感を大切にした、すっきり上品な一枚にしてください。";
-  } else if (density === "自然な華やかさ") {
+  } else if (density === "普通") {
     densitySentence = "小物や装飾は自然な量にして、華やかさと見やすさのバランスがよい一枚にしてください。";
-  } else if (density === "ごちゃかわ多め") {
+  } else if (density === "ごちゃかわ") {
     densitySentence = "選択した小物や装飾を画面内にバランスよく配置し、華やかでごちゃかわいい密度のある一枚にしてください。";
-  } else if (density === "画面いっぱいに華やか") {
+  } else if (density === "超ごちゃかわ") {
     densitySentence = "主役の顔を邪魔しない範囲で、装飾や背景要素を画面いっぱいに華やかに配置してください。";
   } else if (locationType === "indoor" && simpleDensityWorlds.includes(selectedIndoorWorld?.id)) {
     densitySentence = "装飾を詰め込みすぎず、余白・上品さ・空気感を大切にした、すっきり高級感のある一枚にしてください。";
@@ -631,6 +698,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   } else {
     densitySentence = "選んだ世界観の雰囲気を大切にして、自然な華やかさのある夢かわいい一枚にしてください。";
   }
+
   const brightLock = "黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく、選択した色合いや世界観を維持してください。";
   const adaptiveDesignRule = "入れ物・家具・小物・舞台装飾は、選んだ世界観・服・色合いに自然になじむデザインにしてください。色・素材・装飾は、背景や雰囲気に合わせて可愛く調整してください。";
 
@@ -645,10 +713,13 @@ ${identityRule}
 ${baseScene}
 背景は明るく、やさしい光に包まれていて、可愛いけれどペットの顔を邪魔しない。
 
-【服・アクセサリー・足元】
-${outfitSentence}
-${headAccessorySentence}
-${shoesSentence}
+【服】
+${clothingSentence}
+
+【頭装備・アクセサリー・足元】
+${headSentence}
+${accessorySentence}
+${shoeSentence}
 
 【舞台ギミック・小物】
 ${containerSentence}
@@ -657,7 +728,7 @@ ${adaptiveDesignRule}${scenePoseBlock}
 
 【色合い・光・雰囲気】
 色合いは${color}。
-光や明るさは${lighting}。
+光や明るさは${lighting}
 雰囲気は${mood}。
 ${brightLock}
 
@@ -689,19 +760,48 @@ async function copyTextSafely(text, fallbackElement) {
 }
 
 function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
+  const selectedValues = selected[category.id] || [];
+  const isColorChips = category.type === "colorChips";
+
   return (
-    <div>
-      <div className="category-head"><h3>{category.title}</h3><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
-      <div className="chips">
-        {category.options.map((option) => {
-          const active = selected[category.id]?.includes(option);
-          return (
-            <button key={option} onClick={() => onToggle(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
-              {option}
-            </button>
-          );
-        })}
+    <div className="option-group">
+      <div className="category-head">
+        <h3>{category.title}</h3>
+        <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
       </div>
+
+      {isColorChips ? (
+        <div className="color-chip-grid">
+          {category.options.map((option) => {
+            const active = selectedValues.includes(option.name);
+            return (
+              <button
+                key={option.name}
+                type="button"
+                title={option.name}
+                aria-label={option.name}
+                onClick={() => onToggle(category.id, option.name, false, category.maxSelect)}
+                className={`color-chip ${active ? "active" : ""}`}
+              >
+                <span className="color-chip-swatch" style={{ background: option.value }} />
+                <span className="color-chip-name">{option.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="chips">
+          {category.options.map((option) => {
+            const active = selectedValues.includes(option);
+            return (
+              <button key={option} type="button" onClick={() => onToggle(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
+                {option}
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       <label>
         <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
       </label>
@@ -710,12 +810,27 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
   );
 }
 
+function CategorySection({ title, categories, selected, custom, onToggle, onCustomChange, resetCategory }) {
+  return (
+    <section className="card">
+      <div className="card-head category-card-head">
+        <h2>{title}</h2>
+      </div>
+      <div className="section-stack">
+        {categories.map((category) => (
+          <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={onToggle} onCustomChange={onCustomChange} resetCategory={resetCategory} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [locationType, setLocationType] = useState("indoor");
   const [locationOption, setLocationOption] = useState("お姫さまの部屋");
   const [indoorWorldId, setIndoorWorldId] = useState("dreamLolita");
   const [outdoorWorldId, setOutdoorWorldId] = useState("flowerGarden");
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState(initialSelected);
   const [custom, setCustom] = useState({});
   const [featuredPrompt, setFeaturedPrompt] = useState("");
   const [copyStatus, setCopyStatus] = useState("idle");
@@ -733,12 +848,14 @@ function App() {
         if (!exists) {
           setCustom((customPrev) => ({ ...customPrev, [categoryId]: "" }));
         }
-        return { ...prev, [categoryId]: exists ? [] : [option] };
+        return { ...prev, [categoryId]: exists ? getDefaultSelected(categoryId) : [option] };
       }
-      if (option === "なし") return { ...prev, [categoryId]: exists ? [] : ["なし"] };
-      const withoutNone = current.filter((item) => item !== "なし");
-      if (maxSelect && !exists && withoutNone.length >= maxSelect) return prev;
-      return { ...prev, [categoryId]: exists ? withoutNone.filter((item) => item !== option) : [...withoutNone, option] };
+      if (option === "なし" || option === "おまかせ") {
+        return { ...prev, [categoryId]: exists ? getDefaultSelected(categoryId) : [option] };
+      }
+      const withoutAuto = current.filter((item) => item !== "なし" && item !== "おまかせ");
+      if (maxSelect && !exists && withoutAuto.length >= maxSelect) return prev;
+      return { ...prev, [categoryId]: exists ? withoutAuto.filter((item) => item !== option) : [...withoutAuto, option] };
     });
   };
 
@@ -763,7 +880,7 @@ function App() {
 
     if (value.trim()) {
       setSelected((prev) => {
-        if (isSingleCategory(key) || (prev[key] || []).includes("なし")) {
+        if (isSingleCategory(key) || (prev[key] || []).includes("なし") || (prev[key] || []).includes("おまかせ")) {
           return { ...prev, [key]: [] };
         }
         return prev;
@@ -800,7 +917,7 @@ function App() {
     setLocationOption("お姫さまの部屋");
     setIndoorWorldId("dreamLolita");
     setOutdoorWorldId("flowerGarden");
-    setSelected({});
+    setSelected(initialSelected);
     setCustom({});
     setFeaturedPrompt("");
     setCopyStatus("idle");
@@ -809,9 +926,7 @@ function App() {
   const resetCategory = (categoryId) => {
     setFeaturedPrompt("");
     setSelected((prev) => {
-      const next = { ...prev };
-      delete next[categoryId];
-      return next;
+      return { ...prev, [categoryId]: getDefaultSelected(categoryId) };
     });
     setCustom((prev) => {
       const next = { ...prev };
@@ -826,7 +941,8 @@ function App() {
 
   const hasStageGimmick =
     selected.containerScene?.length &&
-    !selected.containerScene.includes("なし");
+    !selected.containerScene.includes("なし") &&
+    !selected.containerScene.includes("おまかせ");
 
   const isUpsideDownStairs =
     locationType === "outdoor" &&
@@ -835,18 +951,6 @@ function App() {
 
   return (
     <div className="page">
-      <style>{`
-        @media (min-width: 900px) {
-          .right {
-            position: sticky;
-            top: 20px;
-            align-self: start;
-            max-height: calc(100vh - 40px);
-            overflow: auto;
-          }
-        }
-      `}</style>
-
       <div className="blob blob-pink" />
       <div className="blob blob-violet" />
       <div className="blob blob-blue" />
@@ -863,7 +967,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 09:46</div>
+          <div className="update-time">最終更新：2026/05/29 15:30</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -971,6 +1075,19 @@ function App() {
               </section>
             )}
 
+            {uiSections.map((section) => (
+              <CategorySection
+                key={section.id}
+                title={section.title}
+                categories={section.categories}
+                selected={selected}
+                custom={custom}
+                onToggle={toggleOption}
+                onCustomChange={updateCustom}
+                resetCategory={resetCategory}
+              />
+            ))}
+
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && ["containerScene", "pose"].includes(category.id)))
@@ -986,7 +1103,6 @@ function App() {
                       return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
-                  {category.id === "lighting" && <div className="notice" style={{ marginBottom: "12px" }}>黒い子・濃い茶色の子・グレー系の子は、背景や全体の色味まで暗く引っ張られやすいです。夢かわ・白ピンク系にしたい場合は「明るくハイキー」「白っぽくふんわり発光」推奨です。</div>}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
