@@ -302,14 +302,13 @@ const shoeCategories = [
 ];
 
 const multiCategories = [
-  { id: "containerScene", title: "ペットのポーズ・ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ちょこんと座る", "窓辺", "クッションの上", "前足そろえ", "スノードームの中", "シャボン玉の中", "カップの中", "グラスの中", "苺バスケットの中", "花かごの中", "プレゼント箱の中", "ベビーベッド", "マカロンクッションの上", "馬車の中"], customPlaceholder: "例：宝石箱の中、透明な香水瓶の中、窓辺で座る" },
-  { id: "gesture", title: "ペットのしぐさ", defaultValue: "おまかせ", options: ["おまかせ", "首かしげ", "くんくん", "スウィーツを食べる", "ケーキを見つめる", "笑顔"], customPlaceholder: "例：マカロンを見つめる、リボンを見上げる、ぺろっ" },
+  { id: "containerScene", title: "ペットのポーズ・ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "カメラ目線でちょこんと座る", "窓辺でふんわり", "クッションでくつろぐ", "前足をそろえる", "ペットがスノーボールの中に入っている", "ペットが大きな透明シャボン玉の中に入っている", "ペットがアンティークなティーカップの中に入っている", "ペットが可愛いガラスのグラスの中に入っている", "ペットが苺のバスケットの中に入っている", "ペットが花かごの中に入っている", "ペットが大きなプレゼント箱の中に入っている", "ペットがレースのベビーベッドに入っている", "ペットがマカロン型クッションの上にいる", "ペットが小さな馬車の中にいる"], customPlaceholder: "例：宝石箱の中に入る、透明な香水瓶の中に入る、窓辺で座る" },
+  { id: "gesture", title: "ペットのしぐさ", defaultValue: "おまかせ", options: ["おまかせ", "小首をかしげる", "お花をくんくん", "スウィーツを食べる", "ケーキを見つめる", "にっこり笑っているように見える"], customPlaceholder: "例：マカロンを見つめる、リボンを見上げる" },
   { id: "items", title: "小物・飾り", defaultValue: "おまかせ", options: ["おまかせ", "なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"], customPlaceholder: "例：小さな王冠、ピンクの魔法ステッキ" },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
-  { id: "color", title: "全体の色合い", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "例：全体を桜ピンク多め、白と金を少し、淡い虹色" },
+  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
-  { id: "bodyStyle", title: "体型・デフォルメ", single: true, defaultValue: "おまかせ", options: ["おまかせ", "シルヴァニア風", "自然な写真寄り"], customPlaceholder: "例：頭大きめで丸いぬいぐるみ風、足短め" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
   { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
 ];
@@ -610,54 +609,9 @@ function buildSceneEffects({ selected, custom }) {
   return `情景演出として、${falling}が${amount || "適度に"}舞っています。ペットの顔を邪魔しない量と位置にしてください。`;
 }
 
-const containerScenePhrases = {
-  "ちょこんと座る": "ペットがカメラ目線でちょこんと座っています",
-  "窓辺": "ペットが可愛い窓辺でふんわり座っています",
-  "クッションの上": "ペットが可愛いクッションの上でくつろいでいます",
-  "前足そろえ": "ペットが前足をそろえて上品に座っています",
-  "スノードームの中": "ペットが可愛いスノードームの中に入っています",
-  "シャボン玉の中": "ペットが大きな透明シャボン玉の中に入っています",
-  "カップの中": "ペットがアンティークなティーカップの中に入っています",
-  "グラスの中": "ペットが可愛いガラスのグラスの中に入っています",
-  "苺バスケットの中": "ペットが苺のバスケットの中に入っています",
-  "花かごの中": "ペットが花かごの中に入っています",
-  "プレゼント箱の中": "ペットが大きなプレゼント箱の中に入っています",
-  "ベビーベッド": "ペットがレースのベビーベッドに入っています",
-  "マカロンクッションの上": "ペットがマカロン型クッションの上にいます",
-  "馬車の中": "ペットが小さな馬車の中にいます",
-};
-
-const gesturePhrases = {
-  "首かしげ": "小首をかしげる",
-  "くんくん": "お花や小物をくんくんする",
-  "笑顔": "にっこり笑っているように見える",
-};
-
-function translateContainerScene(scene) {
-  if (!scene) return "";
-  return scene.split("、").map((item) => containerScenePhrases[item] || item).join("、");
-}
-
-function translateGesture(gesture) {
-  if (!gesture) return "";
-  return gesture.split("、").map((item) => gesturePhrases[item] || item).join("、");
-}
-
-function getBodyStyleInstruction(bodyStyle) {
-  if (!bodyStyle) return "";
-  if (bodyStyle === "シルヴァニア風") {
-    return "体型はシルヴァニアファミリー風の、頭がやや大きめで体は小さめ、足は短め、全体が丸くころんとしたぬいぐるみのような可愛いバランスにしてください。リアル犬の胴長・足長・モデル体型に寄せすぎず、ペット本人の顔と毛色を保ったまま、可愛いデフォルメ感を加えてください。";
-  }
-  if (bodyStyle === "自然な写真寄り") {
-    return "体型は元写真の自然なバランスを尊重し、過度なデフォルメはしないでください。";
-  }
-  return bodyStyle;
-}
-
 function buildPrompt({ locationType, locationOption, selected, custom, outdoorWorldId, indoorWorldId }) {
   const items = joinValues(selected, custom, "items");
-  const rawContainerScene = joinValues(selected, custom, "containerScene");
-  const containerScene = translateContainerScene(rawContainerScene);
+  const containerScene = joinValues(selected, custom, "containerScene");
   const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "選んだ屋内世界観に自然に合う壁紙や壁面デザイン" : ""));
   const wallDecor = joinValues(selected, custom, "wallDecor", locationType === "indoor" ? "選んだ屋内世界観に合う壁飾り" : "");
 
@@ -678,10 +632,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const color = translateColor(joinValues(selected, custom, "color", "選んだ世界観・服・小物に合うやさしい色合い"));
   const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color });
 
-  const gesture = translateGesture(joinValues(selected, custom, "gesture", "小首をかしげる、にっこり笑っているように見える"));
+  const gesture = joinValues(selected, custom, "gesture", "小首をかしげる、にっこり笑っているように見える");
   const density = getSingleValue(selected, custom, "density", "おまかせ", { keepAuto: true });
-  const bodyStyle = getSingleValue(selected, custom, "bodyStyle", "");
-  const bodyStyleInstruction = getBodyStyleInstruction(bodyStyle);
   const textOverlay = getSingleValue(selected, custom, "textOverlay", "なし", { keepAuto: true });
   const size = joinValues(selected, custom, "size", "正方形 1:1", { keepAuto: true });
   const aspectInstruction = getSizeInstruction(size);
@@ -724,10 +676,10 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     : "靴や足元は、服と背景に合わせて自然におまかせしてください。";
 
   const itemSentence = items ? `選んだ小物（${items}）は、世界観になじむ程度にさりげなく取り入れてください。` : "小物は選んだ世界観に合わせて自然におまかせしてください。";
-  const isContainerGimmick = containerScene?.includes("中に") || containerScene?.includes("上に") || containerScene?.includes("ベビーベッド") || containerScene?.includes("馬車");
+  const isContainerGimmick = containerScene?.includes("入っている") || containerScene?.includes("上にいる");
   const containerSentence = containerScene
     ? isContainerGimmick
-      ? `${containerScene}。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
+      ? `ペットは「${containerScene}」という主役ギミックで表現してください。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
       : `ペットのポーズや配置は「${containerScene}」を基本にしてください。背景や小物と自然に合うようにしてください。`
     : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
@@ -789,7 +741,6 @@ ${brightLock}
 
 【仕上げ】
 ${densitySentence}
-${bodyStyleInstruction}
 ${translateTextOverlay(textOverlay)}
 ${aspectInstruction}
 ふんわり上品で夢かわいい一枚にしてください。`;
@@ -1133,7 +1084,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 16:32</div>
+          <div className="update-time">最終更新：2026/05/29 16:08</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
