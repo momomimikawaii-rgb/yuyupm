@@ -239,19 +239,16 @@ const outfitTranslations = {
 };
 
 const multiCategories = [
-  { id: "outfit", title: "服・衣装", icon: Shirt, single: true, options: ["なし", "おまかせ", "夏のフリルワンピース", "ごちゃかわロリータワンピース", "お姫さまドレス", "苺柄ワンピース", "レースたっぷりワンピース", "アイドル衣装", "カフェ店員さん風エプロン", "ふわふわケープ", "クラシカルロリータ", "妖精みたいなチュールドレス", "ピンクハウス系", "ゴスロリドレス", "パンクロック衣装", "白馬の王子様衣装", "セーラー制服", "ブレザー制服", "チェック柄の学院制服", "寄宿学校風制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "くまのきぐるみ", "うさぎのきぐるみ", "リスのきぐるみ", "モモンガのきぐるみ", "ひよこのきぐるみ", "小鳥のきぐるみ"] },
-  { id: "headAccessory", title: "頭装備", single: true, options: ["なし", "おまかせ", "大きなリボン", "細い垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ"] },
-  { id: "headDecor", title: "頭装備の飾り", options: ["おまかせ", "花", "リボン", "レース", "フリル", "パール", "苺", "薔薇", "猫耳", "くま耳", "きつね耳", "うさぎ耳", "垂れ耳うさぎ"] },
-  { id: "accessory", title: "アクセサリー", options: ["なし", "おまかせ", "首飾り", "チョーカー", "ネックレス", "ブローチ", "リボンタイ", "サングラス", "眼鏡", "魔法ステッキ", "バッグ"] },
-  { id: "shoes", title: "靴の形", single: true, options: ["なし", "おまかせ", "レース靴", "バレエシューズ", "ブーツ", "ローファー", "長靴", "サンダル"] },
-  { id: "shoeDecor", title: "靴の飾り", options: ["おまかせ", "リボン", "レース", "フリル", "花", "パール", "ハート", "星"] },
-  { id: "outfitColor", title: "服セットの色合い（3色まで）", maxSelect: 3, options: ["おまかせ", "白", "クリーム", "ベージュ", "ピンク", "ベビーピンク", "くすみピンク", "赤", "水色", "ミント", "藤色", "ラベンダー", "黄色", "茶色", "グレー", "黒", "金", "銀"] },
+  { id: "outfit", title: "服・衣装", icon: Shirt, single: true, options: ["なし", "夏のフリルワンピース", "ごちゃかわロリータワンピース", "お姫さまドレス", "苺柄ワンピース", "レースたっぷりワンピース", "アイドル衣装", "カフェ店員さん風エプロン", "ふわふわケープ", "ヘッドドレス付きドレス", "リボンたっぷりドレス", "クラシカルロリータ", "妖精みたいなチュールドレス", "ピンクハウス系", "ゴスロリドレス", "パンクロック衣装", "白馬の王子様衣装", "黒いロングコート", "黒を基調としたイギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "リスのきぐるみ", "モモンガのきぐるみ", "ひよこのきぐるみ", "うさぎのきぐるみ", "小鳥のきぐるみ", "くまのきぐるみ"] },
+  { id: "headAccessory", title: "頭飾り・アクセサリー", options: ["なし", "大きなリボン", "細い垂れリボン", "ヘッドドレス", "ボンネット", "麦わら帽子", "花冠", "ティアラ", "サングラス", "うさ耳カチューシャ", "苺モチーフの髪飾り", "レースのカチューシャ", "お花付きリボン", "藤の花飾り", "レース付き麦わら帽子", "ベレー帽", "ふわふわイヤーマフ", "天使の輪っか", "小さな王冠", "猫耳ヘッドドレス", "黒レースヘッドドレス", "コウモリリボン", "猫耳ゴスカチューシャ", "リス耳フード", "モモンガ耳フード", "ひよこ帽子", "うさ耳フード", "小鳥の羽飾り", "くま耳フード"] },
+  { id: "shoes", title: "靴・足元", single: true, options: ["なし", "ピンクのリボン付きシューズ", "白レースの小さな靴", "藤色のリボンシューズ", "淡い水色の靴", "苺モチーフの靴", "可愛いピンクのレインブーツ", "小さな赤い長靴", "パール付きシューズ", "バレエシューズ風", "ふわふわブーツ", "足元に小さなリボンだけ"] },
+  { id: "outfitColor", title: "服の色", single: true, options: ["白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "苺ミルク色", "パウダーピンク", "パステルイエロー", "白レース多め", "ピンク×白フリル", "藤色×白フリル", "淡いミントグリーン", "黒×ピンク", "黒×紫", "ワインレッド", "黒×赤", "白×金"] },
   { id: "containerScene", title: "入れ物・舞台ギミック", single: true, options: ["なし", "ペットがスノーボールの中に入っている", "ペットが大きな透明シャボン玉の中に入っている", "ペットがアンティークなティーカップの中に入っている", "ペットが可愛いガラスのグラスの中に入っている", "ペットが苺のバスケットの中に入っている", "ペットが花かごの中に入っている", "ペットが大きなプレゼント箱の中に入っている", "ペットがレースのベビーベッドに入っている", "ペットがマカロン型クッションの上にいる", "ペットが小さな馬車の中にいる"] },
   { id: "pose", title: "ペットのポーズ・しぐさ", options: ["カメラ目線", "ちょこんと座る", "小首をかしげる", "お花をくんくん", "スウィーツを食べる", "ケーキを見つめる", "窓辺でふんわり", "クッションでくつろぐ", "前足をそろえる", "にっこり笑っているように見える"] },
-  { id: "items", title: "小物・飾り", options: ["なし", "おまかせ", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"] },
+  { id: "items", title: "小物・飾り", options: ["なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"] },
-  { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "おまかせ（屋内世界観に合わせる）", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
-  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "", "白×金"] },
+  { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, options: ["なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"] },
+  { id: "color", title: "全体の色合い", single: true, options: ["選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "ワインレッド", "白×金"] },
   { id: "mood", title: "雰囲気（3つまで選択可能）", maxSelect: 3, options: ["ふんわり", "透明感", "夢かわ", "メルヘン", "ロリータ風", "上品", "明るい昼間", "やさしい光", "高級感", "絵本のように可愛い", "ゴシック", "ダークメルヘン", "ハードロック風"] },
   { id: "density", title: "密度・余白", single: true, options: ["おまかせ（世界観に合わせる）", "すっきり透明感", "自然な華やかさ", "ごちゃかわ多め", "画面いっぱいに華やか"] },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり ※文字は崩れる場合があります）", single: true, options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"] },
@@ -265,12 +262,9 @@ const customFieldLabels = {
   wallpaper: "その他の壁紙",
   wallDecor: "その他の壁飾り",
   outfit: "その他の服・衣装",
-  headAccessory: "その他の頭装備",
-  headDecor: "その他の頭装備の飾り",
-  accessory: "その他のアクセサリー",
-  outfitColor: "その他の服セットの色合い",
-  shoes: "その他の靴の形",
-  shoeDecor: "その他の靴の飾り",
+  headAccessory: "その他の頭飾り・アクセサリー",
+  outfitColor: "その他の服の色",
+  shoes: "その他の靴・足元",
   color: "その他の全体色",
   mood: "その他の雰囲気",
   pose: "その他のポーズ",
@@ -283,12 +277,9 @@ const customPlaceholders = {
   wallpaper: "例：ピンクの薔薇柄壁紙、白い腰壁、レース模様の壁紙",
   wallDecor: "例：額縁の天使画、ドライフラワーのスワッグ、リボンガーランド",
   outfit: "例：寄宿学校風制服、リスのきぐるみ、モモンガのきぐるみ、苺のお姫さまドレス",
-  headAccessory: "例：白レースボンネット、花付きヘッドドレス、垂れリボン",
-  headDecor: "例：花、リボン、猫耳、垂れ耳うさぎ",
-  accessory: "例：サングラス、チョーカー、魔法ステッキ、バッグ",
-  outfitColor: "例：黒×金、水色×ピンク×藤色、白×ベビーピンク",
-  shoes: "例：レース靴、ローファー、ふわふわブーツ",
-  shoeDecor: "例：リボン、レース、花、パール",
+  headAccessory: "例：苺リボン、天使のヘッドドレス、白レースボンネット",
+  outfitColor: "例：白×藤色、苺ミルクピンク、淡いクリーム色",
+  shoes: "例：白いレース靴、ピンクの長靴、足元に小さなリボンだけ",
   color: "例：白多めのピンク、淡い藤色、ミルキーなパステルカラー",
   mood: "例：甘くて上品、絵本みたい、ふわふわキラキラ",
   density: "例：余白多め、背景はすっきり、花や小物は多め",
@@ -320,7 +311,7 @@ const recommendedPrompts = [
 【服・アクセサリー】
 必要に応じて、アップロード画像の服装・リボン・アクセサリーを保持してください。または、ユーザーが指定した服装・アクセサリーがある場合は、それを自然に反映してください。服装を追加・変更する場合も、ペット本人の顔・表情・毛色・体格を変えないでください。
 
-【色合い・雰囲気】
+【色合い・光・雰囲気】
 現実の写真のような美しさを保ちながら、夢の中のような幻想的な雰囲気にしてください。柔らかな白い光、ふんわりした逆光、淡い霧、空気中に漂うきらめく光の粒、透明感のある空気感を加えてください。薄いピンクの花びらが、風に乗って優しくそよそよ舞っています。
 
 全体は明るく、透明感があり、上品で夢可愛い雰囲気。暗い雰囲気、ゴシック調、夜景、強すぎる魔法エフェクト、派手すぎる発光、暗い霧演出にはしないでください。
@@ -344,6 +335,7 @@ function splitCustomText(value) {
   if (!value) return [];
   return value.split(/[、,\n]/).map((item) => item.trim()).filter(Boolean);
 }
+
 
 function isSingleCategory(key) {
   const multiCategory = multiCategories.find((category) => category.id === key);
@@ -558,7 +550,6 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const noContainer = hasNoneSelected(selected, "containerScene");
   const noOutfit = hasNoneSelected(selected, "outfit");
   const noHeadAccessory = hasNoneSelected(selected, "headAccessory");
-  const noAccessory = hasNoneSelected(selected, "accessory");
   const noShoes = hasNoneSelected(selected, "shoes");
 
   const items = joinValues(selected, custom, "items");
@@ -567,14 +558,11 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const wallDecor = joinValues(selected, custom, "wallDecor", "");
   const outfit = translateOutfit(joinValues(selected, custom, "outfit"));
   const headAccessory = joinValues(selected, custom, "headAccessory");
-  const headDecor = joinValues(selected, custom, "headDecor");
-  const accessory = joinValues(selected, custom, "accessory");
   const outfitColor = joinValues(selected, custom, "outfitColor");
   const shoes = joinValues(selected, custom, "shoes");
-  const shoeDecor = joinValues(selected, custom, "shoeDecor");
   const color = translateColor(joinValues(selected, custom, "color", "選択した世界観に合うやさしい色合い"));
-  const lighting = (joinValues(selected, custom, "lighting", "おまかせ"));
   const mood = joinValues(selected, custom, "mood", "ふんわり明るく、透明感のあるメルヘンな雰囲気");
+  const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color, mood });
   const hasStageGimmickInPrompt =
     (selected.containerScene || []).length > 0 &&
     !selected.containerScene.includes("なし");
@@ -595,7 +583,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const baseScene =
     locationType === "indoor"
       ? `${buildIndoorScene({ indoorWorldId, locationOption, customLocation: custom.location })}${wallpaper ? `壁紙は${wallpaper}。` : ""}${wallDecor ? `壁飾りは${wallDecor}を自然に配置してください。` : ""}壁や奥の空間まで可愛く作り込んでください。`
-      : `屋外の「${outdoorWorlds.find((item) => item.id === outdoorWorldId)?.title || "ワールド"}」で、${buildOutdoorScene({ selected, custom, outdoorWorldId })}背景は、選んだ屋外ワールドに合う自然な奥行き・空気感を大切にしてください。`;
+      : `屋外の「${outdoorWorlds.find((item) => item.id === outdoorWorldId)?.title || "ワールド"}」で、${buildOutdoorScene({ selected, custom, outdoorWorldId })}背景は、選んだ屋外ワールドに合う自然な奥行き・空気感・光を大切にしてください。`;
 
   const itemSentence = locationType === "outdoor" && items && !noItems ? `選んだ小物（${items}）は、世界観になじむ程度にさりげなく取り入れてください。` : "";
   const containerSentence = containerScene && !noContainer ? `ペットは「${containerScene}」という主役ギミックで表現してください。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。` : "";
@@ -616,10 +604,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     ? "寄宿学校・学院系の衣装を選んだ場合は、体型を細身で中性的な学院生風にしてください。大人の高身長モデルのようにしないでください。幼すぎる子ども体型にもせず、小柄〜中くらいの、上品で少年少女らしいシルエットにしてください。手足は長すぎず、全体のバランスは静かな映画感のあるクラシカルな寄宿学校風に整えてください。"
     : "";
 
-  const outfitSentence = outfit && !noOutfit ? `ペットは${outfit}を着ています。${outfitColor ? `服セットの色合いは${outfitColor}を自然に組み合わせてください。靴や小物の色も、選んだ服セットの色合いになじむように調整してください。` : ""}服はペットの体型に自然に合っていて、顔や目や鼻口まわりを隠さないでください。${animalCostumeShapeRule}${boardingSchoolShapeRule}` : "必要以上に服を追加せず、元写真の自然な魅力を尊重してください。";
-  const headAccessorySentence = headAccessory && !noHeadAccessory ? `頭には${headAccessory}を付けています。${headDecor ? `飾りとして${headDecor}を自然に組み合わせてください。` : ""}頭装備は、顔・目・鼻口まわりを隠さないようにしてください。` : "";
-  const accessorySentence = accessory && !noAccessory ? `アクセサリーとして${accessory}を自然に合わせてください。アクセサリーは小さめにして、ペットの顔や体型の可愛さを邪魔しないようにしてください。` : "";
-  const shoesSentence = shoes && !noShoes ? `足元には${shoes}を合わせています。${shoeDecor ? `靴の飾りとして${shoeDecor}を自然に付けてください。` : ""}靴や足元の飾りは小さめにして、服セットの色合いになじむようにしてください。` : "";
+  const outfitSentence = outfit && !noOutfit ? `ペットは${outfit}を着ています。${outfitColor ? `衣装の色は${outfitColor}を基調としています。` : ""}服はペットの体型に自然に合っていて、顔や目や鼻口まわりを隠さないでください。${animalCostumeShapeRule}${boardingSchoolShapeRule}` : "必要以上に服を追加せず、元写真の自然な魅力を尊重してください。";
+  const headAccessorySentence = headAccessory && !noHeadAccessory ? `頭には${headAccessory}を付けています。頭飾りやアクセサリーは、顔・目・鼻口まわりを隠さないようにしてください。` : "";
+  const shoesSentence = shoes && !noShoes ? `足元には${shoes}を合わせています。靴や足元の飾りは小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。` : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
   const selectedOutdoorWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId);
@@ -661,7 +648,6 @@ ${baseScene}
 【服・アクセサリー・足元】
 ${outfitSentence}
 ${headAccessorySentence}
-${accessorySentence}
 ${shoesSentence}
 
 【舞台ギミック・小物】
@@ -669,7 +655,7 @@ ${containerSentence}
 ${itemSentence}
 ${adaptiveDesignRule}${scenePoseBlock}
 
-【色合い・雰囲気】
+【色合い・光・雰囲気】
 色合いは${color}。
 光や明るさは${lighting}。
 雰囲気は${mood}。
@@ -702,87 +688,10 @@ async function copyTextSafely(text, fallbackElement) {
   return { ok: false };
 }
 
-
-const outfitGroups = [
-  { title: "なし・おまかせ", options: ["なし", "おまかせ"] },
-  { title: "ドレス・ワンピース", options: ["夏のフリルワンピース", "ごちゃかわロリータワンピース", "お姫さまドレス", "苺柄ワンピース", "レースたっぷりワンピース", "アイドル衣装", "カフェ店員さん風エプロン", "ふわふわケープ", "クラシカルロリータ", "妖精みたいなチュールドレス", "ピンクハウス系", "ゴスロリドレス", "パンクロック衣装", "白馬の王子様衣装"] },
-  { title: "制服・学院", options: ["セーラー制服", "ブレザー制服", "チェック柄の学院制服", "寄宿学校風制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服"] },
-  { title: "着ぐるみ・小動物", options: ["くまのきぐるみ", "うさぎのきぐるみ", "リスのきぐるみ", "モモンガのきぐるみ", "ひよこのきぐるみ", "小鳥のきぐるみ"] },
-];
-
-const outfitColorPalette = [
-  { name: "おまかせ", color: "linear-gradient(135deg,#fff,#f5f3ff,#fce7f3)", auto: true },
-  { name: "白", color: "#ffffff" },
-  { name: "クリーム", color: "#fff7d6" },
-  { name: "ベージュ", color: "#e8d2b7" },
-  { name: "ピンク", color: "#f9a8d4" },
-  { name: "ベビーピンク", color: "#fce7f3" },
-  { name: "くすみピンク", color: "#d8a7b1" },
-  { name: "赤", color: "#ef4444" },
-  { name: "水色", color: "#7dd3fc" },
-  { name: "ミント", color: "#a7f3d0" },
-  { name: "藤色", color: "#c4b5fd" },
-  { name: "ラベンダー", color: "#ddd6fe" },
-  { name: "黄色", color: "#fde68a" },
-  { name: "茶色", color: "#92400e" },
-  { name: "グレー", color: "#94a3b8" },
-  { name: "黒", color: "#111827" },
-  { name: "金", color: "linear-gradient(135deg,#fef3c7,#f59e0b,#92400e)" },
-  { name: "銀", color: "linear-gradient(135deg,#f8fafc,#cbd5e1,#64748b)" },
-];
-
-function OutfitSelector({ category, selected, custom, onToggle, onCustomChange }) {
+function OptionGroup({ category, selected, custom, onToggle, onCustomChange }) {
   return (
     <div>
-      {outfitGroups.map((group) => (
-        <div key={group.title} className="outfit-group">
-          <div className="outfit-group-title">{group.title}</div>
-          <div className="chips">
-            {group.options.map((option) => (
-              <button key={option} onClick={() => onToggle("outfit", option, true)} className={`chip ${selected.outfit?.includes(option) ? "active" : ""}`}>
-                {option}
-              </button>
-            ))}
-
-            <section className="card instagram-card">
-              <h2>Instagramも見てね</h2>
-              <a href="https://www.instagram.com/momomimiyuyu/" target="_blank" rel="noreferrer" className="instagram-link">
-                <img src="/instagram_momomimiyuyu.png" alt="Instagram QR" className="instagram-image" />
-              </a>
-            </section>
-
-          </div>
-        </div>
-      ))}
-      <label><PlusCircle size={16} /> {category.customLabel || "その他の服・衣装を記入"}</label>
-      <input value={custom.outfit || ""} onChange={(event) => onCustomChange("outfit", event.target.value)} placeholder={category.customPlaceholder || "例：フェネックのきぐるみ、寄宿学校風制服、苺のお姫さまドレス"} />
-    </div>
-  );
-}
-
-function OutfitColorSelector({ category, selected, custom, onToggle, onCustomChange }) {
-  const current = selected.outfitColor || [];
-  return (
-    <div>
-      <p className="category-note">服・靴・小物を含めた全身コーデの色合いです。最大3色まで選べます。</p>
-      <div className="color-chip-wrap">
-        {outfitColorPalette.map((item) => (
-          <button key={item.name} type="button" title={item.name} onClick={() => onToggle("outfitColor", item.name, false, 3)} className={`color-chip ${item.auto ? "color-chip-auto" : ""} ${current.includes(item.name) ? "active" : ""}`} style={{ background: item.color }}>
-            {item.auto && <span>おまかせ</span>}
-          </button>
-        ))}
-      </div>
-      <label><PlusCircle size={16} /> {category.customLabel || "その他の服セットの色合いを記入"}</label>
-      <input value={custom.outfitColor || ""} onChange={(event) => onCustomChange("outfitColor", event.target.value)} placeholder={category.customPlaceholder || "例：黒×金、水色×ピンク×藤色、白×ベビーピンク"} />
-    </div>
-  );
-}
-
-
-function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
-  return (
-    <div>
-      <div className="category-head"><h3>{category.title}</h3><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
+      <h3 style={{ marginBottom: "10px" }}>{category.title}</h3>
       <div className="chips">
         {category.options.map((option) => {
           const active = selected[category.id]?.includes(option);
@@ -826,9 +735,8 @@ function App() {
         }
         return { ...prev, [categoryId]: exists ? [] : [option] };
       }
-      if (categoryId === "outfitColor" && option === "おまかせ") return { ...prev, [categoryId]: exists ? [] : ["おまかせ"] };
       if (option === "なし") return { ...prev, [categoryId]: exists ? [] : ["なし"] };
-      const withoutNone = current.filter((item) => item !== "なし").filter((item) => !(categoryId === "outfitColor" && item === "おまかせ"));
+      const withoutNone = current.filter((item) => item !== "なし");
       if (maxSelect && !exists && withoutNone.length >= maxSelect) return prev;
       return { ...prev, [categoryId]: exists ? withoutNone.filter((item) => item !== option) : [...withoutNone, option] };
     });
@@ -898,21 +806,6 @@ function App() {
     setCopyStatus("idle");
   };
 
-  const resetCategory = (categoryId) => {
-    setFeaturedPrompt("");
-    setSelected((prev) => {
-      const next = { ...prev };
-      delete next[categoryId];
-      return next;
-    });
-    setCustom((prev) => {
-      const next = { ...prev };
-      delete next[categoryId];
-      return next;
-    });
-  };
-
-
   const LocationIcon = locationTree[locationType]?.icon || Home;
   const activeWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId) || outdoorWorlds[0];
 
@@ -954,39 +847,16 @@ function App() {
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="hero">
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
-          <p className="subtitle">場所・ワールド・服・小物をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 00:03</div>
+          <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
+          <div className="update-time">
+            最終更新：2026/05/28 01:07
+          </div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
-                <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
-          🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ
+        <a className="sister-site-link" href="https://yuyuhy.yuyu-chan.com/" target="_blank" rel="noreferrer">
+          🌈 姉妹サイト：夢かわ以外も作りたい時は、汎用版プロンプト工房へ <ExternalLink size={15} />
         </a>
-
-        <section className="card recommended-wide">
-                      <div className="card-head">
-                        <h2>🌸 ゆゆ姫のおすすめ</h2>
-                        <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
-                      </div>
-                      {recommendedOpen && (
-                <div className="recommended-grid">
-                  {recommendedPrompts.map((item) => (
-                    <div key={item.id} className="recommended-item">
-                      <img className="recommended-thumb" src={item.image} alt={item.title} onClick={() => setModalImage(item.image)} />
-                      <div className="recommended-body">
-                        <div className="recommended-label">{item.label}</div>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                        <div className="recommended-actions">
-                          <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
-                          {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-                    </section>
 
         <div className="grid">
           <div className="left">
@@ -997,10 +867,36 @@ function App() {
               </div>
               <div className="notice">
                 <strong>ゆゆ姫ワールドの作り方</strong>
-                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・密度を自然に調整します。</span>
+                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
               </div>
             </section>
-<section className="card">
+
+            <section className="card">
+              <div className="card-head">
+                <h2>🌸 ゆゆ姫のおすすめ</h2>
+                <button className="outline-button" onClick={() => setRecommendedOpen((prev) => !prev)}>{recommendedOpen ? "閉じる" : "開く"}</button>
+              </div>
+              {recommendedOpen && (
+                <div style={{ display: "grid", gap: "14px" }}>
+                  {recommendedPrompts.map((item) => (
+                    <div key={item.id} style={{ display: "flex", gap: "16px", alignItems: "center", flexWrap: "wrap", padding: "12px", borderRadius: "24px", background: "rgba(255,255,255,0.72)", border: "1px solid rgba(251,207,232,0.9)" }}>
+                      <img src={item.image} alt={item.title} style={{ width: "140px", borderRadius: "20px", cursor: "pointer", boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }} onClick={() => setModalImage(item.image)} />
+                      <div style={{ flex: 1, minWidth: "220px" }}>
+                        <div style={{ fontSize: "13px", color: "#9d4edd", fontWeight: 800, marginBottom: "4px" }}>{item.label}</div>
+                        <h3 style={{ marginBottom: "8px" }}>{item.title}</h3>
+                        <p style={{ marginBottom: "12px" }}>{item.description}</p>
+                        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                          <button className="main-button" onClick={() => { setFeaturedPrompt(item.prompt); setCopyStatus("idle"); }}>このおすすめを使う</button>
+                          {featuredPrompt && <button className="outline-button" onClick={() => { setFeaturedPrompt(""); setCopyStatus("idle"); }}>通常作成に戻す</button>}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+
+            <section className="card">
               <h2><LocationIcon size={20} /> 場所を選ぶ</h2>
               <div className="choice-grid">
                 {Object.entries(locationTree).map(([key, value]) => {
@@ -1011,7 +907,7 @@ function App() {
               </div>
               {locationType === "indoor" && (
                 <>
-                  <div className="category-head"><h3>屋内の世界観</h3><button type="button" className="category-reset" onClick={() => { setIndoorWorldId("dreamLolita"); setLocationOption("お姫さまの部屋"); }}>リセット</button></div>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の世界観</h3>
                   <div className="chips">
                     {indoorWorlds.map((world) => {
                       const active = indoorWorldId === world.id;
@@ -1022,7 +918,7 @@ function App() {
                     <strong>{indoorWorlds.find((item) => item.id === indoorWorldId)?.title}</strong>
                     <span>{indoorWorlds.find((item) => item.id === indoorWorldId)?.description}</span>
                   </div>
-                  <div className="category-head"><h3>屋内の場所</h3><button type="button" className="category-reset" onClick={() => { setLocationOption("お姫さまの部屋"); setCustom((prev) => ({ ...prev, location: "" })); }}>リセット</button></div>
+                  <h3 style={{ marginTop: "14px", marginBottom: "10px" }}>屋内の場所</h3>
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
@@ -1051,11 +947,11 @@ function App() {
                     </div>
                     <div className="notice"><strong>{activeWorld.title}</strong><span>{activeWorld.description}</span></div>
                     {activeWorld.subCategories.map((category) => (
-                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
+                      <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                     ))}
                     <div style={{ display: "grid", gap: "18px", marginTop: "6px" }}>
                       {sceneEffects.map((category) => (
-                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} resetCategory={resetCategory} />
+                        <OptionGroup key={category.id} category={category} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
                       ))}
                     </div>
                   </div>
@@ -1069,39 +965,22 @@ function App() {
               .filter((category) => !(hasStageGimmick && category.id === "pose"))
               .map((category) => {
               const CategoryIcon = category.icon;
-              if (category.id === "outfit") {
-                return (
-                  <section key={category.id} className="card">
-                    <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
-                    <OutfitSelector category={{ ...category, customLabel: customFieldLabels[category.id], customPlaceholder: customPlaceholders[category.id] }} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
-                  </section>
-                );
-              }
-
-              if (category.id === "outfitColor") {
-                return (
-                  <section key={category.id} className="card">
-                    <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
-                    <OutfitColorSelector category={{ ...category, customLabel: customFieldLabels[category.id], customPlaceholder: customPlaceholders[category.id] }} selected={selected} custom={custom} onToggle={toggleOption} onCustomChange={updateCustom} />
-                  </section>
-                );
-              }
-
               return (
                 <section key={category.id} className="card">
-                  <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
+                  <h2>{CategoryIcon && <CategoryIcon size={20} />} {category.title}</h2>
                   <div className="chips">
                     {category.options.map((option) => {
                       const active = selected[category.id]?.includes(option);
                       return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
+                  {category.id === "lighting" && <div className="notice" style={{ marginBottom: "12px" }}>黒い子・濃い茶色の子・グレー系の子は、背景や全体の色味まで暗く引っ張られやすいです。夢かわ・白ピンク系にしたい場合は「明るくハイキー」「白っぽくふんわり発光」推奨です。</div>}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
               );
             })}
-</div>
+          </div>
 
           <div className="right">
             <section className="card result-card">
@@ -1112,6 +991,24 @@ function App() {
               <textarea ref={textAreaRef} value={prompt} readOnly aria-label="生成されたプロンプト" />
             </section>
             <section className="card small-card"><strong>固定ルール：</strong>ペットの顔・毛色・目・鼻口まわりを最優先で守る文を、どの出力にも自動で入れています。</section>
+
+            <div className="instagram-card">
+              <h3>Instagramも見てね</h3>
+
+              <a
+                href="https://www.instagram.com/momomimiyuyu/"
+                target="_blank"
+                rel="noreferrer"
+                className="instagram-link"
+              >
+                <img
+                  src="/instagram_momomimiyuyu.png"
+                  alt="Instagram QR"
+                  className="instagram-image"
+                />
+              </a>
+            </div>
+
           </div>
         </div>
       </div>
