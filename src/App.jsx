@@ -863,7 +863,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 09:31</div>
+          <div className="update-time">最終更新：2026/05/29 09:46</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -992,6 +992,9 @@ function App() {
                 </section>
               );
             })}
+</div>
+
+          <div className="right">
 
             <section className="card instagram-card">
               <h2>Instagramも見てね</h2>
@@ -1000,9 +1003,6 @@ function App() {
               </a>
             </section>
 
-          </div>
-
-          <div className="right">
             <section className="card result-card">
               <div className="card-head"><h2>完成文</h2><button className="main-button" onClick={copyPrompt}><Copy size={16} /> {copyStatus === "copied" ? "コピー済み" : "コピー"}</button></div>
               {copyStatus === "manual" && <div className="message warn"><AlertCircle size={16} /><span>自動コピーがブロックされました。下の文章を選択済みにしたので、Ctrl+C または長押しコピーしてください。</span></div>}
