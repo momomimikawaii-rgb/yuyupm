@@ -817,3 +817,13 @@ input:disabled {
 .option-group.disabled .color-chip:hover {
   transform: none;
 }
+
+
+/* --- 20260529 16:32 color and body style refinement --- */
+.color-chip:first-child .color-chip-name {
+  font-weight: 600;
+}
+
+.option-group.disabled .category-head h3::after {
+  white-space: nowrap;
+}
