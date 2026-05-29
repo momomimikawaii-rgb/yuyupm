@@ -307,7 +307,7 @@ const multiCategories = [
   { id: "items", title: "小物・飾り", defaultValue: "おまかせ", options: ["おまかせ", "なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"], customPlaceholder: "例：小さな王冠、ピンクの魔法ステッキ" },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
-  { id: "color", title: "全体の色合い", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "例：全体を桜ピンク中心、白多めのピンク、淡い藤色" },
+  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
   { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
@@ -1084,7 +1084,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 16:48</div>
+          <div className="update-time">最終更新：2026/05/29 16:08</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
