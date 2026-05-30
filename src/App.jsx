@@ -312,7 +312,7 @@ const multiCategories = [
   { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
-  { id: "size", title: "縦横の比率", type: "ratioInputs", single: true, defaultValue: "インスタ投稿用 縦長4:5", options: ["インスタ投稿用 縦長4:5"], customLabel: "数字で指定", customPlaceholder: "縦：4／横：5" },
+  { id: "size", title: "縦横比", type: "ratioInputs", single: true, defaultValue: "4:5 縦長", options: ["1:1 正方形", "4:5 縦長", "9:16 縦長", "16:9 横長"], customPlaceholder: "縦：4／横：5" },
 ];
 
 const uiSections = [
@@ -937,9 +937,29 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
 
       {isRatioInputs ? (
         <>
+          <div className="ratio-preset-grid">
+            {[
+              { label: "1:1 正方形", height: "1", width: "1" },
+              { label: "4:5 縦長", height: "4", width: "5" },
+              { label: "9:16 縦長", height: "9", width: "16" },
+              { label: "16:9 横長", height: "16", width: "9" },
+            ].map((preset) => {
+              const active = ratioHeight === preset.height && ratioWidth === preset.width;
+              return (
+                <button
+                  key={preset.label}
+                  type="button"
+                  className={`chip ${active ? "active" : ""}`}
+                  onClick={() => onCustomChange(category.id, `${preset.height}:${preset.width}`)}
+                >
+                  {preset.label}
+                </button>
+              );
+            })}
+          </div>
           <div className="ratio-inputs">
             <label className="ratio-input-label">
-              縦
+              <span>縦</span>
               <input
                 type="number"
                 min="1"
@@ -950,7 +970,7 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
             </label>
             <span className="ratio-separator">：</span>
             <label className="ratio-input-label">
-              横
+              <span>横</span>
               <input
                 type="number"
                 min="1"
@@ -960,7 +980,6 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
               />
             </label>
           </div>
-          <div className="color-chip-help">初期値はインスタ投稿向きの縦4：横5です。数字だけ変更できます。</div>
         </>
       ) : isColorChips ? (
         <>
@@ -1186,7 +1205,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 06:13</div>
+          <div className="update-time">最終更新：2026/05/31 06:23</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 

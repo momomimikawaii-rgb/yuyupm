@@ -819,33 +819,53 @@ input:disabled {
 }
 
 
-/* --- 20260531 ratio input fixes --- */
+/* --- 20260531 ratio preset input fixes --- */
+
+.ratio-preset-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
 
 .ratio-inputs {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 16px;
   margin-bottom: 8px;
 }
 
 .ratio-input-label {
-  display: inline-flex;
-  align-items: center;
+  display: grid;
   gap: 8px;
   margin: 0;
   font-size: 14px;
   font-weight: 900;
-  color: #7c3aed;
+  color: #475569;
 }
 
 .ratio-input-label input {
-  width: 88px;
-  padding: 10px 12px;
-  text-align: center;
+  width: 100%;
+  padding: 13px 15px;
+  text-align: left;
 }
 
 .ratio-separator {
+  align-self: center;
   color: #7c3aed;
   font-size: 20px;
   font-weight: 900;
+  padding-top: 26px;
+}
+
+@media (max-width: 560px) {
+  .ratio-inputs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .ratio-separator {
+    display: none;
+  }
 }
