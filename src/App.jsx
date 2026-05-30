@@ -294,7 +294,7 @@ const headCategories = [
 ];
 
 const accessoryCategories = [
-  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "ネックレス", "首リボン", "ブローチ", "バッグ", "サングラス", "ブレスレット", "スタイ"], customPlaceholder: "例：パールの首飾り、ハートのバッグ、小さな王冠ブローチ" },
+  { id: "accessories", title: "アクセサリー", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし"], customLabel: "自由記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
 ];
 
 const shoeCategories = [
@@ -679,7 +679,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
-  const accessories = joinValues(selected, custom, "accessories");
+  const accessoryCustom = splitCustomText(custom.accessories).join("、");
+  const accessoryChoice = getSingleValue(selected, custom, "accessories", "おまかせ", { keepAuto: true });
+  const accessories = accessoryCustom || (accessoryChoice === "なし" || accessoryChoice === "おまかせ" ? "" : accessoryChoice);
   const shoeShape = getSingleValue(selected, custom, "shoeShape", "");
   const shoeDecor = joinValues(selected, custom, "shoeDecor");
 
@@ -721,9 +723,11 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     ? `${headParts.join("。") }。頭装備はペットの顔・目・鼻口まわりを隠さない位置と大きさにしてください。`
     : "頭装備は、必要な場合だけ背景や服に合わせて自然に追加してください。顔・目・鼻口まわりは隠さないでください。";
 
-  const accessorySentence = accessories
-    ? `アクセサリーは${accessories}。頭装備とは分離して扱い、首元・胸元・手元・小物として自然に配置してください。サングラスを選んだ場合もアクセサリーとして扱ってください。`
-    : "アクセサリーは、選んだ服や背景に合うものを必要な範囲で自然におまかせしてください。";
+  const accessorySentence = accessoryChoice === "なし"
+    ? "アクセサリーは追加しないでください。"
+    : accessories
+      ? `アクセサリーは自由記入の内容を優先して、${accessories}を自然に取り入れてください。頭装備とは分離して扱い、首元・胸元・手元・小物として、顔・目・鼻口まわりを邪魔しない位置に配置してください。`
+      : "アクセサリーは、背景・服・世界観に合わせて、首元・胸元・手元などに自然になじむ可愛いものを必要に応じて控えめに追加してください。";
 
   const shoeSentence = shoeShape || shoeDecor
     ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
@@ -1146,7 +1150,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 05:29</div>
+          <div className="update-time">最終更新：2026/05/31 05:39</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
