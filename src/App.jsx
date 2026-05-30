@@ -277,9 +277,10 @@ const clothingCategories = [
   { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
   { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍"] },
-  { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花", "自由記入"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
-  { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー", "自由記入"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
-  { id: "otherPattern", title: "その他柄", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "チェック", "水玉", "ヒョウ柄", "ストライプ", "唐草", "ボタニカル", "千鳥", "自由記入"], customPlaceholder: "例：星柄、ハート柄、クラシカルな総柄" },
+  { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"] },
+  { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花", "自由記入"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
+  { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー", "自由記入"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
+  { id: "otherPattern", title: "その他柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "チェック", "水玉", "ヒョウ柄", "ストライプ", "唐草", "ボタニカル", "千鳥", "自由記入"], customPlaceholder: "例：星柄、ハート柄、クラシカルな総柄" },
 ];
 
 const outfitColorCategories = [
@@ -293,7 +294,7 @@ const headCategories = [
 ];
 
 const accessoryCategories = [
-  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "ネックレス", "首リボン", "ブローチ", "バッグ", "サングラス"], customPlaceholder: "例：パールの首飾り、ハートのバッグ、小さな王冠ブローチ" },
+  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "ネックレス", "首リボン", "ブローチ", "バッグ", "サングラス", "ブレスレット", "スタイ"], customPlaceholder: "例：パールの首飾り、ハートのバッグ、小さな王冠ブローチ" },
 ];
 
 const shoeCategories = [
