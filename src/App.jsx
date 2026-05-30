@@ -291,7 +291,7 @@ const outfitColorCategories = [
 
 const headCategories = [
   { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
-  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", dependsOn: { id: "headShape", value: "かぶりもの" }, options: ["おまかせ", "花", "リボン", "耳"] },
+  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
 
@@ -694,8 +694,10 @@ function buildSceneEffects({ selected, custom }) {
 function buildPrompt({ locationType, locationOption, selected, custom, outdoorWorldId, indoorWorldId }) {
   const items = joinValues(selected, custom, "items");
   const containerScene = joinValues(selected, custom, "containerScene");
-  const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "選んだ屋内世界観に自然に合う壁紙や壁面デザイン" : ""));
-  const wallDecor = joinValues(selected, custom, "wallDecor", locationType === "indoor" ? "選んだ屋内世界観に合う壁飾り" : "");
+  const wallDetail = getSingleValue(selected, custom, "wallDetail", "おまかせ", { keepAuto: true });
+  const useWallDetail = locationType === "indoor" && wallDetail === "詳細選択";
+  const wallpaper = useWallDetail ? translateWallpaper(joinValues(selected, custom, "wallpaper", "")) : "";
+  const wallDecor = useWallDetail ? joinValues(selected, custom, "wallDecor", "") : "";
 
   const clothingSeason = getSingleValue(selected, custom, "clothingSeason", "");
   const clothingShape = getSingleValue(selected, custom, "clothingShape", "");
@@ -705,7 +707,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const fruitPattern = joinValues(selected, custom, "fruitPattern");
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
   const otherPattern = joinValues(selected, custom, "otherPattern");
+  const outfitColorSelection = selected.outfitColorChips || [];
   const outfitColors = joinValues(selected, custom, "outfitColorChips");
+  const outfitColorAuto = outfitColorSelection.includes("おまかせ") && !outfitColors && !splitCustomText(custom.outfitColorChips).length;
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
@@ -740,6 +744,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
   if (outfitColors) clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
+  else if (outfitColorAuto) clothingParts.push("服セットの色合いは、選んだ背景・季節・服の形・世界観に合わせて自然におまかせで可愛く調整する");
 
   const noClothes = clothingShape === "なし";
   const clothingSentence = noClothes
@@ -878,11 +883,11 @@ function hasSelection(selected, categoryId, value) {
 
 function isCategoryDisabledById(categoryId, selected) {
   if (categoryId === "headDecor") {
-    return !hasSpecificSelection(selected, "headShape");
+    return false;
   }
 
   if (categoryId === "earType") {
-    return isCategoryDisabledById("headDecor", selected) || !hasSelection(selected, "headDecor", "耳");
+    return !hasSelection(selected, "headDecor", "耳");
   }
 
   if (categoryId === "shoeDecor") {
@@ -1188,7 +1193,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 22:53</div>
+          <div className="update-time">最終更新：2026/05/31（日） 08:35頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
