@@ -276,6 +276,8 @@ const colorChipOptions = [
 const clothingCategories = [
   { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
   { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
+  { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
+  { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍"] },
   { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"] },
   { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花", "自由記入"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
@@ -671,6 +673,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
 
   const clothingSeason = getSingleValue(selected, custom, "clothingSeason", "");
   const clothingShape = getSingleValue(selected, custom, "clothingShape", "");
+  const uniformStyle = getSingleValue(selected, custom, "uniformStyle", "");
+  const kigurumiAnimal = getSingleValue(selected, custom, "kigurumiAnimal", "");
   const clothingDecor = joinValues(selected, custom, "clothingDecor");
   const fruitPattern = joinValues(selected, custom, "fruitPattern");
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
@@ -702,6 +706,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const clothingParts = [];
   if (clothingSeason) clothingParts.push(`季節は${clothingSeason}`);
   if (clothingShape) clothingParts.push(`服の形は${clothingShape}`);
+  if (uniformStyle) clothingParts.push(`制服の詳細は${uniformStyle}`);
+  if (kigurumiAnimal) clothingParts.push(`着ぐるみの動物モチーフは${kigurumiAnimal}`);
   if (clothingDecor) clothingParts.push(`服の装飾は${clothingDecor}`);
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
@@ -855,7 +861,7 @@ function isCategoryDisabledById(categoryId, selected) {
     return !hasSpecificSelection(selected, "shoeShape");
   }
 
-  if (["clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(categoryId)) {
+  if (["uniformStyle", "kigurumiAnimal", "clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(categoryId)) {
     if (hasSelection(selected, "clothingShape", "なし")) return true;
   }
 
@@ -870,6 +876,8 @@ function getDisabledPlaceholder(category) {
   if (category.id === "headDecor") return "帽子の形を選ぶと使えます";
   if (category.id === "earType") return "頭装備の飾りで『耳』を選ぶと使えます";
   if (category.id === "shoeDecor") return "靴の形を選ぶと使えます";
+  if (category.id === "uniformStyle") return "服の形で『制服』を選ぶと使えます";
+  if (category.id === "kigurumiAnimal") return "服の形で『着ぐるみ』を選ぶと使えます";
   if (["clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(category.id)) return "服の形が『なし』以外の時に使えます";
   if (["wallpaper", "wallDecor"].includes(category.id)) return "背景で『詳細選択』を選ぶと使えます";
   return "この項目は、関連する項目を選ぶと使えます";
@@ -881,6 +889,8 @@ function normalizeDependentSelections(nextSelected) {
     "headDecor",
     "earType",
     "shoeDecor",
+    "uniformStyle",
+    "kigurumiAnimal",
     "clothingDecor",
     "fruitPattern",
     "flowerPattern",
@@ -1150,7 +1160,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 05:39</div>
+          <div className="update-time">最終更新：2026/05/31 06:38</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
