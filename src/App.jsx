@@ -446,11 +446,22 @@ function describeAutoFallback(label) {
 }
 
 function getSizeInstruction(size) {
-  if (size.includes("1:1") || size.includes("正方形")) return "縦横の比率は1:1の正方形。";
-  if (size.includes("4:5")) return "縦横の比率は4:5の縦長。";
-  if (size.includes("9:16")) return "縦横の比率は9:16の縦長。";
-  if (size.includes("16:9")) return "縦横の比率は16:9の横長。";
-  return size ? `縦横の比率は${size}。` : "";
+  const commonRule =
+    "ペットを大きくしすぎないでください。背景・小物・世界観が十分に見える構図にしてください。顔だけの極端なアップは避け、全身または体の大部分が自然に入るようにしてください。背景も作品の重要な一部として扱い、世界観や奥行きが伝わる構図にしてください。";
+
+  if (size.includes("1:1") || size.includes("正方形")) {
+    return `縦横の比率は1:1の正方形。ペットの高さは画面縦の38〜48％程度を目安にしてください。${commonRule}`;
+  }
+  if (size.includes("4:5")) {
+    return `縦横の比率は4:5の縦長。ペットの高さは画面縦の35〜45％程度を目安にしてください。${commonRule}`;
+  }
+  if (size.includes("9:16")) {
+    return `縦横の比率は9:16の縦長。ペットの高さは画面縦の25〜33％程度を目安にしてください。${commonRule}`;
+  }
+  if (size.includes("16:9")) {
+    return `縦横の比率は16:9の横長。ペットの高さは画面縦の40〜55％程度を目安にしてください。${commonRule}`;
+  }
+  return size ? `縦横の比率は${size}。${commonRule}` : commonRule;
 }
 
 function translateOutfit(outfit) {
@@ -463,7 +474,7 @@ function getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldI
     ? `屋内世界観ID:${indoorWorldId}、場所:${locationOption}`
     : `屋外世界観ID:${outdoorWorldId}、場所:${locationOption}`;
 
-  return `光・明るさはユーザーに選ばせず、選んだ世界観・場所・色合いに合わせて自動調整してください。${sceneHint}に最も似合う、ペットが一番可愛く見える自然で上品な光にしてください。夢かわ・ロリータ・薔薇・花畑・お姫さま系では、明るく清潔感があり、白や淡いピンクがきれいに見えるふんわり柔らかな光にしてください。海・水辺・空・透明感のある世界では、明るく澄んだ青空感と透明感を保ってください。夜景・月明かり・ゴシック・ダークメルヘン系の場合も、背景の雰囲気は残しつつ、ペットの顔・目・鼻口まわり・毛並みは暗くせず、はっきり可愛く見える明るさに補正してください。黒い子・濃い茶色の子・グレー系の子でも、ペットの毛色に背景全体が暗く引きずられないようにしてください。ペット本来の毛色は保ちつつ、背景は選んだ世界観本来の明るさ・色合い・空気感を維持してください。強すぎる白飛び、暗い沈み込み、不自然な発光、顔が影で見えにくくなる表現は避けてください。`;
+  return `光や明るさは、選んだ世界観・場所・色合いに合わせて自動調整してください。${sceneHint}に似合う、ペットが一番可愛く見える自然で上品な光にしてください。夢かわ・ロリータ・薔薇・花畑・お姫さま系では、白や淡いピンクがきれいに見える、明るく清潔感のあるふんわり柔らかな光にしてください。海・水辺・空・透明感のある世界では、明るく澄んだ透明感を保ってください。夜景・月明かり・ゴシック・ダークメルヘン系の場合も、背景の雰囲気は残しつつ、ペットの顔・目・鼻口まわり・毛並みは暗くせず、可愛く見える明るさにしてください。黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観本来の明るさ・色合い・空気感を維持してください。強すぎる白飛び、暗い沈み込み、不自然な発光、顔が影で見えにくくなる表現は避けてください。`;
 }
 
 function translateColor(color) {
@@ -716,10 +727,12 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
     : "靴や足元は、服と背景に合わせて自然におまかせしてください。";
 
-  const itemSentence = items ? `選んだ小物（${items}）は、世界観になじむ程度にさりげなく取り入れてください。` : "小物は選んだ世界観に合わせて自然におまかせしてください。";
+  const itemSentence = items
+    ? `選んだ小物（${items}）は、背景や世界観になじむよう自然に取り入れてください。寂しくならない程度に華やかにしつつ、ペットの顔を邪魔しない量と位置にしてください。`
+    : "小物は選んだ世界観に合わせて自然におまかせしてください。";
   const containerDescription = translateContainerScene(containerScene);
   const containerSentence = containerDescription
-    ? `ペットの配置・ポーズ・舞台ギミックは、${containerDescription}。入れ物や透明素材を使う場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。背景や小物と自然に合うようにしてください。`
+    ? `ペットは${containerDescription}。透明素材や入れ物を使用する場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
     : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
@@ -746,8 +759,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     densitySentence = "選んだ世界観の雰囲気を大切にして、自然な華やかさのある夢かわいい一枚にしてください。";
   }
 
-  const brightLock = "黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色調を暗く引きずらないでください。ペット本来の毛色は保ちつつ、背景は選んだ世界観どおり明るく、選択した色合いや世界観を維持してください。";
-  const adaptiveDesignRule = "入れ物・家具・小物・舞台装飾は、選んだ世界観・服・色合いに自然になじむデザインにしてください。色・素材・装飾は、背景や世界観に合わせて可愛く調整してください。";
+  const adaptiveDesignRule = "入れ物・家具・小物・舞台装飾の色・素材・装飾は、選んだ世界観・服・色合いに合わせて自然に調整してください。";
 
   const gestureDescription = translateGesture(gesture);
   const gestureSection = gestureDescription ? `ペットのしぐさは${gestureDescription}。` : "";
@@ -775,9 +787,8 @@ ${itemSentence}
 ${adaptiveDesignRule}${scenePoseBlock}
 
 【色合い・光】
-色合いは${color}。
-光や明るさは${lighting}
-${brightLock}
+${color ? `色合いは${color}` : "色合いは選んだ小物・服・背景に自然になじむ色合いにしてください。"}
+${lighting}
 
 【仕上げ】
 ${densitySentence}
@@ -1124,7 +1135,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/29 17:31</div>
+          <div className="update-time">最終更新：2026/05/31 04:08</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
