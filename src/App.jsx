@@ -849,10 +849,6 @@ function hasSelection(selected, categoryId, value) {
 }
 
 function isCategoryDisabledById(categoryId, selected) {
-  if (categoryId === "headDecor") {
-    return !hasSpecificSelection(selected, "headShape");
-  }
-
   if (categoryId === "earType") {
     return isCategoryDisabledById("headDecor", selected) || !hasSelection(selected, "headDecor", "耳");
   }
@@ -886,7 +882,6 @@ function getDisabledPlaceholder(category) {
 function normalizeDependentSelections(nextSelected) {
   let normalized = { ...nextSelected };
   const dependentIds = [
-    "headDecor",
     "earType",
     "shoeDecor",
     "uniformStyle",
@@ -1285,23 +1280,19 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
-              .map((category) => {
-              const CategoryIcon = category.icon;
-              const displayTitle = getDisplayTitle(category);
-              return (
+              .filter((category) => !isCategoryDisabled(category, selected))
+              .map((category) => (
                 <section key={category.id} className="card">
-                  <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {displayTitle}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
-                  <div className="chips">
-                    {category.options.map((option) => {
-                      const active = selected[category.id]?.includes(option);
-                      return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
-                    })}
-                  </div>
-                  <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
-                  <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
+                  <OptionGroup
+                    category={category}
+                    selected={selected}
+                    custom={custom}
+                    onToggle={toggleOption}
+                    onCustomChange={updateCustom}
+                    resetCategory={resetCategory}
+                  />
                 </section>
-              );
-            })}
+              ))}
 </div>
 
           <div className="right">
