@@ -291,7 +291,7 @@ const outfitColorCategories = [
 
 const headCategories = [
   { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
-  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
+  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", dependsOn: { id: "headShape", value: "かぶりもの" }, options: ["おまかせ", "花", "リボン", "耳"] },
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
 
@@ -312,6 +312,7 @@ const multiCategories = [
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
   { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
+  { id: "lightTone", title: "光・明るさ", single: true, defaultValue: "おまかせ", options: ["おまかせ", "世界観に合わせておまかせ", "明るくハイキー", "ふんわり柔らかい光", "透明感のある光", "きらきら幻想的", "夕方のやさしい光", "夜でもペットの顔は明るく"], customPlaceholder: "例：白っぽく明るい光、窓辺のやわらかい光" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
   { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
@@ -500,6 +501,31 @@ function translateColor(color) {
     .join("、");
 }
 
+function translateLightTone(lightTone) {
+  if (!lightTone || lightTone === "おまかせ") {
+    return "光・明るさは、選んだ世界観・背景・服・全体の色合いに合わせて自然におまかせしてください。ペットの顔・目・鼻口まわりが暗くならないよう、可愛く見える明るさを優先してください。";
+  }
+
+  const translations = {
+    "世界観に合わせておまかせ":
+      "光・明るさは、選んだ世界観に合わせて自動調整してください。背景の雰囲気は守りつつ、ペットの顔・目・鼻口まわりは明るく可愛く見えるようにしてください。",
+    "明るくハイキー":
+      "白っぽく明るいハイキーな光。暗さや重さを避け、清潔感と透明感のある明るい仕上げにしてください。",
+    "ふんわり柔らかい光":
+      "ふんわり柔らかい拡散光。影を強く出さず、ペットの毛並みと表情がやさしく見える光にしてください。",
+    "透明感のある光":
+      "澄んだ透明感のある光。水色・白・淡いピンクがきれいに見える、明るく爽やかな空気感にしてください。",
+    "きらきら幻想的":
+      "きらきらした幻想的な光。光の粒や淡い輝きを入れても、ペットの顔を邪魔しない控えめで上品な量にしてください。",
+    "夕方のやさしい光":
+      "夕方のやさしい光。オレンジに寄りすぎず、夢かわいい淡い温かみを保ってください。",
+    "夜でもペットの顔は明るく":
+      "夜景や月明かりの雰囲気でも、ペットの顔・目・鼻口まわりは暗く沈ませず、可愛く見える明るさにしてください。",
+  };
+
+  return translations[lightTone] || `光・明るさは「${lightTone}」を優先し、ペットの顔が暗くならないよう自然に調整してください。`;
+}
+
 function translateWallpaper(wallpaper) {
   if (!wallpaper) return "";
   const translations = {
@@ -680,7 +706,6 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
   const otherPattern = joinValues(selected, custom, "otherPattern");
   const outfitColors = joinValues(selected, custom, "outfitColorChips");
-  const outfitColorsAuto = !outfitColors && (selected.outfitColorChips || []).includes("おまかせ");
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
@@ -691,6 +716,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const shoeDecor = joinValues(selected, custom, "shoeDecor");
 
   const color = translateColor(joinValues(selected, custom, "color", "選んだ世界観・服・小物に合うやさしい色合い"));
+  const lightTone = translateLightTone(getSingleValue(selected, custom, "lightTone", "おまかせ", { keepAuto: true }));
   const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color });
 
   const gesture = joinValues(selected, custom, "gesture", "小首をかしげる、にっこり笑っているように見える");
@@ -713,12 +739,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
+  if (outfitColors) clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
+
   const noClothes = clothingShape === "なし";
-  if (outfitColors) {
-    clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
-  } else if (outfitColorsAuto && !noClothes) {
-    clothingParts.push("服セットの色合いは、選んだ背景・季節・服の形・小物に合わせて自動で可愛く調整する");
-  }
   const clothingSentence = noClothes
     ? "服は追加せず、元写真の自然な魅力を尊重してください。"
     : clothingParts.length
@@ -803,7 +826,8 @@ ${itemSentence}
 ${adaptiveDesignRule}${scenePoseBlock}
 
 【色合い・光】
-${color ? `色合いは${color}` : "色合いは選んだ小物・服・背景に自然になじむ色合いにしてください。"}
+${color ? `全体の色合いは${color}` : "全体の色合いは、選んだ小物・服・背景に自然になじむ色合いにしてください。"}
+${lightTone}
 ${lighting}
 
 【仕上げ】
@@ -854,7 +878,7 @@ function hasSelection(selected, categoryId, value) {
 
 function isCategoryDisabledById(categoryId, selected) {
   if (categoryId === "headDecor") {
-    return false;
+    return !hasSpecificSelection(selected, "headShape");
   }
 
   if (categoryId === "earType") {
@@ -890,6 +914,7 @@ function getDisabledPlaceholder(category) {
 function normalizeDependentSelections(nextSelected) {
   let normalized = { ...nextSelected };
   const dependentIds = [
+    "headDecor",
     "earType",
     "shoeDecor",
     "uniformStyle",
@@ -1163,7 +1188,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 07:39</div>
+          <div className="update-time">最終更新：2026/05/31 22:53</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -1288,19 +1313,23 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
-              .filter((category) => !isCategoryDisabled(category, selected))
-              .map((category) => (
+              .map((category) => {
+              const CategoryIcon = category.icon;
+              const displayTitle = getDisplayTitle(category);
+              return (
                 <section key={category.id} className="card">
-                  <OptionGroup
-                    category={category}
-                    selected={selected}
-                    custom={custom}
-                    onToggle={toggleOption}
-                    onCustomChange={updateCustom}
-                    resetCategory={resetCategory}
-                  />
+                  <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {displayTitle}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
+                  <div className="chips">
+                    {category.options.map((option) => {
+                      const active = selected[category.id]?.includes(option);
+                      return <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>{option}</button>;
+                    })}
+                  </div>
+                  <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
+                  <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
-              ))}
+              );
+            })}
 </div>
 
           <div className="right">
