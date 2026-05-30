@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { motion } from "framer-motion";
 import {
@@ -312,7 +312,7 @@ const multiCategories = [
   { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
-  { id: "size", title: "縦横の比率", type: "ratioInputs", defaultValue: "4:5", customPlaceholder: "縦と横の数字を入力してください" },
+  { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
 ];
 
 const uiSections = [
@@ -451,25 +451,19 @@ function getSizeInstruction(size) {
   const commonRule =
     "ペットを大きくしすぎないでください。背景・小物・世界観が十分に見える構図にしてください。顔だけの極端なアップは避け、全身または体の大部分が自然に入るようにしてください。背景も作品の重要な一部として扱い、世界観や奥行きが伝わる構図にしてください。";
 
-  const ratioMatch = String(size || "").match(/(\d+)\s*[:：]\s*(\d+)/);
-  if (ratioMatch) {
-    const ratioText = `${ratioMatch[1]}:${ratioMatch[2]}`;
-    if (ratioText === "1:1") {
-      return `縦横の比率は1:1の正方形。ペットの高さは画面縦の38〜48％程度を目安にしてください。${commonRule}`;
-    }
-    if (ratioText === "4:5") {
-      return `縦横の比率は4:5の縦長。ペットの高さは画面縦の35〜45％程度を目安にしてください。${commonRule}`;
-    }
-    if (ratioText === "9:16") {
-      return `縦横の比率は9:16の縦長。ペットの高さは画面縦の25〜33％程度を目安にしてください。${commonRule}`;
-    }
-    if (ratioText === "16:9") {
-      return `縦横の比率は16:9の横長。ペットの高さは画面縦の40〜55％程度を目安にしてください。${commonRule}`;
-    }
-    return `縦横の比率は${ratioText}。ペットを大きくしすぎず、背景・小物・世界観が十分に見える構図にしてください。顔だけの極端なアップは避け、全身または体の大部分が自然に入るようにしてください。`;
+  if (size.includes("1:1") || size.includes("正方形")) {
+    return `縦横の比率は1:1の正方形。ペットの高さは画面縦の38〜48％程度を目安にしてください。${commonRule}`;
   }
-
-  return commonRule;
+  if (size.includes("4:5")) {
+    return `縦横の比率は4:5の縦長。ペットの高さは画面縦の35〜45％程度を目安にしてください。${commonRule}`;
+  }
+  if (size.includes("9:16")) {
+    return `縦横の比率は9:16の縦長。ペットの高さは画面縦の25〜33％程度を目安にしてください。${commonRule}`;
+  }
+  if (size.includes("16:9")) {
+    return `縦横の比率は16:9の横長。ペットの高さは画面縦の40〜55％程度を目安にしてください。${commonRule}`;
+  }
+  return size ? `縦横の比率は${size}。${commonRule}` : commonRule;
 }
 
 function translateOutfit(outfit) {
@@ -921,25 +915,9 @@ function isCategoryDisabled(category, selected) {
   return !(selected[category.dependsOn.id] || []).includes(category.dependsOn.value);
 }
 
-
-function parseRatioValue(value, fallback = "4:5") {
-  const source = value || fallback;
-  const match = String(source).match(/(\d+)\s*[:：]\s*(\d+)/);
-  return {
-    height: match ? match[1] : "4",
-    width: match ? match[2] : "5",
-  };
-}
-
-function normalizeRatioNumber(value, fallback) {
-  const digits = String(value || "").replace(/[^\d]/g, "");
-  return digits || fallback;
-}
-
 function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
   const selectedValues = selected[category.id] || [];
   const isColorChips = category.type === "colorChips";
-  const isRatioInputs = category.type === "ratioInputs";
   const disabled = isCategoryDisabled(category, selected);
   const displayTitle = getDisplayTitle(category);
 
@@ -952,42 +930,7 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
         <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
       </div>
 
-      {isRatioInputs ? (() => {
-        const ratio = parseRatioValue(custom[category.id] || selectedValues[0] || category.defaultValue, category.defaultValue);
-        const updateRatio = (key, value) => {
-          const nextHeight = key === "height" ? normalizeRatioNumber(value, ratio.height) : ratio.height;
-          const nextWidth = key === "width" ? normalizeRatioNumber(value, ratio.width) : ratio.width;
-          onCustomChange(category.id, `${nextHeight}:${nextWidth}`);
-        };
-        return (
-          <>
-            <div className="ratio-input-row">
-              <label className="ratio-input-label">
-                縦
-                <input
-                  type="number"
-                  min="1"
-                  inputMode="numeric"
-                  value={ratio.height}
-                  onChange={(event) => updateRatio("height", event.target.value)}
-                />
-              </label>
-              <span className="ratio-separator">：</span>
-              <label className="ratio-input-label">
-                横
-                <input
-                  type="number"
-                  min="1"
-                  inputMode="numeric"
-                  value={ratio.width}
-                  onChange={(event) => updateRatio("width", event.target.value)}
-                />
-              </label>
-            </div>
-            <div className="color-chip-help">初期値はインスタ4:5です。数字だけ入力してください。</div>
-          </>
-        );
-      })() : isColorChips ? (
+      {isColorChips ? (
         <>
           <div className="color-chip-grid">
             {category.options.map((option) => {
@@ -1025,14 +968,10 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
         </div>
       )}
 
-      {!isRatioInputs && (
-        <>
-          <label>
-            <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
-          </label>
-          <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
-        </>
-      )}
+      <label>
+        <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
+      </label>
+      <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
     </div>
   );
 }
@@ -1065,34 +1004,6 @@ function App() {
   const [recommendedOpen, setRecommendedOpen] = useState(true);
   const [worldOpen, setWorldOpen] = useState(true);
   const textAreaRef = useRef(null);
-
-  useEffect(() => {
-    const title = "ゆゆ姫の夢かわプロンプト工房｜ペット写真から夢かわいいAI画像プロンプトを作成";
-    const description = "ペット写真をもとに、お姫さま部屋・ロリータ・スウィーツ・花畑など夢かわいい世界観のAI画像プロンプトを作れる、ゆゆ姫のプロンプト工房です。";
-    document.title = title;
-
-    const setMeta = (selector, attribute, value) => {
-      let tag = document.head.querySelector(selector);
-      if (!tag) {
-        tag = document.createElement("meta");
-        if (selector.includes("property=")) {
-          tag.setAttribute("property", selector.match(/property="([^"]+)"/)?.[1] || "");
-        } else {
-          tag.setAttribute("name", selector.match(/name="([^"]+)"/)?.[1] || "");
-        }
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute(attribute, value);
-    };
-
-    setMeta('meta[name="description"]', "content", description);
-    setMeta('meta[property="og:title"]', "content", title);
-    setMeta('meta[property="og:description"]', "content", description);
-    setMeta('meta[property="og:type"]', "content", "website");
-    setMeta('meta[property="og:image"]', "content", "/top.png");
-    setMeta('meta[name="twitter:card"]', "content", "summary_large_image");
-  }, []);
-
 
   const toggleOption = (categoryId, option, single = false, maxSelect = null) => {
     setFeaturedPrompt("");
@@ -1239,7 +1150,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 06:03</div>
+          <div className="update-time">最終更新：2026/05/31 05:39</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
