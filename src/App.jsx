@@ -851,7 +851,11 @@ function isCategoryDisabledById(categoryId, selected) {
   }
 
   if (["clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(categoryId)) {
-    return hasSelection(selected, "clothingShape", "なし");
+    if (hasSelection(selected, "clothingShape", "なし")) return true;
+  }
+
+  if (["fruitPattern", "flowerPattern", "otherPattern"].includes(categoryId)) {
+    return !hasSelection(selected, "patternType", "柄物");
   }
 
   return false;
@@ -909,8 +913,10 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
   const disabled = isCategoryDisabled(category, selected);
   const displayTitle = getDisplayTitle(category);
 
+  if (disabled) return null;
+
   return (
-    <div className={`option-group ${disabled ? "disabled" : ""}`}>
+    <div className="option-group">
       <div className="category-head">
         <h3>{displayTitle}</h3>
         <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
@@ -1136,7 +1142,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 04:08</div>
+          <div className="update-time">最終更新：2026/05/31 05:18</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
