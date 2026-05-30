@@ -291,7 +291,7 @@ const outfitColorCategories = [
 
 const headCategories = [
   { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
-  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
+  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", dependsOn: { id: "headShape", value: "かぶりもの" }, options: ["おまかせ", "花", "リボン", "耳"] },
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
 
@@ -850,11 +850,11 @@ function hasSelection(selected, categoryId, value) {
 
 function isCategoryDisabledById(categoryId, selected) {
   if (categoryId === "headDecor") {
-    return !hasSpecificSelection(selected, "headShape");
+    return false;
   }
 
   if (categoryId === "earType") {
-    return isCategoryDisabledById("headDecor", selected) || !hasSelection(selected, "headDecor", "耳");
+    return !hasSelection(selected, "headDecor", "耳");
   }
 
   if (categoryId === "shoeDecor") {
