@@ -294,7 +294,7 @@ const headCategories = [
 ];
 
 const accessoryCategories = [
-  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "なし"], customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、小さなバッグ" },
+  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "ネックレス", "首リボン", "ブローチ", "バッグ", "サングラス", "ブレスレット", "スタイ"], customPlaceholder: "例：パールの首飾り、ハートのバッグ、小さな王冠ブローチ" },
 ];
 
 const shoeCategories = [
@@ -306,13 +306,12 @@ const multiCategories = [
   { id: "containerScene", title: "ペットのポーズ・ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ちょこんと座る", "窓辺", "クッション", "前足そろえ", "スノードームの中", "シャボン玉の中", "ティーカップの中", "グラスの中", "苺バスケットの中", "花かごの中", "プレゼント箱の中", "ベビーベッド", "マカロンクッションの上", "馬車の中"], customPlaceholder: "例：宝石箱の中、透明な香水瓶の中、窓辺" },
   { id: "gesture", title: "ペットのしぐさ", defaultValue: "おまかせ", options: ["おまかせ", "首かしげ", "お花くんくん", "スイーツを食べる", "ケーキを見る", "笑顔"], customPlaceholder: "例：マカロンを見る、リボンを見上げる、ぺろっ" },
   { id: "items", title: "小物・飾り", defaultValue: "おまかせ", options: ["おまかせ", "なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "アフタヌーンティー", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ"], customPlaceholder: "例：小さな王冠、ピンクの魔法ステッキ" },
-  { id: "wallMode", title: "背景", indoorOnly: true, single: true, defaultValue: "おまかせ", options: ["おまかせ", "詳細選択"] },
-  { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", dependsOn: { id: "wallMode", value: "詳細選択" }, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
-  { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, dependsOn: { id: "wallMode", value: "詳細選択" }, defaultValue: "おまかせ", options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
-  { id: "color", title: "全体の色合い", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "全体の色合い自由記入（例：白多めのピンク、淡い藤色）" },
+  { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
+  { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
+  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
-  { id: "size", title: "縦横の比率", single: true, defaultValue: "インスタ投稿用 縦長4:5", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：縦4:横5、縦9:横16、横長3:2" },
+  { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
 ];
 
 const uiSections = [
@@ -672,7 +671,6 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const clothingSeason = getSingleValue(selected, custom, "clothingSeason", "");
   const clothingShape = getSingleValue(selected, custom, "clothingShape", "");
   const clothingDecor = joinValues(selected, custom, "clothingDecor");
-  const patternType = getSingleValue(selected, custom, "patternType", "");
   const fruitPattern = joinValues(selected, custom, "fruitPattern");
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
   const otherPattern = joinValues(selected, custom, "otherPattern");
@@ -702,8 +700,6 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (clothingSeason) clothingParts.push(`季節は${clothingSeason}`);
   if (clothingShape) clothingParts.push(`服の形は${clothingShape}`);
   if (clothingDecor) clothingParts.push(`服の装飾は${clothingDecor}`);
-  if (patternType === "無地") clothingParts.push("服は柄を入れず、無地を基本にする");
-  if (patternType === "柄物") clothingParts.push("服は柄物を基本にする");
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
@@ -724,11 +720,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     ? `${headParts.join("。") }。頭装備はペットの顔・目・鼻口まわりを隠さない位置と大きさにしてください。`
     : "頭装備は、必要な場合だけ背景や服に合わせて自然に追加してください。顔・目・鼻口まわりは隠さないでください。";
 
-  const accessorySentence = accessories === "なし"
-    ? "アクセサリーは追加しないでください。"
-    : accessories
-      ? `アクセサリーは${accessories}。頭装備とは分離して扱い、首元・胸元・手元・小物として自然に配置してください。`
-      : "アクセサリーは、自由記入がある場合はその内容を優先してください。自由記入がない場合は、背景・服・世界観に合わせて、首元・胸元・手元などに自然になじむ可愛いアクセサリーを必要に応じて控えめに追加してください。";
+  const accessorySentence = accessories
+    ? `アクセサリーは${accessories}。頭装備とは分離して扱い、首元・胸元・手元・小物として自然に配置してください。サングラスを選んだ場合もアクセサリーとして扱ってください。`
+    : "アクセサリーは、選んだ服や背景に合うものを必要な範囲で自然におまかせしてください。";
 
   const shoeSentence = shoeShape || shoeDecor
     ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
@@ -860,10 +854,6 @@ function isCategoryDisabledById(categoryId, selected) {
     return hasSelection(selected, "clothingShape", "なし");
   }
 
-  if (["wallpaper", "wallDecor"].includes(categoryId)) {
-    return !hasSelection(selected, "wallMode", "詳細選択");
-  }
-
   return false;
 }
 
@@ -886,8 +876,6 @@ function normalizeDependentSelections(nextSelected) {
     "flowerPattern",
     "otherPattern",
     "outfitColorChips",
-    "wallpaper",
-    "wallDecor",
   ];
 
   for (const categoryId of dependentIds) {
@@ -921,10 +909,8 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
   const disabled = isCategoryDisabled(category, selected);
   const displayTitle = getDisplayTitle(category);
 
-  if (disabled) return null;
-
   return (
-    <div className="option-group">
+    <div className={`option-group ${disabled ? "disabled" : ""}`}>
       <div className="category-head">
         <h3>{displayTitle}</h3>
         <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
@@ -1150,7 +1136,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 05:05</div>
+          <div className="update-time">最終更新：2026/05/31 04:08</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
