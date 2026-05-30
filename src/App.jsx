@@ -1318,6 +1318,7 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
+              .filter((category) => !["wallpaper", "wallDecor"].includes(category.id) || hasSelection(selected, "wallDetail", "詳細選択"))
               .map((category) => {
               const CategoryIcon = category.icon;
               const displayTitle = getDisplayTitle(category);
