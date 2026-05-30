@@ -312,7 +312,7 @@ const multiCategories = [
   { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
-  { id: "size", title: "縦横比", type: "ratioInputs", single: true, defaultValue: "4:5 縦長", options: ["1:1 正方形", "4:5 縦長", "9:16 縦長", "16:9 横長"], customPlaceholder: "縦：4／横：5" },
+  { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
 ];
 
 const uiSections = [
@@ -918,13 +918,8 @@ function isCategoryDisabled(category, selected) {
 function OptionGroup({ category, selected, custom, onToggle, onCustomChange, resetCategory }) {
   const selectedValues = selected[category.id] || [];
   const isColorChips = category.type === "colorChips";
-  const isRatioInputs = category.type === "ratioInputs";
   const disabled = isCategoryDisabled(category, selected);
   const displayTitle = getDisplayTitle(category);
-  const ratioSource = custom[category.id] || selectedValues.find((value) => String(value).includes(":")) || "4:5";
-  const ratioMatch = String(ratioSource).match(/(\d+(?:\.\d+)?)\s*[:：]\s*(\d+(?:\.\d+)?)/);
-  const ratioHeight = ratioMatch ? ratioMatch[1] : "4";
-  const ratioWidth = ratioMatch ? ratioMatch[2] : "5";
 
   if (disabled) return null;
 
@@ -935,53 +930,7 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
         <button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button>
       </div>
 
-      {isRatioInputs ? (
-        <>
-          <div className="ratio-preset-grid">
-            {[
-              { label: "1:1 正方形", height: "1", width: "1" },
-              { label: "4:5 縦長", height: "4", width: "5" },
-              { label: "9:16 縦長", height: "9", width: "16" },
-              { label: "16:9 横長", height: "16", width: "9" },
-            ].map((preset) => {
-              const active = ratioHeight === preset.height && ratioWidth === preset.width;
-              return (
-                <button
-                  key={preset.label}
-                  type="button"
-                  className={`chip ${active ? "active" : ""}`}
-                  onClick={() => onCustomChange(category.id, `${preset.height}:${preset.width}`)}
-                >
-                  {preset.label}
-                </button>
-              );
-            })}
-          </div>
-          <div className="ratio-inputs">
-            <label className="ratio-input-label">
-              <span>縦</span>
-              <input
-                type="number"
-                min="1"
-                step="1"
-                value={ratioHeight}
-                onChange={(event) => onCustomChange(category.id, `${event.target.value}:${ratioWidth}`)}
-              />
-            </label>
-            <span className="ratio-separator">：</span>
-            <label className="ratio-input-label">
-              <span>横</span>
-              <input
-                type="number"
-                min="1"
-                step="1"
-                value={ratioWidth}
-                onChange={(event) => onCustomChange(category.id, `${ratioHeight}:${event.target.value}`)}
-              />
-            </label>
-          </div>
-        </>
-      ) : isColorChips ? (
+      {isColorChips ? (
         <>
           <div className="color-chip-grid">
             {category.options.map((option) => {
@@ -1019,14 +968,10 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
         </div>
       )}
 
-      {!isRatioInputs && (
-        <>
-          <label>
-            <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
-          </label>
-          <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
-        </>
-      )}
+      <label>
+        <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
+      </label>
+      <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
     </div>
   );
 }
@@ -1205,7 +1150,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 06:23</div>
+          <div className="update-time">最終更新：2026/05/31 05:39</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
