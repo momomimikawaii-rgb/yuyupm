@@ -680,6 +680,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
   const otherPattern = joinValues(selected, custom, "otherPattern");
   const outfitColors = joinValues(selected, custom, "outfitColorChips");
+  const outfitColorsAuto = !outfitColors && (selected.outfitColorChips || []).includes("おまかせ");
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
@@ -712,9 +713,12 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
-  if (outfitColors) clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
-
   const noClothes = clothingShape === "なし";
+  if (outfitColors) {
+    clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
+  } else if (outfitColorsAuto && !noClothes) {
+    clothingParts.push("服セットの色合いは、選んだ背景・季節・服の形・小物に合わせて自動で可愛く調整する");
+  }
   const clothingSentence = noClothes
     ? "服は追加せず、元写真の自然な魅力を尊重してください。"
     : clothingParts.length
@@ -849,6 +853,10 @@ function hasSelection(selected, categoryId, value) {
 }
 
 function isCategoryDisabledById(categoryId, selected) {
+  if (categoryId === "headDecor") {
+    return false;
+  }
+
   if (categoryId === "earType") {
     return isCategoryDisabledById("headDecor", selected) || !hasSelection(selected, "headDecor", "耳");
   }
@@ -1155,7 +1163,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 06:38</div>
+          <div className="update-time">最終更新：2026/05/31 07:39</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
