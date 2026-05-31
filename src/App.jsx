@@ -659,22 +659,41 @@ function translateGesture(gesture) {
     .join("、");
 }
 
+
+function isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) {
+  return (
+    locationType === "indoor" &&
+    indoorWorldId === "dreamLolita" &&
+    ["ドレスを着て鏡の前", "口紅をぬろうとする鏡の前"].includes(locationOption)
+  );
+}
+
+function getDreamLolitaMirrorScenePrompt(locationOption) {
+  if (locationOption === "ドレスを着て鏡の前") {
+    return "この場面では通常の舞台ギミックや入れ物ギミックは使わず、ドレスを着て大きな姿見の前で可愛くポーズしている専用構図を優先してください。";
+  }
+  if (locationOption === "口紅をぬろうとする鏡の前") {
+    return "この場面では通常の舞台ギミックや入れ物ギミックは使わず、鏡・ドレッサー・口紅・コスメが見える専用構図を優先してください。可能であれば鏡の中にもペットの顔を自然に映してください。不自然な場合は反射を無理に作らないでください。";
+  }
+  return "";
+}
+
 function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   const world = indoorWorlds.find((item) => item.id === indoorWorldId) || indoorWorlds[0];
   const place = customLocation?.trim() || locationOption || world.places[0];
   const decor = world.decor?.join("、") || "";
 
-  // ギミック非表示候補: 「ドレスを着て鏡の前」「口紅をぬろうとする鏡の前」\nconst dreamLolitaPlaceDescriptions = {
+  const dreamLolitaPlaceDescriptions = {
     "アフタヌーンティーカフェ":
-      "白ピンク基調の夢かわいいアフタヌーンティーカフェ。ティーポット、ティーカップ、ケーキスタンド、紅茶、マカロン、レースクロス、薔薇、パール、天使装飾が見える、優雅に座って紅茶を楽しむお茶会の場所。ベッドやドレッサーは主役にせず、カフェテーブルとティーセットを中心に表現してください。",
+      "夢かわいいアフタヌーンティーカフェ。色合いがおまかせの場合は、白とベビーピンクを基調にしてください。ティーポット、ティーカップ、ケーキスタンド、紅茶、マカロン、レースクロス、薔薇、パール、天使装飾が見える、優雅に座って紅茶を楽しむお茶会の場所。ベッドやドレッサーは主役にせず、カフェテーブルとティーセットを中心に表現してください。",
     "お姫様の部屋":
       "お城のお姫様の私室。天蓋ベッド、ドレッサー、シャンデリア、ロココ家具、大きな鏡、ジュエリーボックス、薔薇、パール、リボンで飾られた優雅な生活空間。アフタヌーンティーカフェやスイーツショップではなく、お姫様が暮らしている部屋として表現してください。苺やぬいぐるみは必須にしないでください。",
     "スイーツショップ":
       "ショーケースが見える可愛いスイーツショップ。ケーキ、マカロン、クッキー、キャンディ、商品棚、ショーケースを入れ、可愛いお菓子を売っている店内として表現してください。アフタヌーンティーカフェのように座って紅茶を楽しむ場所ではなく、販売店らしさを大切にしてください。",
     "ドレスを着て鏡の前":
-      "大きな姿見の前でドレスを楽しむ夢かわいいおしゃれ部屋。姿見、ドレスラック、リボン、靴、アクセサリー、ハンガー、可愛い小物を入れ、お着替え・ドレスアップの場面として表現してください。カフェや販売店ではなく、鏡前のファッション空間にしてください。",
+      "大きな姿見の前でドレスを楽しむ夢かわいいおしゃれ部屋。シルヴァニアファミリーのような可愛い二足寄りの体型・雰囲気で、ドレスを着て大きな姿見の前で可愛くポーズしている場面にしてください。姿見、ドレスラック、リボン、靴、アクセサリー、ハンガー、可愛い小物を入れ、お着替え・ドレスアップの場面として表現してください。カフェや販売店ではなく、鏡前のファッション空間にしてください。",
     "口紅をぬろうとする鏡の前":
-      "ドレッサーと鏡の前で口紅をぬろうとする可愛いメイクルーム。口紅、香水、コスメ、ブラシ、ジュエリートレイ、鏡、ドレッサーライトを入れ、メイク中の場面として表現してください。可能であれば鏡台の鏡の中にもペットの顔が自然に映るようにしてください。ただし元写真の角度や構図的に不自然になる場合は無理に反射を作らず、顔が別人になったり歪んだりしないことを優先してください。紅茶やショーケースではなく、コスメと鏡が主役の空間にしてください。",
+      "ドレッサーと鏡の前で口紅をぬろうとする可愛いメイクルーム。口紅、香水、コスメ、ブラシ、ジュエリートレイ、鏡、ドレッサーライトを入れ、メイク中の場面として表現してください。可能であれば鏡台の鏡の中にもペットの顔が自然に映るようにしてください。ただし元写真の角度や構図的に不自然になる場合は無理に反射を作らず、顔が別人になったり歪んだりしないことを優先してください。可能であれば、鏡台の鏡の中にもペットの顔が自然に映っているようにしてください。ただし、元写真の顔の角度や構図的に不自然になる場合は、鏡の反射表現を無理に作らず、鏡・ドレッサー・口紅・コスメが見える自然な場面を優先してください。鏡の中の顔が歪んだり、別の顔になったり、目や鼻口まわりが崩れる表現は避けてください。紅茶やショーケースではなく、コスメと鏡が主役の空間にしてください。",
     "苺スウィーツルーム":
       "苺をテーマにした夢かわいいスイーツ部屋。苺ケーキ、苺柄、小さな苺の飾り、ピンクのスイーツ、苺ミルクのような色合いを中心にした甘い空間。苺を明確なテーマとして使い、他の夢かわ部屋と差別化してください。",
     "お人形の部屋":
@@ -821,6 +840,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const textOverlay = getSingleValue(selected, custom, "textOverlay", "なし", { keepAuto: true });
   const size = joinValues(selected, custom, "size", "インスタ投稿用 縦長4:5", { keepAuto: true });
   const aspectInstruction = getSizeInstruction(size);
+  const isMirrorScene = isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption);
+  const mirrorScenePrompt = getDreamLolitaMirrorScenePrompt(locationOption);
 
   const baseScene =
     locationType === "indoor"
@@ -866,10 +887,12 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const itemSentence = items
     ? `選んだ小物（${items}）は、背景や世界観になじむよう自然に取り入れてください。寂しくならない程度に華やかにしつつ、ペットの顔を邪魔しない量と位置にしてください。`
     : "小物は選んだ世界観に合わせて自然におまかせしてください。";
-  const containerDescription = translateContainerScene(containerScene);
-  const containerSentence = containerDescription
-    ? `ペットは${containerDescription}。透明素材や入れ物を使用する場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
-    : "";
+  const containerDescription = isMirrorScene ? "" : translateContainerScene(containerScene);
+  const containerSentence = isMirrorScene
+    ? mirrorScenePrompt
+    : containerDescription
+      ? `ペットは${containerDescription}。透明素材や入れ物を使用する場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
+      : "";
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
   const selectedOutdoorWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId);
@@ -1288,7 +1311,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 00:10頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 03:25頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -1413,6 +1436,7 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
+              .filter((category) => !(isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) && category.id === "containerScene"))
               .filter((category) => !(["wallpaper", "wallDecor"].includes(category.id) && !(selected.wallDetail || []).includes("詳細選択")))
               .map((category) => {
               const CategoryIcon = category.icon;
