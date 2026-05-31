@@ -178,10 +178,30 @@ h1 {
 }
 
 .right {
-  position: static;
   align-self: start;
   min-width: 0;
   overflow: visible;
+}
+
+@media (min-width: 921px) {
+  .page {
+    overflow-x: clip;
+  }
+
+  .sticky-prompt-column {
+    position: sticky;
+    top: 18px;
+    z-index: 10;
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+    padding-bottom: 4px;
+    scrollbar-gutter: stable;
+  }
+
+  .prompt-result-card textarea {
+    min-height: min(470px, calc(100vh - 330px));
+    max-height: calc(100vh - 330px);
+  }
 }
 
 .card {
@@ -548,8 +568,15 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
-  .right {
+  .right,
+  .sticky-prompt-column {
     position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .prompt-result-card textarea {
+    max-height: none;
   }
 }
 
@@ -816,4 +843,41 @@ input:disabled {
 .option-group.disabled .chip:hover,
 .option-group.disabled .color-chip:hover {
   transform: none;
+}
+
+
+/* --- 20260601 05:29 PC prompt sticky fix --- */
+@media (min-width: 921px) {
+  .page {
+    overflow-x: clip;
+  }
+
+  .right.sticky-prompt-column {
+    position: sticky !important;
+    top: 18px;
+    align-self: start;
+    z-index: 10;
+    max-height: calc(100vh - 36px);
+    overflow-y: auto;
+    overflow-x: visible;
+    padding-bottom: 4px;
+    scrollbar-gutter: stable;
+  }
+
+  .prompt-result-card textarea {
+    min-height: min(470px, calc(100vh - 330px));
+    max-height: calc(100vh - 330px);
+  }
+}
+
+@media (max-width: 920px) {
+  .right.sticky-prompt-column {
+    position: static !important;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .prompt-result-card textarea {
+    max-height: none;
+  }
 }
