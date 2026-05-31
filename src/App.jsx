@@ -714,7 +714,7 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
 
   const dreamLolitaPlaceDescriptions = {
     "アフタヌーンティーカフェ":
-      "夢かわいいアフタヌーンティーカフェ。ティーポット、ティーカップ、ケーキスタンド、紅茶、マカロン、レースクロス、薔薇、パールが見える、優雅に座って紅茶を楽しむお茶会の場所。カフェテーブルとティーセットを中心に表現してください。",
+      "夢かわいいアフタヌーンティーカフェ。ティーポット、紅茶入りのティーカップ、3段ケーキスタンド、マカロン、小花柄のアンティーク猫足テーブルが見える、優雅なお茶会の場所。ティーセットを中心に表現してください。",
     "お姫様の部屋":
       "お城のお姫様の私室。天蓋ベッド、ドレッサー、シャンデリア、ロココ家具、大きな鏡、ジュエリーボックス、薔薇、パール、リボンで飾られた優雅な生活空間。お姫様が暮らしている部屋として表現してください。",
     "スイーツショップ":
@@ -1352,7 +1352,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 05:29頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 06:10頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
