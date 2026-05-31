@@ -358,6 +358,26 @@ const customPlaceholders = Object.fromEntries(
   allCategoryDefinitions.map((category) => [category.id, category.customPlaceholder || "カンマ、読点、改行で複数追加できます"])
 );
 
+
+const COLOR_PROMPT_MAP = {
+  "夢かわ虹色": "薄いピンクを中心に、水色とラベンダー（藤色）を組み合わせた夢かわいいパステル配色",
+  "パステル虹色": "ピンク、水色、ラベンダー（藤色）、ミント、淡い黄色をバランスよく使用した柔らかなパステル虹色配色",
+  "白ピンク": "白を基調にピンクをアクセントとして使用した配色",
+  "白×水色": "白と淡い水色を組み合わせた爽やかな配色",
+  "白×藤色": "白とラベンダー（藤色）を組み合わせた上品で優しい配色",
+  "黒×ピンク": "黒を基調にピンクをアクセントとして使用した配色",
+  "黒×紫": "黒を基調に紫をアクセントとして使用した配色",
+  "白×金": "白を基調に金色をアクセントとして使用した華やかな配色"
+};
+
+function convertColorNamesToPrompt(text) {
+  return (text || "")
+    .split(/[,、]/)
+    .map(v => COLOR_PROMPT_MAP[v.trim()] || v.trim())
+    .filter(Boolean)
+    .join("、");
+}
+
 const recommendedPrompts = [
   {
     id: "rose-swing-garden",
