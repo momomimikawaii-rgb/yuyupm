@@ -480,9 +480,7 @@ function getSingleValue(selected, custom, key, fallback = "", options = {}) {
 function getOverallColorSwatch(option) {
   const swatches = {
     "おまかせ": "linear-gradient(135deg, #fff1f8 0%, #ede9fe 50%, #e0f2fe 100%)",
-    "
-【小物】
-選んだ小物や服に合わせて自然に": "linear-gradient(135deg, #fdf2f8 0%, #fef3c7 50%, #dbeafe 100%)",
+    "選んだ小物や服に合わせて自然に": "linear-gradient(135deg, #fdf2f8 0%, #fef3c7 50%, #dbeafe 100%)",
     "背景に合わせておまかせ": "linear-gradient(135deg, #ffffff 0%, #f5f3ff 50%, #e0f2fe 100%)",
     "服の色を主役にして調整": "linear-gradient(135deg, #ffd6e8 0%, #c4b5fd 50%, #67c7f0 100%)",
     "小物の色を差し色にして調整": "linear-gradient(135deg, #fffaf0 0%, #ff7ab6 50%, #d4a72c 100%)",
@@ -569,20 +567,14 @@ function getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldI
 function translateColor(color) {
   if (!color) return "";
   const translations = {
-    "
-【小物】
-選んだ小物や服に合わせて自然に":
-      "
-【小物】
-選んだ小物・服・背景に自然になじむ色合い。特定の色を強く固定せず、全体が可愛くまとまるように調整してください。",
+    "選んだ小物や服に合わせて自然に":
+      "選んだ小物・服・背景に自然になじむ色合い。特定の色を強く固定せず、全体が可愛くまとまるように調整してください。",
     "背景に合わせておまかせ":
       "選んだ背景や世界観に合わせて自然にまとまる色合い。ペットの毛色は変えず、背景と小物が調和するようにしてください。",
     "服の色を主役にして調整":
       "選んだ服の色を主役にして、背景や小物はその色を引き立てるように自然に調整してください。",
     "小物の色を差し色にして調整":
-      "
-【小物】
-選んだ小物の色を差し色として使い、全体はまとまりのある可愛い色合いにしてください。",
+      "選んだ小物の色を差し色として使い、全体はまとまりのある可愛い色合いにしてください。",
 
     "夢かわ虹色":
       "薄いピンクを中心に、水色とラベンダー（藤色）を組み合わせた夢かわいいパステル配色",
@@ -886,20 +878,14 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     ? "アクセサリーは追加しないでください。"
     : accessories
       ? `アクセサリーは自由記入の内容を優先して、${accessories}を自然に取り入れてください。頭装備とは分離して扱い、首元・胸元・手元・小物として、顔・目・鼻口まわりを邪魔しない位置に配置してください。`
-      : "
-【アクセサリー】
-アクセサリーは、背景・服・世界観に合わせて、首元・胸元・手元などに自然になじむ可愛いものを必要に応じて控えめに追加してください。";
+      : "アクセサリーは、背景・服・世界観に合わせて、首元・胸元・手元などに自然になじむ可愛いものを必要に応じて控えめに追加してください。";
 
   const shoeSentence = shoeShape || shoeDecor
     ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
-    : "
-【靴・足元】
-靴や足元は、服と背景に合わせて自然に作成してください。ただし、不要な場合は無理に追加せず、なしにしてください。";
+    : "靴や足元は、服と背景に合わせて自然に作成してください。ただし、不要な場合は無理に追加せず、なしにしてください。";
 
   const itemSentence = items
-    ? `
-【小物】
-選んだ小物（${items}）は、背景や世界観になじむよう自然に取り入れてください。寂しくならない程度に華やかにしつつ、ペットの顔を邪魔しない量と位置にしてください。`
+    ? `選んだ小物（${items}）は、背景や世界観になじむよう自然に取り入れてください。寂しくならない程度に華やかにしつつ、ペットの顔を邪魔しない量と位置にしてください。`
     : "小物は選んだ世界観に合わせて自然におまかせしてください。";
   const containerDescription = isMirrorScene ? "" : translateContainerScene(containerScene);
   const containerSentence = isMirrorScene
@@ -953,18 +939,22 @@ ${outfitColors ? `【服セットの色合い】\n服・頭装備・アクセサ
 
 【頭装備】
 ${headSentence}
+
+【アクセサリー】
 ${accessorySentence}
+
+【靴・足元】
 ${shoeSentence}
 
 【舞台ギミック】
 ${containerSentence}
+
+【小物】
 ${itemSentence}
 ${adaptiveDesignRule}${scenePoseBlock}
 
 【画像全体の色合い】
-${color ? `画像全体の色合いは${color}` : "画像全体の色合いは
-【小物】
-選んだ小物・服・背景に自然になじむ色合いにしてください。"}
+${color ? `画像全体の色合いは${color}` : "画像全体の色合いは選んだ小物・服・背景に自然になじむ色合いにしてください。"}
 ${lighting}
 
 【仕上げ】
@@ -1327,7 +1317,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 04:20頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 04:25頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
