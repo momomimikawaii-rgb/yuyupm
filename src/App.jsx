@@ -86,27 +86,6 @@ const indoorWorlds = [
     decor: ["マカロン", "キャンディ", "ケーキ", "苺", "チョコレート", "ホイップクリーム風装飾"],
   },
   {
-    id: "heavenIndoor",
-    title: "🌌 幻想・天国系",
-    description: "雲の上、星降る部屋、光の回廊のような幻想的な屋内世界。",
-    places: ["雲の上の寝室", "光の回廊", "星降るお部屋", "オーロラサロン", "天使のお部屋"],
-    decor: ["羽", "星", "雲", "光の粒", "白い花", "淡い虹色の光"],
-  },
-  {
-    id: "aliceIndoor",
-    title: "♠️ 不思議ワールド室内版",
-    description: "時計、トランプ、浮遊本、ティーカップがある不思議な屋内世界。",
-    places: ["不思議なお茶会部屋", "時計だらけの部屋", "トランプの広間", "逆さま廊下", "浮遊本の図書室"],
-    decor: ["トランプ", "時計", "ティーカップ", "浮遊本", "鍵", "うさぎモチーフ"],
-  },
-  {
-    id: "simpleLuxury",
-    title: "🤍 シンプル・ラグジュアリー系",
-    description: "ブランド名や実在ロゴを使わず、白・ピンク・パール・リボン・ふわふわ素材で上品にまとめる、シンプル可愛い高級感のある屋内世界。",
-    places: ["パールとリボンの上品ルーム", "ピンク×白の高級ギフトボックス", "ふわふわファーの撮影ブース", "白レースのドレッサールーム", "シンプル可愛いラグジュアリーサロン"],
-    decor: ["パール", "白レース", "サテンリボン", "ふわふわファー素材", "上品な丸箱", "淡いピンクの小物"],
-  },
-  {
     id: "boardingSchool",
     title: "🥀 寄宿学校・学院系",
     description: "ヨーロッパの古い寄宿学校や学院のような、静かな映画感・冬の空気・赤薔薇が似合うクラシカルな世界。",
@@ -928,7 +907,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
   const selectedOutdoorWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId);
-  const simpleDensityWorlds = ["simpleLuxury", "boardingSchool"];
+  const simpleDensityWorlds = ["boardingSchool"];
   const clearOutdoorWorlds = ["sea", "fantasy"];
 
   let densitySentence = "";
@@ -1352,7 +1331,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 06:10頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 07:35頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
