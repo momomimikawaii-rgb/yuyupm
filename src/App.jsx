@@ -417,7 +417,7 @@ const recommendedPrompts = [
     label: "ゆゆ姫5月のおすすめ",
     image: "/ajisai-road.png",
     description: "あじさい・お天気雨・虹・フリル傘の、透明感たっぷりな夢かわ世界。",
-    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n画像全体の色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。縦横比は必ず4:5の縦長画像にしてください。正方形（1:1）や横長にはしないでください。ふんわり上品で夢かわいい一枚にしてください。`,
+    prompt: `${identityRule}\n\n屋外の「雨の日のあじさいロード」で、たくさんのあじさい（桜ピンク、藤色、水色）に囲まれたペットの可愛い静止画。少なめの小さな水玉（ピンク・水色・藤色）が入った、フリル付きの白い可愛い傘をペットが持っています。\n\n背景には、奥まで続くあじさいロード、美しい雨粒、お天気雨の透明感、淡い虹を入れてください。晴れているのに雨が降っているような、明るく幻想的な雰囲気。雨の日でも暗くせず、透明感のあるハイキーな明るさを維持してください。\n\nペットは、花型ポケットの付いた可愛いフリル付きのピンクのレインコートを着ています。右耳の下には可愛いピンクの細長いフリル付きリボンをつけています。服はペットの体型に自然に合っていて、顔や鼻口まわりを隠さないでください。\n\n画像全体の色合いは桜ピンクを中心に、藤色・淡い水色を組み合わせ、少量の白や淡い黄色のあじさいも配置してください。\n\n雰囲気は、透明感、絵本のような可愛さ、やさしい光、夢かわいい世界観。自然の景色を活かしつつ、華やかだけど自然な可愛さを大切にしてください。\n\n黒い子・濃い茶色の子・グレー系の子でも、背景や全体の色味を暗く引きずらないでください。ペット本来の毛色を保ちつつ、背景は明るく、選択した世界観どおりのやさしい色合いを維持してください。\n\nペットは小首をかしげながら、傘を持ってこちらを見ています。縦横比は必ず4:5の縦長画像にしてください。可能な場合は1080×1350px相当の高品質な4:5縦長画像として作成してください。正方形（1:1）や横長にはしないでください。ふんわり上品で夢かわいい一枚にしてください。`,
   },
 ];
 
@@ -523,7 +523,7 @@ function getSizeInstruction(size) {
     return `縦横比は必ず1:1の正方形画像にしてください。縦長や横長にはしないでください。${commonRule}`;
   }
   if (size.includes("4:5")) {
-    return `縦横比は必ず4:5の縦長画像にしてください。正方形（1:1）や横長にはしないでください。${commonRule}`;
+    return `縦横比は必ず4:5の縦長画像にしてください。可能な場合は1080×1350px相当の高品質な4:5縦長画像として作成してください。正方形（1:1）や横長にはしないでください。${commonRule}`;
   }
   if (size.includes("9:16")) {
     return `縦横比は必ず9:16の縦長画像にしてください。正方形（1:1）や横長にはしないでください。${commonRule}`;
@@ -537,6 +537,26 @@ function getSizeInstruction(size) {
 function translateOutfit(outfit) {
   if (!outfit) return "";
   return outfit.split("、").map((item) => outfitTranslations[item] || item).join("、");
+}
+
+
+function getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }) {
+  if (color) return `画像全体の色合いは${color}`;
+
+  if (outfitColors) {
+    return `画像全体の色合いは、服セットの色合いに合わせて自然に調整してください。`;
+  }
+
+  if (indoorWorldId === "dreamLolita") {
+    return "画像全体の色合いは、白・薄いピンク・水色・薄いラベンダー（藤色）を主とした、やさしく夢かわいい配色にしてください。";
+  }
+
+  return "画像全体の色合いは選んだ世界観・服・小物に合うやさしい色合いにしてください。";
+}
+
+function makePromptSection(title, body) {
+  const cleanBody = String(body || "").trim();
+  return cleanBody ? `【${title}】\n${cleanBody}` : "";
 }
 
 function getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color }) {
@@ -937,24 +957,19 @@ ${clothingSentence}
 
 ${outfitColors ? `【服セットの色合い】\n服・頭装備・アクセサリー・足元の色合いは${outfitColors}を基調にしてください。` : ""}
 
-【頭装備】
-${headSentence}
+${makePromptSection("頭装備", headSentence)}
 
-【アクセサリー】
-${accessorySentence}
+${makePromptSection("アクセサリー", accessorySentence)}
 
-【靴・足元】
-${shoeSentence}
+${makePromptSection("靴・足元", shoeSentence)}
 
-【舞台ギミック】
-${containerSentence}
+${makePromptSection("舞台ギミック", containerSentence)}
 
-【小物】
-${itemSentence}
-${adaptiveDesignRule}${scenePoseBlock}
+${makePromptSection("小物", `${itemSentence}
+${adaptiveDesignRule}`)}
+${scenePoseBlock}
 
-【画像全体の色合い】
-${color ? `画像全体の色合いは${color}` : "画像全体の色合いは選んだ小物・服・背景に自然になじむ色合いにしてください。"}
+${makePromptSection("画像全体の色合い", getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }))}
 ${lighting}
 
 【仕上げ】
@@ -1317,7 +1332,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 04:25頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 04:35頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
