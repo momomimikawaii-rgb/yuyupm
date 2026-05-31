@@ -271,19 +271,11 @@ const colorChipOptions = [
   { name: "黒", value: "#111827" },
   { name: "金", value: "#d4a72c" },
   { name: "銀", value: "#c7cbd1" },
-  { name: "白ピンク", value: "linear-gradient(90deg, #ffffff 0 50%, #ffd6e8 50% 100%)" },
-  { name: "白×水色", value: "linear-gradient(90deg, #ffffff 0 50%, #aee8ff 50% 100%)" },
-  { name: "白×藤色", value: "linear-gradient(90deg, #ffffff 0 50%, #c4b5fd 50% 100%)" },
-  { name: "黒×ピンク", value: "linear-gradient(90deg, #111827 0 50%, #ff7ab6 50% 100%)" },
-  { name: "黒×紫", value: "linear-gradient(90deg, #111827 0 50%, #9333ea 50% 100%)" },
-  { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
-  { name: "パステル虹色", value: "linear-gradient(90deg, #ffd6e8 0%, #fff59d 25%, #a7f3d0 50%, #aee8ff 75%, #c4b5fd 100%)" },
-  { name: "夢かわ虹色", value: "linear-gradient(90deg, #ffffff 0%, #ffd6e8 25%, #ff7ab6 45%, #c4b5fd 70%, #aee8ff 100%)" },
 ];
 
 const clothingCategories = [
   { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
-  { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント", "コート"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
+  { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
   { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
   { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍"] },
@@ -298,17 +290,17 @@ const outfitColorCategories = [
 ];
 
 const headCategories = [
-  { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
+  { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
   { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
 
 const accessoryCategories = [
-  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ネックレス", "ブレスレット", "スタイ", "ワッペン", "ハートのバッグ", "小さなポシェット"], customLabel: "自由記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
+  { id: "accessories", title: "アクセサリー", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし"], customLabel: "自由記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
 ];
 
 const shoeCategories = [
-  { id: "shoeShape", title: "靴の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ローファー", "ブーツ", "スニーカー", "サンダル", "パンプス"], customPlaceholder: "例：白いレース靴、ピンクの長靴" },
+  { id: "shoeShape", title: "靴の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ローファー", "ブーツ", "スニーカー", "サンダル", "パンプス", "バレエシューズ"], customPlaceholder: "例：白いレース靴、ピンクの長靴" },
   { id: "shoeDecor", title: "靴の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "レース", "花", "パール"] },
 ];
 
@@ -319,7 +311,7 @@ const multiCategories = [
   { id: "wallDetail", title: "背景", indoorOnly: true, single: true, defaultValue: "おまかせ", options: ["おまかせ", "詳細選択"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
-  { id: "color", title: "全体の色合い（3個まで選択可能）", type: "colorChips", single: false, maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "例：白多めのピンク、ピンク多め、藤色と水色中心" },
+  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
   { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
@@ -357,26 +349,6 @@ const customFieldLabels = Object.fromEntries(
 const customPlaceholders = Object.fromEntries(
   allCategoryDefinitions.map((category) => [category.id, category.customPlaceholder || "カンマ、読点、改行で複数追加できます"])
 );
-
-
-const COLOR_PROMPT_MAP = {
-  "夢かわ虹色": "薄いピンクを中心に、水色とラベンダー（藤色）を組み合わせた夢かわいいパステル配色",
-  "パステル虹色": "ピンク、水色、ラベンダー（藤色）、ミント、淡い黄色をバランスよく使用した柔らかなパステル虹色配色",
-  "白ピンク": "白を基調にピンクをアクセントとして使用した配色",
-  "白×水色": "白と淡い水色を組み合わせた爽やかな配色",
-  "白×藤色": "白とラベンダー（藤色）を組み合わせた上品で優しい配色",
-  "黒×ピンク": "黒を基調にピンクをアクセントとして使用した配色",
-  "黒×紫": "黒を基調に紫をアクセントとして使用した配色",
-  "白×金": "白を基調に金色をアクセントとして使用した華やかな配色"
-};
-
-function convertColorNamesToPrompt(text) {
-  return (text || "")
-    .split(/[,、]/)
-    .map(v => COLOR_PROMPT_MAP[v.trim()] || v.trim())
-    .filter(Boolean)
-    .join("、");
-}
 
 const recommendedPrompts = [
   {
@@ -426,15 +398,6 @@ function splitCustomText(value) {
   return value.split(/[、,\n]/).map((item) => item.trim()).filter(Boolean);
 }
 
-function getOptionName(option) {
-  return typeof option === "string" ? option : option?.name || "";
-}
-
-function getOptionValue(option) {
-  return typeof option === "string" ? getOverallColorSwatch(option) : option?.value || "";
-}
-
-
 
 function findCategoryDefinition(key) {
   return allCategoryDefinitions.find((category) => category.id === key);
@@ -477,39 +440,10 @@ function getSingleValue(selected, custom, key, fallback = "", options = {}) {
   return values.length ? values[values.length - 1] : fallback;
 }
 
-function getOverallColorSwatch(option) {
-  const swatches = {
-    "おまかせ": "linear-gradient(135deg, #fff1f8 0%, #ede9fe 50%, #e0f2fe 100%)",
-    "選んだ小物や服に合わせて自然に": "linear-gradient(135deg, #fdf2f8 0%, #fef3c7 50%, #dbeafe 100%)",
-    "背景に合わせておまかせ": "linear-gradient(135deg, #ffffff 0%, #f5f3ff 50%, #e0f2fe 100%)",
-    "服の色を主役にして調整": "linear-gradient(135deg, #ffd6e8 0%, #c4b5fd 50%, #67c7f0 100%)",
-    "小物の色を差し色にして調整": "linear-gradient(135deg, #fffaf0 0%, #ff7ab6 50%, #d4a72c 100%)",
-    "白ピンク": "linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #ffd6e8 50%, #ffd6e8 100%)",
-    "ミルキーピンク": "#ffd6e8",
-    "藤色": "#c4b5fd",
-    "クリームホワイト": "#fff7d6",
-    "淡い水色": "#bae6fd",
-    "桜ピンク": "#ffc9de",
-    "パステル虹色": "linear-gradient(135deg, #ffd6e8 0%, #fff59d 25%, #bae6fd 50%, #c4b5fd 75%, #ffffff 100%)",
-    "淡い黄色": "#fff59d",
-    "上品なラベンダーピンク": "linear-gradient(90deg, #fbcfe8 0%, #fbcfe8 50%, #c4b5fd 50%, #c4b5fd 100%)",
-    "黒×ピンク": "linear-gradient(90deg, #111827 0%, #111827 50%, #ff7ab6 50%, #ff7ab6 100%)",
-    "黒×紫": "linear-gradient(90deg, #111827 0%, #111827 50%, #9333ea 50%, #9333ea 100%)",
-    "白×金": "linear-gradient(90deg, #ffffff 0%, #ffffff 50%, #d4a72c 50%, #d4a72c 100%)",
-  };
-
-  return swatches[option] || null;
-}
-
 function getDefaultSelected(categoryId) {
   const defaultValue = findCategoryDefinition(categoryId)?.defaultValue;
   return defaultValue ? [defaultValue] : [];
 }
-
-function isWallDetailEnabled(selected) {
-  return (selected.wallDetail || []).includes("詳細選択");
-}
-
 
 function describeAutoFallback(label) {
   return `${label}は、選んだ背景・季節・世界観に合わせて自然におまかせしてください。`;
@@ -558,6 +492,18 @@ function translateColor(color) {
       "選んだ服の色を主役にして、背景や小物はその色を引き立てるように自然に調整してください。",
     "小物の色を差し色にして調整":
       "選んだ小物の色を差し色として使い、全体はまとまりのある可愛い色合いにしてください。",
+    "夢かわ虹色":
+      "薄いピンクを中心に、水色とラベンダー（藤色）を組み合わせた夢かわいいパステル配色",
+    "パステル虹色":
+      "ピンク・水色・ラベンダー（藤色）・ミント・淡い黄色をバランスよく使用した柔らかなパステル虹色配色",
+    "白ピンク":
+      "白を基調にピンクをアクセントとして使用した配色",
+    "白×水色":
+      "白と淡い水色を組み合わせた爽やかな配色",
+    "白×藤色":
+      "白とラベンダー（藤色）を組み合わせた上品で優しい配色",
+    "黒×ピンク":
+      "黒を基調にピンクをアクセントとして使用した配色",
   };
 
   return color
@@ -735,7 +681,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const items = joinValues(selected, custom, "items");
   const containerScene = joinValues(selected, custom, "containerScene");
   const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "選んだ屋内世界観に自然に合う壁紙や壁面デザイン" : ""));
-  const wallDecor = isWallDetailEnabled(selected) ? joinValues(selected, custom, "wallDecor") : "";
+  const wallDecor = joinValues(selected, custom, "wallDecor", locationType === "indoor" ? "選んだ屋内世界観に合う壁飾り" : "");
 
   const clothingSeason = getSingleValue(selected, custom, "clothingSeason", "");
   const clothingShape = getSingleValue(selected, custom, "clothingShape", "");
@@ -746,6 +692,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
   const otherPattern = joinValues(selected, custom, "otherPattern");
   const outfitColors = joinValues(selected, custom, "outfitColorChips");
+  const outfitColorsAuto = !outfitColors && (selected.outfitColorChips || []).includes("おまかせ");
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
@@ -778,9 +725,12 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
-  if (outfitColors) clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
-
   const noClothes = clothingShape === "なし";
+  if (outfitColors) {
+    clothingParts.push(`服セットの色合いは${outfitColors}を基調に、最大3色の組み合わせとして自然にまとめる`);
+  } else if (outfitColorsAuto && !noClothes) {
+    clothingParts.push("服セットの色合いは、選んだ背景・季節・服の形・小物に合わせて自動で可愛く調整する");
+  }
   const clothingSentence = noClothes
     ? "服は追加せず、元写真の自然な魅力を尊重してください。"
     : clothingParts.length
@@ -916,7 +866,7 @@ function hasSelection(selected, categoryId, value) {
 
 function isCategoryDisabledById(categoryId, selected) {
   if (categoryId === "headDecor") {
-    return !hasSpecificSelection(selected, "headShape");
+    return false;
   }
 
   if (categoryId === "earType") {
@@ -952,7 +902,6 @@ function getDisabledPlaceholder(category) {
 function normalizeDependentSelections(nextSelected) {
   let normalized = { ...nextSelected };
   const dependentIds = [
-    "headDecor",
     "earType",
     "shoeDecor",
     "uniformStyle",
@@ -1226,7 +1175,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31（日） 10:40頃</div>
+          <div className="update-time">最終更新：2026/05/31 07:39</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -1351,71 +1300,19 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
-              .filter((category) => !(["wallpaper", "wallDecor"].includes(category.id) && !(selected.wallDetail || []).includes("詳細選択")))
-              .map((category) => {
-              const CategoryIcon = category.icon;
-              const displayTitle = getDisplayTitle(category);
-              return (
+              .filter((category) => !isCategoryDisabled(category, selected))
+              .map((category) => (
                 <section key={category.id} className="card">
-                  <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {displayTitle}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
-                  {category.type === "colorChips" ? (
-                    <>
-                      <div className="color-chip-grid">
-                        {category.options.map((option) => {
-                          const optionName = getOptionName(option);
-                          const optionValue = getOptionValue(option);
-                          const active = selected[category.id]?.includes(optionName);
-                          return (
-                            <button
-                              key={optionName}
-                              type="button"
-                              title={optionName}
-                              aria-label={optionName}
-                              onClick={() => toggleOption(category.id, optionName, false, category.maxSelect)}
-                              className={`color-chip ${active ? "active" : ""}`}
-                              data-label={optionName}
-                            >
-                              <span className="color-chip-swatch" style={{ background: optionValue }} />
-                              {active && <span className="color-chip-check">✓</span>}
-                              <span className="color-chip-name">{optionName}</span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                      <div className="color-chip-help">おまかせ、または最大3色まで選択可能。色の名前はチップにカーソルを重ねると表示されます。</div>
-                    </>
-                  ) : (
-                    <div className="chips">
-                      {category.options.map((option) => {
-                        const active = selected[category.id]?.includes(option);
-                        return (
-                          <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
-                            {category.id === "color" && getOverallColorSwatch(option) && (
-                              <span
-                                aria-hidden="true"
-                                style={{
-                                  display: "inline-block",
-                                  width: "16px",
-                                  height: "16px",
-                                  borderRadius: "999px",
-                                  marginRight: "6px",
-                                  verticalAlign: "-3px",
-                                  border: "1px solid rgba(100, 116, 139, 0.35)",
-                                  background: getOverallColorSwatch(option),
-                                }}
-                              />
-                            )}
-                            {option}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
-                  <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
-                  <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
+                  <OptionGroup
+                    category={category}
+                    selected={selected}
+                    custom={custom}
+                    onToggle={toggleOption}
+                    onCustomChange={updateCustom}
+                    resetCategory={resetCategory}
+                  />
                 </section>
-              );
-            })}
+              ))}
 </div>
 
           <div className="right">
