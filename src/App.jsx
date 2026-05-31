@@ -46,9 +46,9 @@ const indoorWorlds = [
   {
     id: "dreamLolita",
     title: "🩷 夢かわ・ロリータ系",
-    description: "お姫さま部屋、苺、レース、ぬいぐるみの甘い屋内世界。",
-    places: ["お姫さまの部屋", "苺スウィーツルーム", "レースだらけの寝室", "お人形の部屋", "ミルキーピンクのサロン"],
-    decor: ["レース", "パール", "苺", "くまのぬいぐるみ", "うさぎのぬいぐるみ", "フリル", "花かご"],
+    description: "白ピンク、レース、パール、薔薇、天使装飾が似合う甘く上品な屋内世界。選んだ場所ごとの用途や家具が分かるように、似た部屋にならないよう差別化して表現してください。",
+    places: ["アフタヌーンティーカフェ", "お姫様の部屋", "スイーツショップ", "ドレスを着て鏡の前", "口紅をぬろうとする鏡の前", "苺スウィーツルーム", "お人形の部屋"],
+    decor: ["レース", "パール", "薔薇", "リボン", "フリル", "天使装飾"],
   },
   {
     id: "gothicIndoor",
@@ -286,7 +286,7 @@ const clothingCategories = [
   { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント", "コート"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
   { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
   { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
-  { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍"] },
+  { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍", "スパンコール", "ラインストーン"] },
   { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"] },
   { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花", "自由記入"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
   { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー", "自由記入"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
@@ -663,6 +663,30 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   const world = indoorWorlds.find((item) => item.id === indoorWorldId) || indoorWorlds[0];
   const place = customLocation?.trim() || locationOption || world.places[0];
   const decor = world.decor?.join("、") || "";
+
+  const dreamLolitaPlaceDescriptions = {
+    "アフタヌーンティーカフェ":
+      "白ピンク基調の夢かわいいアフタヌーンティーカフェ。ティーポット、ティーカップ、ケーキスタンド、紅茶、マカロン、レースクロス、薔薇、パール、天使装飾が見える、優雅に座って紅茶を楽しむお茶会の場所。ベッドやドレッサーは主役にせず、カフェテーブルとティーセットを中心に表現してください。",
+    "お姫様の部屋":
+      "お城のお姫様の私室。天蓋ベッド、ドレッサー、シャンデリア、ロココ家具、大きな鏡、ジュエリーボックス、薔薇、パール、リボンで飾られた優雅な生活空間。アフタヌーンティーカフェやスイーツショップではなく、お姫様が暮らしている部屋として表現してください。苺やぬいぐるみは必須にしないでください。",
+    "スイーツショップ":
+      "ショーケースが見える可愛いスイーツショップ。ケーキ、マカロン、クッキー、キャンディ、商品棚、ショーケースを入れ、可愛いお菓子を売っている店内として表現してください。アフタヌーンティーカフェのように座って紅茶を楽しむ場所ではなく、販売店らしさを大切にしてください。",
+    "ドレスを着て鏡の前":
+      "大きな姿見の前でドレスを楽しむ夢かわいいおしゃれ部屋。姿見、ドレスラック、リボン、靴、アクセサリー、ハンガー、可愛い小物を入れ、お着替え・ドレスアップの場面として表現してください。カフェや販売店ではなく、鏡前のファッション空間にしてください。",
+    "口紅をぬろうとする鏡の前":
+      "ドレッサーと鏡の前で口紅をぬろうとする可愛いメイクルーム。口紅、香水、コスメ、ブラシ、ジュエリートレイ、鏡、ドレッサーライトを入れ、メイク中の場面として表現してください。紅茶やショーケースではなく、コスメと鏡が主役の空間にしてください。",
+    "苺スウィーツルーム":
+      "苺をテーマにした夢かわいいスイーツ部屋。苺ケーキ、苺柄、小さな苺の飾り、ピンクのスイーツ、苺ミルクのような色合いを中心にした甘い空間。苺を明確なテーマとして使い、他の夢かわ部屋と差別化してください。",
+    "お人形の部屋":
+      "ドールハウスのような可愛いお人形の部屋。小さなロココ家具、ミニチュア家具、人形用ベッド、ドールチェア、可愛いぬいぐるみやお人形小物を入れ、実物大のカフェやお姫様の私室ではなく、お人形遊びの世界として表現してください。",
+  };
+
+  const placeDescription =
+    world.id === "dreamLolita" ? dreamLolitaPlaceDescriptions[place] : "";
+
+  if (placeDescription) {
+    return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${placeDescription}装飾として${decor}を世界観に合うように自然に配置してください。`;
+  }
 
   return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${world.description}${decor ? `装飾として${decor}を世界観に合うように自然に配置してください。` : ""}`;
 }
@@ -1264,7 +1288,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31（日） 16:05頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 00:10頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
