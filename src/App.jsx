@@ -311,7 +311,35 @@ const multiCategories = [
   { id: "wallDetail", title: "背景", indoorOnly: true, single: true, defaultValue: "おまかせ", options: ["おまかせ", "詳細選択"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
-  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "ピンク多め虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
+  { id: "color", title: "全体の色合い（3個まで選択可能）", type: "colorChips", single: false, maxSelect: 3, defaultValue: "おまかせ", options: [
+    { name: "おまかせ", value: "linear-gradient(135deg, #fff1f8, #ede9fe, #e0f2fe)" },
+    { name: "白", value: "#ffffff" },
+    { name: "アイボリー", value: "#fffaf0" },
+    { name: "クリームホワイト", value: "#fff7e6" },
+    { name: "ベージュ", value: "#ead8bd" },
+    { name: "ミルクティー", value: "#d8c1a3" },
+    { name: "ベビーピンク", value: "#ffd6e8" },
+    { name: "ミルキーピンク", value: "#f8b6d6" },
+    { name: "桜ピンク", value: "#ffd1dc" },
+    { name: "くすみピンク", value: "#d8a2b0" },
+    { name: "ピンク", value: "#ff7ab6" },
+    { name: "濃いピンク", value: "#db2777" },
+    { name: "藤色", value: "#c4b5fd" },
+    { name: "ラベンダー", value: "#b999e8" },
+    { name: "淡い水色", value: "#aee8ff" },
+    { name: "水色", value: "#67c7f0" },
+    { name: "ミント", value: "#a7f3d0" },
+    { name: "淡い黄色", value: "#fff59d" },
+    { name: "上品なラベンダーピンク", value: "linear-gradient(135deg, #f8b6d6 0%, #c4b5fd 100%)" },
+    { name: "白ピンク", value: "linear-gradient(90deg, #ffffff 0 50%, #ffd6e8 50% 100%)" },
+    { name: "白×水色", value: "linear-gradient(90deg, #ffffff 0 50%, #aee8ff 50% 100%)" },
+    { name: "白×藤色", value: "linear-gradient(90deg, #ffffff 0 50%, #c4b5fd 50% 100%)" },
+    { name: "黒×ピンク", value: "linear-gradient(90deg, #111827 0 50%, #ff7ab6 50% 100%)" },
+    { name: "黒×紫", value: "linear-gradient(90deg, #111827 0 50%, #9333ea 50% 100%)" },
+    { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
+    { name: "パステル虹色", value: "linear-gradient(90deg, #ffd6e8 0%, #fff59d 25%, #a7f3d0 50%, #aee8ff 75%, #c4b5fd 100%)" },
+    { name: "夢かわ虹色", value: "linear-gradient(90deg, #ffffff 0%, #ffd6e8 25%, #ff7ab6 45%, #c4b5fd 70%, #aee8ff 100%)" },
+  ], customPlaceholder: "例：白多めのピンク、ピンク多め、藤色と水色中心" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
   { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
@@ -398,6 +426,15 @@ function splitCustomText(value) {
   return value.split(/[、,\n]/).map((item) => item.trim()).filter(Boolean);
 }
 
+function getOptionName(option) {
+  return typeof option === "string" ? option : option?.name || "";
+}
+
+function getOptionValue(option) {
+  return typeof option === "string" ? getOverallColorSwatch(option) : option?.value || "";
+}
+
+
 
 function findCategoryDefinition(key) {
   return allCategoryDefinitions.find((category) => category.id === key);
@@ -454,7 +491,6 @@ function getOverallColorSwatch(option) {
     "淡い水色": "#bae6fd",
     "桜ピンク": "#ffc9de",
     "パステル虹色": "linear-gradient(135deg, #ffd6e8 0%, #fff59d 25%, #bae6fd 50%, #c4b5fd 75%, #ffffff 100%)",
-    "ピンク多め虹色": "linear-gradient(135deg, #ffffff 0%, #ffd6e8 25%, #ff7ab6 48%, #bae6fd 72%, #c4b5fd 100%)",
     "淡い黄色": "#fff59d",
     "上品なラベンダーピンク": "linear-gradient(90deg, #fbcfe8 0%, #fbcfe8 50%, #c4b5fd 50%, #c4b5fd 100%)",
     "黒×ピンク": "linear-gradient(90deg, #111827 0%, #111827 50%, #ff7ab6 50%, #ff7ab6 100%)",
@@ -1185,7 +1221,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31 06:38</div>
+          <div className="update-time">最終更新：2026/05/31（日） 10:05頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -1316,31 +1352,59 @@ function App() {
               return (
                 <section key={category.id} className="card">
                   <div className="card-head category-card-head"><h2>{CategoryIcon && <CategoryIcon size={20} />} {displayTitle}</h2><button type="button" className="category-reset" onClick={() => resetCategory(category.id)}>リセット</button></div>
-                  <div className="chips">
-                    {category.options.map((option) => {
-                      const active = selected[category.id]?.includes(option);
-                      return (
-                        <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
-                          {category.id === "color" && getOverallColorSwatch(option) && (
-                            <span
-                              aria-hidden="true"
-                              style={{
-                                display: "inline-block",
-                                width: "16px",
-                                height: "16px",
-                                borderRadius: "999px",
-                                marginRight: "6px",
-                                verticalAlign: "-3px",
-                                border: "1px solid rgba(100, 116, 139, 0.35)",
-                                background: getOverallColorSwatch(option),
-                              }}
-                            />
-                          )}
-                          {option}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  {category.type === "colorChips" ? (
+                    <>
+                      <div className="color-chip-grid">
+                        {category.options.map((option) => {
+                          const optionName = getOptionName(option);
+                          const optionValue = getOptionValue(option);
+                          const active = selected[category.id]?.includes(optionName);
+                          return (
+                            <button
+                              key={optionName}
+                              type="button"
+                              title={optionName}
+                              aria-label={optionName}
+                              onClick={() => toggleOption(category.id, optionName, false, category.maxSelect)}
+                              className={`color-chip ${active ? "active" : ""}`}
+                              data-label={optionName}
+                            >
+                              <span className="color-chip-swatch" style={{ background: optionValue }} />
+                              {active && <span className="color-chip-check">✓</span>}
+                              <span className="color-chip-name">{optionName}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <div className="color-chip-help">おまかせ、または最大3色まで選択可能。色の名前はチップにカーソルを重ねると表示されます。</div>
+                    </>
+                  ) : (
+                    <div className="chips">
+                      {category.options.map((option) => {
+                        const active = selected[category.id]?.includes(option);
+                        return (
+                          <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
+                            {category.id === "color" && getOverallColorSwatch(option) && (
+                              <span
+                                aria-hidden="true"
+                                style={{
+                                  display: "inline-block",
+                                  width: "16px",
+                                  height: "16px",
+                                  borderRadius: "999px",
+                                  marginRight: "6px",
+                                  verticalAlign: "-3px",
+                                  border: "1px solid rgba(100, 116, 139, 0.35)",
+                                  background: getOverallColorSwatch(option),
+                                }}
+                              />
+                            )}
+                            {option}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
