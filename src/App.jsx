@@ -812,7 +812,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
-  if (outfitColors) clothingParts.push(`服セットの画像全体の色合いは${outfitColors}を基調に`);
+  if (outfitColors) clothingParts.push(`【服セットの色合い】\n服・頭装備・アクセサリー・足元の色合いは${outfitColors}を基調に`);
 
   const noClothes = clothingShape === "なし";
   const clothingSentence = noClothes
