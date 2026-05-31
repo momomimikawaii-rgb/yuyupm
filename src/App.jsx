@@ -676,6 +676,25 @@ function isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) {
   );
 }
 
+function isDreamLolitaBathScene(locationType, indoorWorldId, locationOption) {
+  return (
+    locationType === "indoor" &&
+    indoorWorldId === "dreamLolita" &&
+    locationOption === "お姫様のバスタイム"
+  );
+}
+
+function getDreamLolitaBathHeadPrompt(headShape) {
+  if (!headShape || headShape === "なし") return "";
+  if (headShape === "タオル") {
+    return "頭には上品で清潔感のあるタオルを自然に合わせてください。韓国風の巻き方にはしないでください。";
+  }
+  if (headShape === "ひよこのかぶりもの") {
+    return "頭には小さなひよこのかぶりものを自然に合わせてください。顔・目・鼻口まわりは隠さないでください。";
+  }
+  return `頭装備は${headShape}。顔・目・鼻口まわりは隠さないでください。`;
+}
+
 function getDreamLolitaMirrorScenePrompt(locationOption) {
   if (locationOption === "ドレスを着て鏡の前") {
     return "ドレスを着て大きな姿見の前で可愛くポーズしている専用構図を優先してください。";
@@ -702,6 +721,8 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
       "大きな姿見の前でドレスを楽しむ夢かわいいおしゃれ部屋。シルヴァニアファミリーのような可愛い二足寄りの体型・雰囲気で、ドレスを着て大きな姿見の前で可愛くポーズしている場面にしてください。姿見、ドレスラック、リボン、靴、アクセサリー、ハンガー、可愛い小物を入れ、お着替え・ドレスアップの場面として表現してください。鏡前のファッション空間にしてください。",
     "口紅をぬろうとする鏡の前":
       "ドレッサーと鏡の前で口紅をぬろうとする可愛いメイクルーム。口紅、香水、コスメ、ブラシ、ジュエリートレイ、鏡、ドレッサーライトを入れ、メイク中の場面として表現してください。可能であれば、鏡台の鏡の中にもペットの顔が自然に映っているようにしてください。ただし、元写真の顔の角度や構図的に不自然になる場合は、鏡の反射表現を無理に作らず、鏡・ドレッサー・口紅・コスメが見える自然な場面を優先してください。鏡の中の顔が歪んだり、別の顔になったり、目や鼻口まわりが崩れる表現は避けてください。",
+    "お姫様のバスタイム":
+      "優雅なお姫様のバスルーム。白いアンティーク猫足バスタブの泡風呂で、泡からペットの顔と前足だけが自然に出ている場面。体はお湯と泡で自然に隠してください。しっぽは無理に見せず、元写真の向きや体勢的に自然な場合のみ、泡の外に少し見えてもよいです。レースのカーテン、花柄の壁紙、上品なアンティーク家具、白く美しい猫足の置き台、シャンプーボトルや香水瓶が見える、夢かわいく清潔感のあるバスタイム空間。",
     "苺スウィーツルーム":
       "苺をテーマにした夢かわいいスイーツ部屋。苺ケーキ、苺柄、小さな苺の飾り、ピンクのスイーツ、苺ミルクのような色合いを中心にした甘い空間。苺を明確なテーマとして使い、他の夢かわ部屋と差別化してください。",
     "お人形の部屋":
@@ -849,6 +870,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const size = joinValues(selected, custom, "size", "インスタ投稿用 縦長4:5", { keepAuto: true });
   const aspectInstruction = getSizeInstruction(size);
   const isMirrorScene = isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption);
+  const isBathScene = isDreamLolitaBathScene(locationType, indoorWorldId, locationOption);
   const mirrorScenePrompt = getDreamLolitaMirrorScenePrompt(locationOption);
 
   const baseScene =
@@ -866,9 +888,11 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
 
-  const outfitColorSentence = outfitColors
-    ? `服・頭装備・アクセサリー・足元の色合いは${outfitColors}。`
-    : "";
+  const outfitColorSentence = isBathScene
+    ? ""
+    : outfitColors
+      ? `服・頭装備・アクセサリー・足元の色合いは${outfitColors}。`
+      : "";
 
   const noClothes = clothingShape === "なし";
   const clothingSentence = noClothes
@@ -881,26 +905,38 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (headShape) headParts.push(`帽子・頭装備の形は${headShape}`);
   if (headDecor) headParts.push(`頭装備の飾りは${headDecor}`);
   if (headDecor.includes("耳") && earType) headParts.push(`耳モチーフは${earType}`);
-  const headSentence = headParts.length
-    ? `${headParts.join("。") }。頭装備はペットの顔・目・鼻口まわりを隠さない位置と大きさにしてください。`
-    : "頭装備は、必要な場合だけ背景や服に合わせて自然に追加してください。顔・目・鼻口まわりは隠さないでください。";
+  const headSentence = isBathScene
+    ? getDreamLolitaBathHeadPrompt(headShape)
+    : headParts.length
+      ? `${headParts.join("。") }。頭装備はペットの顔・目・鼻口まわりを隠さない位置と大きさにしてください。`
+      : "頭装備は、必要な場合だけ背景や服に合わせて自然に追加してください。顔・目・鼻口まわりは隠さないでください。";
 
-  const accessorySentence = accessoryChoice === "なし"
-    ? "アクセサリーは追加しないでください。"
-    : accessories
-      ? `アクセサリーは自由記入の内容を優先して、${accessories}を自然に取り入れてください。頭装備とは分離して扱い、首元・胸元・手元・小物として、顔・目・鼻口まわりを邪魔しない位置に配置してください。`
-      : "アクセサリーは、背景・服・世界観に合わせて、首元・胸元・手元などに自然になじむ可愛いものを必要に応じて控えめに追加してください。";
+  const accessorySentence = isBathScene
+    ? ""
+    : accessoryChoice === "なし"
+      ? "アクセサリーは追加しないでください。"
+      : accessories
+        ? `アクセサリーは自由記入の内容を優先して、${accessories}を自然に取り入れてください。頭装備とは分離して扱い、首元・胸元・手元・小物として、顔・目・鼻口まわりを邪魔しない位置に配置してください。`
+        : "アクセサリーは、背景・服・世界観に合わせて、首元・胸元・手元などに自然になじむ可愛いものを必要に応じて控えめに追加してください。";
 
-  const shoeSentence = shoeShape || shoeDecor
-    ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
-    : "靴や足元は、服と背景に合わせて自然に作成してください。ただし、不要な場合は無理に追加せず、なしにしてください。";
+  const shoeSentence = isBathScene
+    ? ""
+    : shoeShape || shoeDecor
+      ? `靴の形は${shoeShape || "背景と服に合わせておまかせ"}。靴の飾りは${shoeDecor || "控えめにおまかせ"}。足元は小さめにして、ペットの体型や自然な可愛さを邪魔しないようにしてください。`
+      : "靴や足元は、服と背景に合わせて自然に作成してください。ただし、不要な場合は無理に追加せず、なしにしてください。";
 
-  const itemSentence = items
-    ? `選んだ小物（${items}）は、背景や世界観になじむよう自然に取り入れてください。寂しくならない程度に華やかにしつつ、ペットの顔を邪魔しない量と位置にしてください。`
-    : "小物は選んだ世界観に合わせて自然におまかせしてください。";
-  const containerDescription = isMirrorScene ? "" : translateContainerScene(containerScene);
-  const containerSentence = isMirrorScene
-    ? mirrorScenePrompt
+  const itemSentence = isBathScene
+    ? items
+      ? `選んだ小物（${items}）は、泡風呂やバスルームに自然になじむ、浮かべられる小物として控えめに取り入れてください。ペットの顔と前足を邪魔しない量と位置にしてください。`
+      : "小物は必要な場合のみ、泡風呂に浮かべられる小さなものを控えめに追加してください。"
+    : items
+      ? `選んだ小物（${items}）は、背景や世界観になじむよう自然に取り入れてください。寂しくならない程度に華やかにしつつ、ペットの顔を邪魔しない量と位置にしてください。`
+      : "小物は選んだ世界観に合わせて自然におまかせしてください。";
+  const containerDescription = isMirrorScene || isBathScene ? "" : translateContainerScene(containerScene);
+  const containerSentence = isBathScene
+    ? ""
+    : isMirrorScene
+      ? mirrorScenePrompt
     : containerDescription
       ? `ペットは${containerDescription}。透明素材や入れ物を使用する場合も、ペットの顔・目・鼻口まわりが歪んだり隠れたりしないようにしてください。`
       : "";
@@ -931,7 +967,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
 
   const adaptiveDesignRule = "入れ物・家具・小物・舞台装飾の色・素材・装飾は、選んだ世界観・服・色合いに合わせて自然に調整してください。";
 
-  const gestureDescription = translateGesture(gesture);
+  const gestureDescription = isBathScene ? "" : translateGesture(gesture);
   const gestureSection = gestureDescription ? `ペットのしぐさは${gestureDescription}。` : "";
   const scenePoseSection = [sceneEffectSentence, gestureSection].filter(Boolean).join("\n");
   const scenePoseBlock = scenePoseSection ? `\n\n【情景演出・ポーズ】\n${scenePoseSection}` : "";
@@ -943,8 +979,7 @@ ${identityRule}
 ${baseScene}
 背景は明るく、やさしい光に包まれていて、可愛いけれどペットの顔を邪魔しない。
 
-【服】
-${clothingSentence}
+${makePromptSection("服", isBathScene ? "" : clothingSentence)}
 
 ${makePromptSection("頭装備", headSentence)}
 
@@ -1313,6 +1348,17 @@ function App() {
     outdoorWorldId === "alice" &&
     selected.alicePlace?.includes("逆さま階段");
 
+  const isBathScene =
+    locationType === "indoor" &&
+    indoorWorldId === "dreamLolita" &&
+    locationOption === "お姫様のバスタイム";
+
+  const visibleUiSections = isBathScene
+    ? [{ id: "bathHead", title: "頭装備", categories: [
+        { id: "headShape", title: "バスタイム頭装備", single: true, defaultValue: "なし", options: ["なし", "タオル", "ひよこのかぶりもの", "自由記入"], customPlaceholder: "例：薔薇柄のタオル、黒ピンクレースのタオル" },
+      ] }]
+    : uiSections;
+
   return (
     <div className="page">
       <div className="blob blob-pink" />
@@ -1331,7 +1377,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 07:35頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 07:45頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -1403,7 +1449,22 @@ function App() {
                   <div className="chips">
                     {(indoorWorlds.find((item) => item.id === indoorWorldId)?.places || []).map((option) => {
                       const active = locationOption === option && !custom.location;
-                      return <button key={option} onClick={() => { setFeaturedPrompt(""); setLocationOption(option); setCustom((prev) => ({ ...prev, location: "" })); }} className={`chip ${active ? "active" : ""}`}>{option}</button>;
+                      return <button key={option} onClick={() => {
+                        setFeaturedPrompt("");
+                        setLocationOption(option);
+                        setCustom((prev) => ({ ...prev, location: "" }));
+                        if (option === "お姫様のバスタイム") {
+                          setSelected((prev) => normalizeDependentSelections({
+                            ...prev,
+                            clothingShape: ["なし"],
+                            accessories: ["なし"],
+                            shoeShape: ["なし"],
+                            headShape: ["なし"],
+                            containerScene: ["なし"],
+                            gesture: ["おまかせ"],
+                          }));
+                        }
+                      }} className={`chip ${active ? "active" : ""}`}>{option}</button>;
                     })}
                   </div>
                   <label><PlusCircle size={16} /> その他の場所を記入</label>
@@ -1440,7 +1501,7 @@ function App() {
               </section>
             )}
 
-            {uiSections.map((section) => (
+            {visibleUiSections.map((section) => (
               <CategorySection
                 key={section.id}
                 title={section.title}
@@ -1456,7 +1517,7 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
-              .filter((category) => !(isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) && ["containerScene", "gesture"].includes(category.id)))
+              .filter((category) => !((isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) || isBathScene) && ["containerScene", "gesture"].includes(category.id)))
               .filter((category) => !(["wallpaper", "wallDecor"].includes(category.id) && !(selected.wallDetail || []).includes("詳細選択")))
               .map((category) => {
               const CategoryIcon = category.icon;
