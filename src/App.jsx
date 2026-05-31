@@ -283,7 +283,7 @@ const colorChipOptions = [
 
 const clothingCategories = [
   { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
-  { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
+  { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント", "コート"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
   { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
   { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍"] },
@@ -308,7 +308,7 @@ const accessoryCategories = [
 ];
 
 const shoeCategories = [
-  { id: "shoeShape", title: "靴の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ローファー", "ブーツ", "スニーカー", "サンダル", "パンプス", "バレエシューズ"], customPlaceholder: "例：白いレース靴、ピンクの長靴" },
+  { id: "shoeShape", title: "靴の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ローファー", "ブーツ", "スニーカー", "サンダル", "パンプス"], customPlaceholder: "例：白いレース靴、ピンクの長靴" },
   { id: "shoeDecor", title: "靴の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "レース", "花", "パール"] },
 ];
 
@@ -485,6 +485,11 @@ function getDefaultSelected(categoryId) {
   const defaultValue = findCategoryDefinition(categoryId)?.defaultValue;
   return defaultValue ? [defaultValue] : [];
 }
+
+function isWallDetailEnabled(selected) {
+  return (selected.wallDetail || []).includes("詳細選択");
+}
+
 
 function describeAutoFallback(label) {
   return `${label}は、選んだ背景・季節・世界観に合わせて自然におまかせしてください。`;
@@ -710,7 +715,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const items = joinValues(selected, custom, "items");
   const containerScene = joinValues(selected, custom, "containerScene");
   const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "選んだ屋内世界観に自然に合う壁紙や壁面デザイン" : ""));
-  const wallDecor = joinValues(selected, custom, "wallDecor", locationType === "indoor" ? "選んだ屋内世界観に合う壁飾り" : "");
+  const wallDecor = isWallDetailEnabled(selected) ? joinValues(selected, custom, "wallDecor") : "";
 
   const clothingSeason = getSingleValue(selected, custom, "clothingSeason", "");
   const clothingShape = getSingleValue(selected, custom, "clothingShape", "");
@@ -1201,7 +1206,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31（日） 10:30頃</div>
+          <div className="update-time">最終更新：2026/05/31（日） 10:40頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
@@ -1326,6 +1331,7 @@ function App() {
             {multiCategories
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
+              .filter((category) => !(["wallpaper", "wallDecor"].includes(category.id) && !(selected.wallDetail || []).includes("詳細選択")))
               .map((category) => {
               const CategoryIcon = category.icon;
               const displayTitle = getDisplayTitle(category);
