@@ -322,7 +322,7 @@ const multiCategories = [
   { id: "color", title: "全体の色合い（3個まで選択可能）", type: "colorChips", single: false, maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "例：白多めのピンク、ピンク多め、藤色と水色中心" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
-  { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
+  { id: "size", title: "縦横の比率", single: true, defaultValue: "インスタ投稿用 縦長4:5", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
 ];
 
 const uiSections = [
@@ -795,7 +795,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const gesture = joinValues(selected, custom, "gesture", "小首をかしげる、にっこり笑っているように見える");
   const density = getSingleValue(selected, custom, "density", "おまかせ", { keepAuto: true });
   const textOverlay = getSingleValue(selected, custom, "textOverlay", "なし", { keepAuto: true });
-  const size = joinValues(selected, custom, "size", "正方形 1:1", { keepAuto: true });
+  const size = joinValues(selected, custom, "size", "インスタ投稿用 縦長4:5", { keepAuto: true });
   const aspectInstruction = getSizeInstruction(size);
 
   const baseScene =
@@ -888,6 +888,8 @@ ${baseScene}
 【服】
 ${clothingSentence}
 
+${outfitColors ? `【服セットの色合い】\n服・頭装備・アクセサリー・足元の色合いは${outfitColors}を基調にしてください。` : ""}
+
 【頭装備・アクセサリー・足元】
 ${headSentence}
 ${accessorySentence}
@@ -905,6 +907,8 @@ ${lighting}
 【仕上げ】
 ${densitySentence}
 ${translateTextOverlay(textOverlay)}
+
+【サイズ・構図】
 ${aspectInstruction}
 ふんわり上品で夢かわいい一枚にしてください。`;
 }
@@ -1260,7 +1264,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31（日） 12:10頃</div>
+          <div className="update-time">最終更新：2026/05/31（日） 14:50頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
