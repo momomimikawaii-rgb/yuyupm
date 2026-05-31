@@ -886,14 +886,17 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
   if (otherPattern) clothingParts.push(`その他柄は${otherPattern}`);
-  if (outfitColors) clothingParts.push(`【服セットの色合い】\n服・頭装備・アクセサリー・足元の色合いは${outfitColors}を基調に`);
+
+  const outfitColorSentence = outfitColors
+    ? `服・頭装備・アクセサリー・足元の色合いは${outfitColors}。`
+    : "";
 
   const noClothes = clothingShape === "なし";
   const clothingSentence = noClothes
     ? "服は追加せず、元写真の自然な魅力を尊重してください。"
     : clothingParts.length
-      ? `${clothingParts.join("。") }。未指定の服要素は、背景・季節・世界観に合わせて自動で可愛く調整してください。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。`
-      : "服は、選んだ背景・季節・世界観に合わせて自動で可愛く調整してください。ペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。";
+      ? `${clothingParts.join("。") }。服は背景・季節・世界観に合わせて自然に可愛く調整してください。ペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。`
+      : "世界観や背景に合わせた夢かわいい服を自然に着せてください。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。";
 
   const headParts = [];
   if (headShape) headParts.push(`帽子・頭装備の形は${headShape}`);
@@ -964,13 +967,13 @@ ${baseScene}
 【服】
 ${clothingSentence}
 
-${outfitColors ? `【服セットの色合い】\n服・頭装備・アクセサリー・足元の色合いは${outfitColors}を基調にしてください。` : ""}
-
 ${makePromptSection("頭装備", headSentence)}
 
 ${makePromptSection("アクセサリー", accessorySentence)}
 
 ${makePromptSection("靴・足元", shoeSentence)}
+
+${makePromptSection("服セットの色合い", outfitColorSentence)}
 
 ${makePromptSection("舞台ギミック", containerSentence)}
 
@@ -1048,6 +1051,10 @@ function isCategoryDisabledById(categoryId, selected) {
 
   if (["fruitPattern", "flowerPattern", "otherPattern"].includes(categoryId)) {
     return !hasSelection(selected, "patternType", "柄物");
+  }
+
+  if (["wallpaper", "wallDecor"].includes(categoryId)) {
+    return !hasSelection(selected, "wallDetail", "詳細選択");
   }
 
   return false;
@@ -1341,7 +1348,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 04:40頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 05:03頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
