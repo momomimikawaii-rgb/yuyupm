@@ -273,27 +273,6 @@ const colorChipOptions = [
   { name: "銀", value: "#c7cbd1" },
 ];
 
-const overallColorChipOptions = [
-  { name: "おまかせ", value: "linear-gradient(135deg, #fff1f8, #ede9fe, #e0f2fe)" },
-  { name: "選んだ小物や服に合わせて自然に", value: "linear-gradient(135deg, #fff7ed, #fce7f3, #ede9fe)" },
-  { name: "背景に合わせておまかせ", value: "linear-gradient(135deg, #f0f9ff, #fdf2f8, #f8fafc)" },
-  { name: "服の色を主役にして調整", value: "linear-gradient(135deg, #ffd6e8, #c4b5fd, #67c7f0)" },
-  { name: "小物の色を差し色にして調整", value: "linear-gradient(135deg, #ffffff 0 45%, #ff7ab6 45% 55%, #ffffff 55% 100%)" },
-  { name: "白ピンク", value: "linear-gradient(90deg, #ffffff 0 50%, #ffd6e8 50% 100%)" },
-  { name: "ミルキーピンク", value: "#ffd6e8" },
-  { name: "藤色", value: "#c4b5fd" },
-  { name: "クリームホワイト", value: "#fff7d6" },
-  { name: "淡い水色", value: "#bdefff" },
-  { name: "桜ピンク", value: "#ffc9dd" },
-  { name: "パステル虹色", value: "linear-gradient(135deg, #ffd6e8, #fff59d, #bdefff, #c4b5fd)" },
-  { name: "ゆめかわ虹色", value: "linear-gradient(135deg, #fff1f8, #ffd6e8, #c4b5fd, #bdefff, #fff7d6)" },
-  { name: "淡い黄色", value: "#fff59d" },
-  { name: "上品なラベンダーピンク", value: "linear-gradient(135deg, #ffd6e8, #c4b5fd)" },
-  { name: "黒×ピンク", value: "linear-gradient(90deg, #111827 0 50%, #ff7ab6 50% 100%)" },
-  { name: "黒×紫", value: "linear-gradient(90deg, #111827 0 50%, #9333ea 50% 100%)" },
-  { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
-];
-
 const clothingCategories = [
   { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
   { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
@@ -332,7 +311,7 @@ const multiCategories = [
   { id: "wallDetail", title: "背景", indoorOnly: true, single: true, defaultValue: "おまかせ", options: ["おまかせ", "詳細選択"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
-  { id: "color", title: "全体の色合い", type: "colorChips", maxSelect: 3, defaultValue: "おまかせ", options: overallColorChipOptions, customPlaceholder: "例：白多めのピンク、淡い藤色、白×水色、淡い虹色" },
+  { id: "color", title: "全体の色合い", single: true, defaultValue: "おまかせ", options: ["おまかせ", "選んだ小物や服に合わせて自然に", "背景に合わせておまかせ", "服の色を主役にして調整", "小物の色を差し色にして調整", "白ピンク", "ミルキーピンク", "藤色", "クリームホワイト", "淡い水色", "桜ピンク", "パステル虹色", "淡い黄色", "上品なラベンダーピンク", "黒×ピンク", "黒×紫", "白×金"], customPlaceholder: "例：白多めのピンク、淡い藤色" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
   { id: "size", title: "縦横の比率", single: true, defaultValue: "正方形 1:1", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
