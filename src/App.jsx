@@ -540,10 +540,19 @@ function translateOutfit(outfit) {
 }
 
 
-function getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }) {
-  if (color) return `画像全体の色合いは${color}`;
 
-  if (outfitColors) {
+function normalizeAutoColor(value) {
+  const clean = String(value || "").trim();
+  return clean === "おまかせ" ? "" : clean;
+}
+
+function getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }) {
+  const cleanColor = String(color || "").trim();
+  const cleanOutfitColors = String(outfitColors || "").trim();
+
+  if (cleanColor) return `画像全体の色合いは${cleanColor}`;
+
+  if (cleanOutfitColors) {
     return `画像全体の色合いは、服セットの色合いに合わせて自然に調整してください。`;
   }
 
@@ -551,7 +560,7 @@ function getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }) 
     return "画像全体の色合いは、白・薄いピンク・水色・薄いラベンダー（藤色）を主とした、やさしく夢かわいい配色にしてください。";
   }
 
-  return "画像全体の色合いは選んだ世界観・服・小物に合うやさしい色合いにしてください。";
+  return "画像全体の色合いは、選んだ世界観・服・小物に合うやさしい色合いにしてください。";
 }
 
 function makePromptSection(title, body) {
@@ -842,7 +851,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const fruitPattern = joinValues(selected, custom, "fruitPattern");
   const flowerPattern = joinValues(selected, custom, "flowerPattern");
   const otherPattern = joinValues(selected, custom, "otherPattern");
-  const outfitColors = translateColor(joinValues(selected, custom, "outfitColorChips"));
+  const outfitColors = normalizeAutoColor(translateColor(joinValues(selected, custom, "outfitColorChips")));
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
@@ -852,7 +861,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const shoeShape = getSingleValue(selected, custom, "shoeShape", "");
   const shoeDecor = joinValues(selected, custom, "shoeDecor");
 
-  const color = translateColor(joinValues(selected, custom, "color", "選んだ世界観・服・小物に合うやさしい色合い"));
+  const color = normalizeAutoColor(translateColor(joinValues(selected, custom, "color", "選んだ世界観・服・小物に合うやさしい色合い")));
   const lighting = getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color });
 
   const gesture = joinValues(selected, custom, "gesture", "小首をかしげる、にっこり笑っているように見える");
@@ -1332,7 +1341,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月） 04:35頃</div>
+          <div className="update-time">最終更新：2026/06/01（月） 04:40頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
