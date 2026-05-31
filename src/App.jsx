@@ -271,6 +271,14 @@ const colorChipOptions = [
   { name: "黒", value: "#111827" },
   { name: "金", value: "#d4a72c" },
   { name: "銀", value: "#c7cbd1" },
+  { name: "白ピンク", value: "linear-gradient(90deg, #ffffff 0 50%, #ffd6e8 50% 100%)" },
+  { name: "白×水色", value: "linear-gradient(90deg, #ffffff 0 50%, #aee8ff 50% 100%)" },
+  { name: "白×藤色", value: "linear-gradient(90deg, #ffffff 0 50%, #c4b5fd 50% 100%)" },
+  { name: "黒×ピンク", value: "linear-gradient(90deg, #111827 0 50%, #ff7ab6 50% 100%)" },
+  { name: "黒×紫", value: "linear-gradient(90deg, #111827 0 50%, #9333ea 50% 100%)" },
+  { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
+  { name: "パステル虹色", value: "linear-gradient(90deg, #ffd6e8 0%, #fff59d 25%, #a7f3d0 50%, #aee8ff 75%, #c4b5fd 100%)" },
+  { name: "夢かわ虹色", value: "linear-gradient(90deg, #ffffff 0%, #ffd6e8 25%, #ff7ab6 45%, #c4b5fd 70%, #aee8ff 100%)" },
 ];
 
 const clothingCategories = [
@@ -291,12 +299,12 @@ const outfitColorCategories = [
 
 const headCategories = [
   { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
-  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", dependsOn: { id: "headShape", value: "かぶりもの" }, options: ["おまかせ", "花", "リボン", "耳"] },
+  { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
 
 const accessoryCategories = [
-  { id: "accessories", title: "アクセサリー", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし"], customLabel: "自由記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
+  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ネックレス", "ブレスレット", "スタイ", "ワッペン", "パールアクセサリー", "リボンアクセサリー", "ハートのバッグ", "小さなポシェット"], customLabel: "自由記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
 ];
 
 const shoeCategories = [
@@ -339,14 +347,6 @@ const multiCategories = [
   { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
   { name: "パステル虹色", value: "linear-gradient(90deg, #ffd6e8 0%, #fff59d 25%, #a7f3d0 50%, #aee8ff 75%, #c4b5fd 100%)" },
   { name: "夢かわ虹色", value: "linear-gradient(90deg, #ffffff 0%, #ffd6e8 25%, #ff7ab6 45%, #c4b5fd 70%, #aee8ff 100%)" },
-    { name: "白ピンク", value: "linear-gradient(90deg, #ffffff 0 50%, #ffd6e8 50% 100%)" },
-    { name: "白×水色", value: "linear-gradient(90deg, #ffffff 0 50%, #aee8ff 50% 100%)" },
-    { name: "白×藤色", value: "linear-gradient(90deg, #ffffff 0 50%, #c4b5fd 50% 100%)" },
-    { name: "黒×ピンク", value: "linear-gradient(90deg, #111827 0 50%, #ff7ab6 50% 100%)" },
-    { name: "黒×紫", value: "linear-gradient(90deg, #111827 0 50%, #9333ea 50% 100%)" },
-    { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
-    { name: "パステル虹色", value: "linear-gradient(90deg, #ffd6e8 0%, #fff59d 25%, #a7f3d0 50%, #aee8ff 75%, #c4b5fd 100%)" },
-    { name: "夢かわ虹色", value: "linear-gradient(90deg, #ffffff 0%, #ffd6e8 25%, #ff7ab6 45%, #c4b5fd 70%, #aee8ff 100%)" },
   ], customPlaceholder: "例：白多めのピンク、ピンク多め、藤色と水色中心" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
@@ -1229,7 +1229,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/05/31（日） 10:12頃</div>
+          <div className="update-time">最終更新：2026/05/31（日） 10:18頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
