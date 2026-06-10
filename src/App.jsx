@@ -54,7 +54,9 @@ const indoorWorlds = [
     id: "gothicIndoor",
     title: "🖤 ゴシック・ダークメルヘン系",
     description: "吸血姫や悪役令嬢が暮らす闇かわで上品な屋内世界。",
-    places: ["吸血姫の闇かわ部屋", "悪魔姫の書斎", "悪役令嬢のパーティルーム", "闇かわアイドルステージ"],
+    places: ["吸血姫の闇かわ部屋", "悪魔姫の書斎", "悪役令嬢のパーティルーム\n
+服がおまかせの場合、黒とピンクを基調にしたフリル付きのゴスロリドレス、または高級感のある悪役令嬢風ドレスを自動で選択してください。リボンやレースにも黒とピンクを使用し、大人っぽく上品な雰囲気にしてください。
+", "闇かわアイドルステージ"],
     decor: ["黒レース", "キャンドル", "アンティーク時計", "薔薇", "ステンドグラス", "古い本", "銀色の小物"],
   },
   {
@@ -1377,7 +1379,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月）20:32頃</div>
+          <div className="update-time">最終更新：2026/06/01（月）20:38頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
