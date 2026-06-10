@@ -266,10 +266,10 @@ const clothingCategories = [
   { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
   { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍", "スパンコール", "ラインストーン"] },
-  { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"] },
-  { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花", "自由記入"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
-  { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー", "自由記入"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
-  { id: "otherPattern", title: "その他柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "チェック", "水玉", "ヒョウ柄", "ストライプ", "唐草", "ボタニカル", "千鳥", "自由記入"], customPlaceholder: "例：星柄、ハート柄、クラシカルな総柄" },
+  { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"], hideCustom: true },
+  { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
+  { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
+  { id: "otherPattern", title: "その他柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "チェック", "水玉", "ヒョウ柄", "ストライプ", "唐草", "ボタニカル", "千鳥"], customPlaceholder: "例：星柄、ハート柄、クラシカルな総柄" },
 ];
 
 const outfitColorCategories = [
@@ -277,7 +277,7 @@ const outfitColorCategories = [
 ];
 
 const headCategories = [
-  { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ", "自由記入"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
+  { id: "headShape", title: "帽子の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "リボン", "垂れリボン", "カチューシャ", "ヘッドドレス", "ボンネット", "ベレー帽", "麦わら帽子", "かぶりもの", "ティアラ"], customPlaceholder: "例：白レースボンネット、苺リボン、天使のヘッドドレス" },
   { id: "headDecor", title: "頭装備の飾り", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "花", "リボン", "耳"] },
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
@@ -1216,10 +1216,14 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
         </div>
       )}
 
-      <label>
-        <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
-      </label>
-      <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
+      {!category.hideCustom && (
+        <>
+          <label>
+            <PlusCircle size={16} /> {category.customLabel || "その他を記入"}
+          </label>
+          <input disabled={disabled} value={custom[category.id] || ""} onChange={(event) => onCustomChange(category.id, event.target.value)} placeholder={disabled ? getDisabledPlaceholder(category) : (category.customPlaceholder || "カンマ、読点、改行で複数追加できます")} />
+        </>
+      )}
     </div>
   );
 }
@@ -1413,7 +1417,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/10（水）23:13頃</div>
+          <div className="update-time">最終更新：2026/06/11（木）1:00頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
