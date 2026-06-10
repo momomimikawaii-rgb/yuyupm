@@ -256,8 +256,8 @@ const colorChipOptions = [
   { name: "黒×ピンク", value: "linear-gradient(90deg, #111827 0 50%, #ff7ab6 50% 100%)" },
   { name: "黒×紫", value: "linear-gradient(90deg, #111827 0 50%, #9333ea 50% 100%)" },
   { name: "白×金", value: "linear-gradient(90deg, #ffffff 0 50%, #d4a72c 50% 100%)" },
-  { name: "パステル虹色", value: "linear-gradient(90deg, #ff9fb8 0%, #ff9fb8 28%, #fff1a8 28%, #fff1a8 52%, #9fdcff 52%, #9fdcff 76%, #b78cff 76%, #b78cff 100%)" },
-  { name: "夢かわ虹色", value: "linear-gradient(90deg, #9fdcff 0%, #9fdcff 35%, #ffd1e8 35%, #ffd1e8 65%, #b78cff 65%, #b78cff 100%)" },
+  { name: "パステル虹色", value: "linear-gradient(90deg, #ff9fb8 0%, #ffb9a6 18%, #fff1a8 38%, #c8f3c8 52%, #9fdcff 72%, #b78cff 100%)" },
+  { name: "夢かわ虹色", value: "linear-gradient(90deg, #9fdcff 0%, #c9e7ff 24%, #ffd1e8 50%, #dcbfff 76%, #b78cff 100%)" },
 ];
 
 const clothingCategories = [
@@ -1417,7 +1417,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/11（木）1:45頃</div>
+          <div className="update-time">最終更新：2026/06/11（木）2:12頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
