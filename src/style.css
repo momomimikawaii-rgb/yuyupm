@@ -883,31 +883,3 @@ input:disabled {
 }
 
 
-/* --- 20260611 01:45 rainbow chip tuning --- */
-/* パステル虹色 */
-.pastel-rainbow-swatch {
-  background: linear-gradient(
-    90deg,
-    #ffb6c9 0%,
-    #ffb6c9 28%,
-    #fff1a8 28%,
-    #fff1a8 52%,
-    #bfe7ff 52%,
-    #bfe7ff 76%,
-    #d7b8ff 76%,
-    #d7b8ff 100%
-  );
-}
-
-/* 夢かわ虹色 */
-.yumekawa-rainbow-swatch {
-  background: linear-gradient(
-    90deg,
-    #bfe7ff 0%,
-    #bfe7ff 35%,
-    #ffd6ea 35%,
-    #ffd6ea 65%,
-    #cfaeff 65%,
-    #cfaeff 100%
-  );
-}
