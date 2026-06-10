@@ -54,9 +54,7 @@ const indoorWorlds = [
     id: "gothicIndoor",
     title: "🖤 ゴシック・ダークメルヘン系",
     description: "吸血姫や悪役令嬢が暮らす闇かわで上品な屋内世界。",
-    places: ["吸血姫の闇かわ部屋", "悪魔姫の書斎", "悪役令嬢のパーティルーム\n
-服がおまかせの場合、黒とピンクを基調にしたフリル付きのゴスロリドレス、または高級感のある悪役令嬢風ドレスを自動で選択してください。リボンやレースにも黒とピンクを使用し、大人っぽく上品な雰囲気にしてください。
-", "闇かわアイドルステージ"],
+    places: ["吸血姫の闇かわ部屋", "悪魔姫の書斎", "悪役令嬢のパーティルーム", "闇かわアイドルステージ"],
     decor: ["黒レース", "キャンドル", "アンティーク時計", "薔薇", "ステンドグラス", "古い本", "銀色の小物"],
   },
   {
@@ -686,6 +684,15 @@ function isDreamLolitaBathScene(locationType, indoorWorldId, locationOption) {
   );
 }
 
+
+function isGothicVillainessPartyScene(locationType, indoorWorldId, locationOption) {
+  return (
+    locationType === "indoor" &&
+    indoorWorldId === "gothicIndoor" &&
+    locationOption === "悪役令嬢のパーティルーム"
+  );
+}
+
 function getDreamLolitaBathHeadPrompt(headShape) {
   if (!headShape || headShape === "なし") return "";
   if (headShape === "タオル") {
@@ -712,6 +719,18 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   const place = customLocation?.trim() || locationOption || world.places[0];
   const decor = world.decor?.join("、") || "";
 
+  const gothicPlaceDescriptions = {
+    "吸血姫の闇かわ部屋":
+      "赤黒のお姫様の部屋。赤い薔薇が似合う、上品で闇かわいいアンティークルーム。黒い天蓋付きベッド、またはもふもふの絨毯の上でくつろぐ場面。赤黒のゴスロリドレス、赤い薔薇、頭と背中のコウモリの翼、高価そうなグラスに入ったトマトジュース、ペットより少し大きい子供の黒豹が寄り添う雰囲気。",
+    "悪魔姫の書斎":
+      "桔梗紫色と銀を基調にした悪魔姫の書斎。大きな本棚、古書、魔導書、紫薔薇、銀色の花、桔梗紫色の花、銀細工、青紫のランプがある。ペットは桔梗紫色と銀のゴスロリ服、紫宝石の銀ティアラ、カラスの羽のように艶やかに照り光る桔梗紫色の翼を身につけ、アンティークな椅子やソファで開いた古書を読んでいる。",
+    "悪役令嬢のパーティルーム":
+      "黒とピンクを基調にした、大人っぽく高級感のある夜のパーティルーム。シャンデリア、レースカーテン、三日月の見える窓、高級ソファ、チューリップ型のクリスタルグラス、黒ピンクの装飾を入れてください。ペットは悪役令嬢らしく優雅にくつろぎ、夜会を楽しんでいる雰囲気。お酒っぽくしすぎず、クリスタルグラスにはピンク色のジュースや苺ソーダのような可愛い飲み物を入れてください。",
+    "闇かわアイドルステージ":
+      "黒とピンクを基調にした闇かわいいアイドルステージ。スポットライト、マイク、黒レース、ハート、星、ピンクのライトを入れ、ゴスロリ系アイドルとして歌っている雰囲気。",
+  };
+
+
   const dreamLolitaPlaceDescriptions = {
     "アフタヌーンティーカフェ":
       "夢かわいいアフタヌーンティーカフェ。ティーポット、紅茶入りのティーカップ、3段ケーキスタンド、マカロン、小花柄のアンティーク猫足テーブルが見える、優雅なお茶会の場所。ティーセットを中心に表現してください。",
@@ -732,7 +751,11 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   };
 
   const placeDescription =
-    world.id === "dreamLolita" ? dreamLolitaPlaceDescriptions[place] : "";
+    world.id === "dreamLolita"
+      ? dreamLolitaPlaceDescriptions[place]
+      : world.id === "gothicIndoor"
+        ? gothicPlaceDescriptions[place]
+        : "";
 
   if (placeDescription) {
     return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${placeDescription}装飾として${decor}を世界観に合うように自然に配置してください。`;
@@ -873,6 +896,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const aspectInstruction = getSizeInstruction(size);
   const isMirrorScene = isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption);
   const isBathScene = isDreamLolitaBathScene(locationType, indoorWorldId, locationOption);
+  const isVillainessPartyScene = isGothicVillainessPartyScene(locationType, indoorWorldId, locationOption);
   const mirrorScenePrompt = getDreamLolitaMirrorScenePrompt(locationOption);
 
   const baseScene =
@@ -894,14 +918,18 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
     ? ""
     : outfitColors
       ? `服・頭装備・アクセサリー・足元の色合いは${outfitColors}。`
-      : "";
+      : isVillainessPartyScene
+        ? "服・頭装備・アクセサリー・足元の色合いは黒とピンクを主役として使用した配色。リボンやレースにも黒とピンクを使い、大人っぽく上品な悪役令嬢の雰囲気にしてください。"
+        : "";
 
   const noClothes = clothingShape === "なし";
   const clothingSentence = noClothes
     ? "服は追加せず、元写真の自然な魅力を尊重してください。"
     : clothingParts.length
       ? `${clothingParts.join("。") }。服は背景・季節・世界観に合わせて自然に可愛く調整してください。ペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。`
-      : "世界観や背景に合わせた夢かわいい服を自然に着せてください。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。";
+      : isVillainessPartyScene
+        ? "服は黒とピンクを基調にしたフリル付きのゴスロリドレス、または高級感のある悪役令嬢風ドレスを自然に着せてください。黒ピンクのリボンやレースを使い、大人っぽく上品な夜会の雰囲気にしてください。ペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。"
+        : "世界観や背景に合わせた夢かわいい服を自然に着せてください。服はペットの体型に自然に合っていて、顔・目・鼻口まわりを隠さないでください。";
 
   const headParts = [];
   if (headShape) headParts.push(`帽子・頭装備の形は${headShape}`);
@@ -1379,7 +1407,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/01（月）20:38頃</div>
+          <div className="update-time">最終更新：2026/06/10（水）20:49頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
