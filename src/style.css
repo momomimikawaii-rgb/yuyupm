@@ -102,7 +102,7 @@ h1 {
   font-size: clamp(30px, 5vw, 54px);
   font-weight: 900;
   line-height: 1.12;
-  background: linear-gradient(90deg, #d9c6ff 0%, #d9c6ff 35%, #ffd6ea 35%, #ffd6ea 65%, #cdefff 65%, #cdefff 100%);
+  background: linear-gradient(90deg, #bfe7ff 0%, #bfe7ff 35%, #ffd6ea 35%, #ffd6ea 65%, #cfaeff 65%, #cfaeff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -880,4 +880,34 @@ input:disabled {
   .prompt-result-card textarea {
     max-height: none;
   }
+}
+
+
+/* --- 20260611 01:45 rainbow chip tuning --- */
+/* パステル虹色 */
+.pastel-rainbow-swatch {
+  background: linear-gradient(
+    90deg,
+    #ffb6c9 0%,
+    #ffb6c9 28%,
+    #fff1a8 28%,
+    #fff1a8 52%,
+    #bfe7ff 52%,
+    #bfe7ff 76%,
+    #d7b8ff 76%,
+    #d7b8ff 100%
+  );
+}
+
+/* 夢かわ虹色 */
+.yumekawa-rainbow-swatch {
+  background: linear-gradient(
+    90deg,
+    #bfe7ff 0%,
+    #bfe7ff 35%,
+    #ffd6ea 35%,
+    #ffd6ea 65%,
+    #cfaeff 65%,
+    #cfaeff 100%
+  );
 }

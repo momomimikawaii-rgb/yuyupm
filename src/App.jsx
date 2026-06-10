@@ -1417,7 +1417,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/11（木）1:25頃</div>
+          <div className="update-time">最終更新：2026/06/11（木）1:45頃</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
