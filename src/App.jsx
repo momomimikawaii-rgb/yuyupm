@@ -192,6 +192,7 @@ const outdoorWorlds = [
       { id: "aliceMood", title: "テイスト", single: true, options: ["可愛い", "幻想的", "パステル", "カラフル", "少しダークメルヘン"], customPlaceholder: "例：ちょっと不気味で可愛い" },
     ],
   },
+
   {
     id: "boardingSchoolOutdoor",
     title: "🥀 寄宿学校・学院系",
@@ -201,20 +202,18 @@ const outdoorWorlds = [
         id: "boardingOutdoorPlace",
         title: "寄宿学校の屋外場所",
         single: true,
-        defaultValue: "石造りの中庭と回廊",
         options: ["石造りの中庭と回廊", "古い洋館風の寄宿学校前"],
+        customPlaceholder: "例：霧の中庭、雪の回廊、古い校舎の門前",
       },
       {
         id: "boardingMagicItems",
         title: "寄宿学校の魔法寄り小物",
         multi: true,
-        defaultValue: "なし",
         options: ["なし", "ふくろう", "魔法の箒", "魔法書", "羽ペン", "ランタン", "古い鍵", "蝋封の手紙", "懐中時計"],
         customPlaceholder: "例：古い革表紙の本、学院章のペンダント",
       },
     ],
-  },
-];
+  },];
 
 const sceneEffects = [
   { id: "fallingItems", title: "舞い落ちるもの", multi: true, options: ["なし", "花びら", "雪", "キラキラ（星）", "紙ふぶき", "羽", "光の粒"], customPlaceholder: "例：蝶、ハート、薔薇の花びら" },
@@ -742,39 +741,6 @@ function getDreamLolitaMirrorScenePrompt(locationOption) {
   return "";
 }
 
-
-function isBoardingSchoolScene(locationType, indoorWorldId, outdoorWorldId) {
-  return (
-    (locationType === "indoor" && indoorWorldId === "boardingSchool") ||
-    (locationType === "outdoor" && outdoorWorldId === "boardingSchoolOutdoor")
-  );
-}
-
-function isBoardingSchoolOutdoorScene(locationType, outdoorWorldId) {
-  return locationType === "outdoor" && outdoorWorldId === "boardingSchoolOutdoor";
-}
-
-function getBoardingSchoolTonePrompt(isOutdoor) {
-  const base =
-    "古いヨーロッパの寄宿学校映画のような、静かで耽美な雰囲気。魔法学校らしさを基本にはせず、現実寄りのクラシカルな学院感、冬の空気、石造り、古書、曇り空の柔らかい光を大切にしてください。体型は小柄で上品、すっきりしたシルエット。頭を大きくしすぎず小顔寄りにし、ギャグ調や幼すぎるSD体型、成人モデルのような成熟しすぎた体型は避けてください。首は長く見せず、毛や襟元に自然に埋もれるようにしてください。赤い薔薇は固定せず、服や小物で選ばれた場合だけ自然に入れてください。";
-  const outdoor =
-    "屋外の寄宿学校シーンでは、黒手袋を自然につけてください。手袋により人間の手の印象を弱め、クラシカルな冬映画感に馴染ませてください。";
-  const indoor =
-    "屋内の教室・図書室では黒手袋は基本的に不要です。古書、木机、本棚、暖炉、羽ペン、静かな窓辺の光を中心にしてください。";
-  return `${base}${isOutdoor ? outdoor : indoor}`;
-}
-
-function getBoardingOutdoorPlacePrompt(place) {
-  const descriptions = {
-    "石造りの中庭と回廊":
-      "古い石造りの寄宿学校の中庭とアーチ回廊。石畳、重厚な柱、曇り空、冬の静かな光、少し湿った空気、映画のワンシーンのような奥行き。派手な魔法演出ではなく、静かな学院映画感を大切にしてください。",
-    "古い洋館風の寄宿学校前":
-      "古い洋館風の寄宿学校の校舎前。重厚な玄関、石階段、冬の庭園、曇り空、霧のような柔らかい空気、ヨーロッパのクラシカルな学院映画の雰囲気。派手な魔法演出ではなく、静かな品のある校舎前にしてください。",
-  };
-  return descriptions[place] || "";
-}
-
-
 function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   const world = indoorWorlds.find((item) => item.id === indoorWorldId) || indoorWorlds[0];
   const place = customLocation?.trim() || locationOption || world.places[0];
@@ -810,6 +776,10 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
     "お人形の部屋":
       "ドールハウスのような可愛いお人形の部屋。小さなロココ家具、ミニチュア家具、人形用ベッド、ドールチェア、可愛いぬいぐるみやお人形小物を入れ、お人形遊びの世界として表現してください。",
   };
+
+  if (world.id === "boardingSchool") {
+    return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は古いヨーロッパの寄宿学校映画のような静かで耽美な教室・図書室。古書、木机、本棚、暖炉、羽ペン、蝋封の手紙、静かな窓辺の光を中心に、現実寄りのクラシカルな学院感を大切にしてください。体型は小柄で上品、すっきりしたシルエット。頭を大きくしすぎず小顔寄りにし、ギャグ調や幼すぎるSD体型、成人モデルのような成熟しすぎた体型は避けてください。首は長く見せず、毛や襟元に自然に埋もれるようにしてください。屋内の教室・図書室では黒手袋は基本的に不要です。赤い薔薇は固定せず、服や小物で選ばれた場合だけ自然に入れてください。装飾として${decor}を世界観に合うように自然に配置してください。`;
+  }
 
   const placeDescription =
     world.id === "dreamLolita"
@@ -913,6 +883,22 @@ function buildOutdoorScene({ selected, custom, outdoorWorldId }) {
     return `${place}で、${mood}な不思議世界にいるペットの可愛い静止画。${containerText}${itemText}`;
   }
 
+  if (world.id === "boardingSchoolOutdoor") {
+    const place = getWorldValue("boardingOutdoorPlace", "石造りの中庭と回廊");
+    const magicItems = getWorldValues("boardingMagicItems", "");
+    const placeDescriptions = {
+      "石造りの中庭と回廊":
+        "古い石造りの寄宿学校の中庭とアーチ回廊。石畳、重厚な柱、曇り空、冬の静かな光、少し湿った空気、映画のワンシーンのような奥行き。",
+      "古い洋館風の寄宿学校前":
+        "古い洋館風の寄宿学校の校舎前。重厚な玄関、石階段、冬の庭園、曇り空、霧のような柔らかい空気、ヨーロッパのクラシカルな学院映画の雰囲気。",
+    };
+    const magicText =
+      magicItems && magicItems !== "なし"
+        ? `寄宿学校の魔法寄り小物として、${magicItems}を自然に加えてください。デフォルト世界観は現実寄りの寄宿学校映画感を保ち、小物で少しだけ魔法学校寄りにしてください。`
+        : "魔法学校らしさを基本にはせず、現実寄りの寄宿学校映画感を大切にしてください。";
+    return `${placeDescriptions[place] || place}ペットは小柄で上品、すっきりしたシルエット。頭を大きくしすぎず小顔寄りにし、ギャグ調や幼すぎるSD体型、成人モデルのような成熟しすぎた体型は避けてください。首は長く見せず、毛や襟元に自然に埋もれるようにしてください。黒手袋を自然につけ、人間の手の印象を弱め、クラシカルな冬映画感に馴染ませてください。赤い薔薇は固定せず、服や小物で選ばれた場合だけ自然に入れてください。${magicText}`;
+  }
+
   return `${world.title}の世界にいるペットの可愛い静止画。`;
 }
 
@@ -957,12 +943,6 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const isMirrorScene = isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption);
   const isBathScene = isDreamLolitaBathScene(locationType, indoorWorldId, locationOption);
   const isVillainessPartyScene = isGothicVillainessPartyScene(locationType, indoorWorldId, locationOption);
-  const isBoardingScene = isBoardingSchoolScene(locationType, indoorWorldId, outdoorWorldId);
-  const isBoardingOutdoor = isBoardingSchoolOutdoorScene(locationType, outdoorWorldId);
-  const boardingTonePrompt = isBoardingScene ? getBoardingSchoolTonePrompt(isBoardingOutdoor) : "";
-  const boardingOutdoorPlacePrompt = isBoardingOutdoor ? getBoardingOutdoorPlacePrompt(boardingOutdoorPlace) : "";
-  const boardingMagicItemsSentence = isBoardingOutdoor && boardingMagicItems && boardingMagicItems !== "なし" ? `寄宿学校の魔法寄り小物として、${boardingMagicItems}を自然に加えてください。デフォルト世界観は現実寄りの寄宿学校映画感を保ち、小物で少しだけ魔法学校寄りにしてください。` : "";
-
   const mirrorScenePrompt = getDreamLolitaMirrorScenePrompt(locationOption);
 
   const baseScene =
@@ -1045,7 +1025,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const sceneEffectSentence = locationType === "outdoor" ? buildSceneEffects({ selected, custom }) : "";
   const selectedIndoorWorld = indoorWorlds.find((item) => item.id === indoorWorldId);
   const selectedOutdoorWorld = outdoorWorlds.find((item) => item.id === outdoorWorldId);
-  const simpleDensityWorlds = ["boardingSchool"];
+  const simpleDensityWorlds = ["boardingSchool", "boardingSchoolOutdoor"];
   const clearOutdoorWorlds = ["sea", "fantasy"];
 
   let densitySentence = "";
