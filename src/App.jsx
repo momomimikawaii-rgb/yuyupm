@@ -293,6 +293,7 @@ const clothingCategories = [
   { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
   { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍", "スパンコール", "ラインストーン"] },
+  { id: "clothingStyle", title: "服の系統", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ロリータ系", "ゴスロリ系", "ピンクハウス系", "クラシカル系", "お嬢様系", "フリル系", "プリンセス系", "エレガント", "カジュアル", "スポーティ"], customPlaceholder: "例：クラシカルロリータ、アンティークドール風" },
   { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"], hideCustom: true },
   { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
   { id: "flowerPattern", title: "花柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "小花柄", "薔薇", "デイジー", "デフォルメデイジー"], customPlaceholder: "例：すずらん、ミモザ、チューリップ柄" },
@@ -955,6 +956,9 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   if (clothingShape) clothingParts.push(`服の形は${clothingShape}`);
   if (uniformStyle) clothingParts.push(`制服の詳細は${translateOutfit(uniformStyle)}`);
   if (kigurumiAnimal) clothingParts.push(`着ぐるみの動物モチーフは${kigurumiAnimal}`);
+
+  const clothingStyle = getSingleValue(selected, custom, "clothingStyle", "");
+  if (clothingStyle && clothingStyle !== "おまかせ") clothingParts.push(`服の系統は${translateOutfit(clothingStyle)}`);
   if (clothingDecor) clothingParts.push(`服の装飾は${clothingDecor}`);
   if (fruitPattern) clothingParts.push(`果物柄は${fruitPattern}`);
   if (flowerPattern) clothingParts.push(`花柄は${flowerPattern}`);
