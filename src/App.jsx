@@ -87,7 +87,7 @@ const indoorWorlds = [
     title: "🥀 寄宿学校・学院系",
     description: "古いヨーロッパの寄宿学校映画のような、静かで耽美な屋内世界。魔法学校ではなく、現実寄りのクラシカルな学院感を大切にします。",
     places: ["古い寄宿学校の教室・図書室"],
-    decor: ["古書", "木机", "本棚", "暖炉", "羽ペン", "蝋封の手紙", "静かな窓辺の光"],
+    decor: [],
   },
 ];
 const outdoorWorlds = [
@@ -203,7 +203,7 @@ const outdoorWorlds = [
         id: "boardingMagicItems",
         title: "寄宿学校の魔法寄り小物",
         multi: true,
-        options: ["なし", "ふくろう", "魔法の箒", "魔法書", "羽ペン", "ランタン", "古い鍵", "蝋封の手紙", "懐中時計", "学院トランク", "魔法薬の小瓶", "古いランプ", "学院マフラー"],
+        options: ["なし", "ふくろう", "魔法の箒", "魔法書", "羽ペン", "ランタン", "古い鍵", "蝋封の手紙", "懐中時計", "魔法薬の小瓶", "古い羊皮紙", "小さな魔法の杖"],
         customPlaceholder: "例：古い革表紙の本、学院章のペンダント",
       },
     ],
@@ -685,7 +685,7 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
       "ドールハウスのような可愛いお人形の部屋。小さなロココ家具、ミニチュア家具、人形用ベッド、ドールチェア、可愛いぬいぐるみやお人形小物を入れ、お人形遊びの世界として表現してください。",
   };
   if (world.id === "boardingSchool") {
-    return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は古いヨーロッパの寄宿学校映画のような静かで耽美な教室・図書室。古書、木机、本棚、暖炉、羽ペン、蝋封の手紙、静かな窓辺の光を中心に、現実寄りのクラシカルな学院感を大切にしてください。体型は小柄で上品、すっきりしたシルエット。頭を大きくしすぎず小顔寄りにし、ギャグ調や幼すぎるSD体型、成人モデルのような成熟しすぎた体型は避けてください。首は長く見せず、毛や襟元に自然に埋もれるようにしてください。屋内の教室・図書室では黒手袋は基本的に不要です。装飾として${decor}を世界観に合うように自然に配置してください。`;
+    return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は古いヨーロッパの寄宿学校映画のような静かで耽美な教室・図書室。古書、木机、本棚、暖炉、羽ペン、蝋封の手紙、静かな窓辺の光を中心に、現実寄りのクラシカルな学院感を大切にしてください。体型は小柄で上品、すっきりしたシルエット。頭を大きくしすぎず小顔寄りにし、ギャグ調や幼すぎるSD体型、成人モデルのような成熟しすぎた体型は避けてください。首は長く見せず、毛や襟元に自然に埋もれるようにしてください。屋内の教室・図書室では黒手袋は基本的に不要です。`;
   }
   const placeDescription =
     world.id === "dreamLolita"
@@ -694,9 +694,9 @@ function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
         ? gothicPlaceDescriptions[place]
         : "";
   if (placeDescription) {
-    return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${placeDescription}装飾として${decor}を世界観に合うように自然に配置してください。`;
+    return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${placeDescription}`;
   }
-  return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${world.description}${decor ? `装飾として${decor}を世界観に合うように自然に配置してください。` : ""}`;
+  return `屋内の「${world.title}」の${place}で、ペットの可愛い静止画。背景は${world.description}${decor ? `` : ""}`;
 }
 function buildOutdoorScene({ selected, custom, outdoorWorldId }) {
   const world = outdoorWorlds.find((item) => item.id === outdoorWorldId) || outdoorWorlds[0];
