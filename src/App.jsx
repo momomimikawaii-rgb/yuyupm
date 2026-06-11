@@ -89,9 +89,9 @@ const indoorWorlds = [
   {
     id: "boardingSchool",
     title: "🥀 寄宿学校・学院系",
-    description: "ヨーロッパの古い寄宿学校や学院のような、静かな映画感・冬の空気・赤薔薇が似合うクラシカルな世界。",
-    places: ["雪の寄宿学校", "古い学院の回廊", "石造りの中庭", "冬の洋館前", "夕暮れの渡り廊下"],
-    decor: ["赤薔薇", "古い石造り", "回廊", "雪", "アンティークな窓", "静かな冬の光"],
+    description: "古いヨーロッパの寄宿学校映画のような、静かで耽美な屋内世界。魔法学校ではなく、現実寄りのクラシカルな学院感を大切にします。",
+    places: ["古い寄宿学校の教室・図書室"],
+    decor: ["古書", "木机", "本棚", "暖炉", "羽ペン", "蝋封の手紙", "静かな窓辺の光"],
   },
 ];
 
@@ -190,6 +190,28 @@ const outdoorWorlds = [
       { id: "aliceContainer", title: "不思議な入れ物", single: true, options: ["なし", "巨大ティーカップの中", "ハンプティダンプティの割れた卵の中", "時計の中の世界", "空飛ぶ本の中", "マカロンハウスの中"], customPlaceholder: "例：割れた卵の殻の中、巨大な砂時計の中" },
       { id: "aliceItems", title: "モチーフ", multi: true, options: ["トランプ", "時計", "ティーカップ", "マカロン", "浮遊本", "キャンディ", "うさぎ"], customPlaceholder: "例：空飛ぶ鍵、ハートの女王の飾り" },
       { id: "aliceMood", title: "テイスト", single: true, options: ["可愛い", "幻想的", "パステル", "カラフル", "少しダークメルヘン"], customPlaceholder: "例：ちょっと不気味で可愛い" },
+    ],
+  },
+  {
+    id: "boardingSchoolOutdoor",
+    title: "🥀 寄宿学校・学院系",
+    description: "古いヨーロッパの寄宿学校映画のような、静かで耽美な屋外世界。現実寄りの学院感、冬の空気、石造りの校舎、回廊や中庭を大切にします。",
+    subCategories: [
+      {
+        id: "boardingOutdoorPlace",
+        title: "寄宿学校の屋外場所",
+        single: true,
+        defaultValue: "石造りの中庭と回廊",
+        options: ["石造りの中庭と回廊", "古い洋館風の寄宿学校前"],
+      },
+      {
+        id: "boardingMagicItems",
+        title: "寄宿学校の魔法寄り小物",
+        multi: true,
+        defaultValue: "なし",
+        options: ["なし", "ふくろう", "魔法の箒", "魔法書", "羽ペン", "ランタン", "古い鍵", "蝋封の手紙", "懐中時計"],
+        customPlaceholder: "例：古い革表紙の本、学院章のペンダント",
+      },
     ],
   },
 ];
@@ -720,6 +742,39 @@ function getDreamLolitaMirrorScenePrompt(locationOption) {
   return "";
 }
 
+
+function isBoardingSchoolScene(locationType, indoorWorldId, outdoorWorldId) {
+  return (
+    (locationType === "indoor" && indoorWorldId === "boardingSchool") ||
+    (locationType === "outdoor" && outdoorWorldId === "boardingSchoolOutdoor")
+  );
+}
+
+function isBoardingSchoolOutdoorScene(locationType, outdoorWorldId) {
+  return locationType === "outdoor" && outdoorWorldId === "boardingSchoolOutdoor";
+}
+
+function getBoardingSchoolTonePrompt(isOutdoor) {
+  const base =
+    "古いヨーロッパの寄宿学校映画のような、静かで耽美な雰囲気。魔法学校らしさを基本にはせず、現実寄りのクラシカルな学院感、冬の空気、石造り、古書、曇り空の柔らかい光を大切にしてください。体型は小柄で上品、すっきりしたシルエット。頭を大きくしすぎず小顔寄りにし、ギャグ調や幼すぎるSD体型、成人モデルのような成熟しすぎた体型は避けてください。首は長く見せず、毛や襟元に自然に埋もれるようにしてください。赤い薔薇は固定せず、服や小物で選ばれた場合だけ自然に入れてください。";
+  const outdoor =
+    "屋外の寄宿学校シーンでは、黒手袋を自然につけてください。手袋により人間の手の印象を弱め、クラシカルな冬映画感に馴染ませてください。";
+  const indoor =
+    "屋内の教室・図書室では黒手袋は基本的に不要です。古書、木机、本棚、暖炉、羽ペン、静かな窓辺の光を中心にしてください。";
+  return `${base}${isOutdoor ? outdoor : indoor}`;
+}
+
+function getBoardingOutdoorPlacePrompt(place) {
+  const descriptions = {
+    "石造りの中庭と回廊":
+      "古い石造りの寄宿学校の中庭とアーチ回廊。石畳、重厚な柱、曇り空、冬の静かな光、少し湿った空気、映画のワンシーンのような奥行き。派手な魔法演出ではなく、静かな学院映画感を大切にしてください。",
+    "古い洋館風の寄宿学校前":
+      "古い洋館風の寄宿学校の校舎前。重厚な玄関、石階段、冬の庭園、曇り空、霧のような柔らかい空気、ヨーロッパのクラシカルな学院映画の雰囲気。派手な魔法演出ではなく、静かな品のある校舎前にしてください。",
+  };
+  return descriptions[place] || "";
+}
+
+
 function buildIndoorScene({ indoorWorldId, locationOption, customLocation }) {
   const world = indoorWorlds.find((item) => item.id === indoorWorldId) || indoorWorlds[0];
   const place = customLocation?.trim() || locationOption || world.places[0];
@@ -902,6 +957,12 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const isMirrorScene = isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption);
   const isBathScene = isDreamLolitaBathScene(locationType, indoorWorldId, locationOption);
   const isVillainessPartyScene = isGothicVillainessPartyScene(locationType, indoorWorldId, locationOption);
+  const isBoardingScene = isBoardingSchoolScene(locationType, indoorWorldId, outdoorWorldId);
+  const isBoardingOutdoor = isBoardingSchoolOutdoorScene(locationType, outdoorWorldId);
+  const boardingTonePrompt = isBoardingScene ? getBoardingSchoolTonePrompt(isBoardingOutdoor) : "";
+  const boardingOutdoorPlacePrompt = isBoardingOutdoor ? getBoardingOutdoorPlacePrompt(boardingOutdoorPlace) : "";
+  const boardingMagicItemsSentence = isBoardingOutdoor && boardingMagicItems && boardingMagicItems !== "なし" ? `寄宿学校の魔法寄り小物として、${boardingMagicItems}を自然に加えてください。デフォルト世界観は現実寄りの寄宿学校映画感を保ち、小物で少しだけ魔法学校寄りにしてください。` : "";
+
   const mirrorScenePrompt = getDreamLolitaMirrorScenePrompt(locationOption);
 
   const baseScene =
