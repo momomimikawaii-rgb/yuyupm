@@ -15,6 +15,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import "./style.css";
+import { APP_LAST_UPDATED } from "virtual:app-last-updated";
 
 const heroImageUrl = "/top.png";
 
@@ -26,7 +27,7 @@ const locationTree = {
     label: "屋内",
     icon: Home,
     options: [
-      "お姫さまの部屋",
+      "お姫様の部屋",
       "可愛いスウィーツ屋さん",
       "アイドルのステージ",
       "海が見える窓辺",
@@ -880,9 +881,8 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const headShape = getSingleValue(selected, custom, "headShape", "");
   const headDecor = joinValues(selected, custom, "headDecor");
   const earType = getSingleValue(selected, custom, "earType", "");
-  const accessoryCustom = splitCustomText(custom.accessories).join("、");
-  const accessoryChoice = getSingleValue(selected, custom, "accessories", "おまかせ", { keepAuto: true });
-  const accessories = accessoryCustom || (accessoryChoice === "なし" || accessoryChoice === "おまかせ" ? "" : accessoryChoice);
+  const accessories = joinValues(selected, custom, "accessories");
+  const hasAccessoryNone = hasSelection(selected, "accessories", "なし");
   const shoeShape = getSingleValue(selected, custom, "shoeShape", "");
   const shoeDecor = joinValues(selected, custom, "shoeDecor");
 
@@ -949,7 +949,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
 
   const accessorySentence = isBathScene
     ? ""
-    : accessoryChoice === "なし"
+    : hasAccessoryNone
       ? "アクセサリーは追加しないでください。"
       : accessories
         ? `アクセサリーは自由記入の内容を優先して、${accessories}を自然に取り入れてください。頭装備とは分離して扱い、首元・胸元・手元・小物として、顔・目・鼻口まわりを邪魔しない位置に配置してください。`
@@ -1245,7 +1245,7 @@ function CategorySection({ title, categories, selected, custom, onToggle, onCust
 
 function App() {
   const [locationType, setLocationType] = useState("indoor");
-  const [locationOption, setLocationOption] = useState("お姫さまの部屋");
+  const [locationOption, setLocationOption] = useState("お姫様の部屋");
   const [indoorWorldId, setIndoorWorldId] = useState("dreamLolita");
   const [outdoorWorldId, setOutdoorWorldId] = useState("flowerGarden");
   const [selected, setSelected] = useState(initialSelected);
@@ -1348,7 +1348,7 @@ function App() {
 
   const reset = () => {
     setLocationType("indoor");
-    setLocationOption("お姫さまの部屋");
+    setLocationOption("お姫様の部屋");
     setIndoorWorldId("dreamLolita");
     setOutdoorWorldId("flowerGarden");
     setSelected(initialSelected);
@@ -1417,7 +1417,7 @@ function App() {
           <div className="badge"><Sparkles size={16} /><span>Yuyu Princess World</span></div>
           <h1>ゆゆ姫の夢かわプロンプト工房</h1>
           <p className="subtitle">場所・ワールド・服・小物・光をポチポチ選択。ゆゆ姫みたいに可愛い夢かわ世界で、ペットの顔を守るプロンプトを作ります。</p>
-          <div className="update-time">最終更新：2026/06/11（木）2:12頃</div>
+          <div className="update-time">最終更新：{APP_LAST_UPDATED}</div>
           {heroImageUrl && <div className="hero-image"><img src={heroImageUrl} alt="ゆゆ姫ワールドのトップ画像" /></div>}
         </motion.div>
 
