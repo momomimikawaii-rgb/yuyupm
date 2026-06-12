@@ -528,7 +528,7 @@ function getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }) 
 }
 function makePromptSection(title, body) {
   const cleanBody = String(body || "").trim();
-  return cleanBody ? `【${title}】\n${cleanBody}` : "";
+  return cleanBody ? `\n\n【${title}】\n${cleanBody}` : "";
 }
 function getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color }) {
   const darkSceneIds = ["gothicIndoor"];
