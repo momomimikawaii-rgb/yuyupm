@@ -199,13 +199,6 @@ const outdoorWorlds = [
         options: ["石造りの中庭と回廊", "古い洋館風の寄宿学校前"],
         customPlaceholder: "例：霧の中庭、雪の回廊、古い校舎の門前",
       },
-      {
-        id: "boardingMagicItems",
-        title: "寄宿学校の魔法寄り小物",
-        multi: true,
-        options: ["なし", "ふくろう", "魔法の箒", "魔法書", "羽ペン", "ランタン", "古い鍵", "蝋封の手紙", "懐中時計", "魔法薬の小瓶", "古い羊皮紙", "小さな魔法の杖"],
-        customPlaceholder: "例：古い革表紙の本、学院章のペンダント",
-      },
     ],
   },];
 const sceneEffects = [
@@ -306,7 +299,15 @@ const shoeCategories = [
 const multiCategories = [
   { id: "containerScene", title: "ペットのポーズ・ギミック", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ちょこんと座る", "窓辺", "クッション", "前足そろえ", "スノードームの中", "シャボン玉の中", "ティーカップの中", "グラスの中", "苺バスケットの中", "花かごの中", "プレゼント箱の中", "ベビーベッド", "マカロンクッションの上", "馬車の中"], customPlaceholder: "例：宝石箱の中、透明な香水瓶の中、窓辺" },
   { id: "gesture", title: "ペットのしぐさ", defaultValue: "おまかせ", options: ["おまかせ", "首かしげ", "お花くんくん", "スイーツを食べる", "ケーキを見る", "笑顔"], customPlaceholder: "例：マカロンを見る、リボンを見上げる、ぺろっ" },
-  { id: "items", title: "小物・飾り", defaultValue: "おまかせ", options: ["おまかせ", "なし", "レース", "リボン", "パール", "フリル", "苺", "フルーツ各種いろいろ", "スウィーツ", "紅茶", "アフタヌーンティー", "花かご", "カーテン", "くまのぬいぐるみ", "うさぎのぬいぐるみ", "ふくろう", "魔法の箒", "魔法書", "羽ペン", "ランタン", "古い鍵", "蝋封の手紙", "懐中時計", "魔法薬の小瓶", "古い羊皮紙", "小さな魔法の杖"], customPlaceholder: "例：小さな王冠、ピンクの魔法ステッキ" },
+  { id: "itemCategories", title: "小物カテゴリ", defaultValue: "おまかせ", maxSelect: 3, options: ["おまかせ", "なし", "布・装飾系", "スウィーツ系", "花系", "ぬいぐるみ系", "アンティーク系", "魔法学校系", "カントリー系", "プリンセス・クラシカル系"], customLabel: "その他を記入", customPlaceholder: "例：和風小物、天使モチーフ、宝石系", helpText: "※選びすぎると散らかるよ💦" },
+  { id: "fabricItems", title: "布・装飾系小物", dependsOn: { id: "itemCategories", value: "布・装飾系" }, options: ["レース", "リボン", "パール", "フリル", "チュール", "カーテン", "リボンガーランド", "パールガーランド"], customLabel: "その他を記入", customPlaceholder: "例：生成りレース、白いリボンガーランド" },
+  { id: "sweetsItems", title: "スウィーツ系小物", dependsOn: { id: "itemCategories", value: "スウィーツ系" }, options: ["アフタヌーンティー", "紅茶セット", "お皿に可愛く盛られたスウィーツ3種", "タルト", "ケーキ", "クッキー缶", "キャンディボトル"], customLabel: "その他を記入", customPlaceholder: "例：マカロンタワー、いちごタルト" },
+  { id: "flowerItems", title: "花系小物", dependsOn: { id: "itemCategories", value: "花系" }, options: ["薔薇", "桜", "藤", "ラベンダー", "ネモフィラ", "紫陽花", "すずらん", "チューリップ", "カスミソウ", "ミモザ"], customLabel: "その他を記入", customPlaceholder: "例：パンジー、野いちごの花" },
+  { id: "plushItems", title: "ぬいぐるみ系小物", dependsOn: { id: "itemCategories", value: "ぬいぐるみ系" }, options: ["くま", "うさぎ", "猫", "ひよこ"], customLabel: "その他を記入", customPlaceholder: "例：ぞう、白くま、黒うさぎ" },
+  { id: "antiqueItems", title: "アンティーク系小物", dependsOn: { id: "itemCategories", value: "アンティーク系" }, options: ["キャンドル", "アンティーク時計", "古書", "額縁", "ステンドグラス", "ランタン", "羽ペン", "古い鍵", "懐中時計", "蝋封の手紙"], customLabel: "その他を記入", customPlaceholder: "例：銀の燭台、アンティーク鏡" },
+  { id: "magicSchoolItems", title: "魔法学校系小物", dependsOn: { id: "itemCategories", value: "魔法学校系" }, options: ["ふくろう", "魔法の箒", "魔法書", "魔法薬の小瓶", "古い羊皮紙", "小さな魔法の杖"], customLabel: "その他を記入", customPlaceholder: "例：魔法のランタン、学院章の本" },
+  { id: "countryItems", title: "カントリー系小物", dependsOn: { id: "itemCategories", value: "カントリー系" }, options: ["吊り植物", "戸棚の上の植物", "蔦植物", "ドライフラワー", "木箱", "木製戸棚", "籐かご", "ホーロー雑貨", "パッチワーク", "小花柄クロス"], customLabel: "その他を記入", customPlaceholder: "例：ハーブ鉢、木製キッチン戸棚" },
+  { id: "princessClassicItems", title: "プリンセス・クラシカル系小物", dependsOn: { id: "itemCategories", value: "プリンセス・クラシカル系" }, options: ["王冠", "ティアラ", "宝石箱", "香水瓶", "猫脚家具", "シャンデリア", "レース日傘", "クラシカル額縁"], customLabel: "その他を記入", customPlaceholder: "例：小さなガラスの靴、白い宝石箱" },
   { id: "wallDetail", title: "背景", indoorOnly: true, single: true, defaultValue: "おまかせ", options: ["おまかせ", "詳細選択"] },
   { id: "wallpaper", title: "屋内の壁紙", indoorOnly: true, single: true, defaultValue: "おまかせ（屋内世界観に合わせる）", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ（屋内世界観に合わせる）", "ピンクのストライプ壁紙", "苺柄の壁紙", "薔薇柄の壁紙", "小花柄の壁紙", "レース模様の壁紙", "天使やリボンの絵がある壁紙", "レースカーテン越しの光", "白い腰壁パネル"], customPlaceholder: "例：ピンクの薔薇柄壁紙、白い腰壁" },
   { id: "wallDecor", title: "屋内の壁飾り", indoorOnly: true, defaultValue: "おまかせ", dependsOn: { id: "wallDetail", value: "詳細選択" }, options: ["おまかせ", "なし", "額縁入りの可愛い絵", "ドライフラワーの壁飾り", "リボンガーランド", "Happy Birthdayと書かれた風船のガーランド", "アンティーク風の飾り棚", "小さな鏡", "ウォールランプ", "パールガーランド"], customPlaceholder: "例：額縁の天使画、リボンガーランド" },
@@ -771,7 +772,7 @@ function buildOutdoorScene({ selected, custom, outdoorWorldId }) {
   }
   if (world.id === "boardingSchoolOutdoor") {
     const place = getWorldValue("boardingOutdoorPlace", "石造りの中庭と回廊");
-    const magicItems = getWorldValues("boardingMagicItems", "");
+    const magicItems = joinValues(selected, custom, "magicSchoolItems", "");
     const placeDescriptions = {
       "石造りの中庭と回廊":
         "古い石造りの寄宿学校の中庭とアーチ回廊。石畳、重厚な柱、曇り空、冬の静かな光、少し湿った空気、映画のワンシーンのような奥行き。",
@@ -792,8 +793,27 @@ function buildSceneEffects({ selected, custom }) {
   if (!falling) return "";
   return `情景演出として、${falling}が${amount || "適度に"}舞っています。ペットの顔を邪魔しない量と位置にしてください。`;
 }
+function buildItemSelection(selected, custom) {
+  const itemCategoryCustom = splitCustomText(custom.itemCategories);
+  const detailIds = [
+    "fabricItems",
+    "sweetsItems",
+    "flowerItems",
+    "plushItems",
+    "antiqueItems",
+    "magicSchoolItems",
+    "countryItems",
+    "princessClassicItems",
+  ];
+
+  const detailValues = detailIds.flatMap((id) => getValues(selected, custom, id));
+  return [...detailValues, ...itemCategoryCustom]
+    .filter((item) => !isAutoValue(item))
+    .join("、");
+}
+
 function buildPrompt({ locationType, locationOption, selected, custom, outdoorWorldId, indoorWorldId }) {
-  const items = joinValues(selected, custom, "items");
+  const items = buildItemSelection(selected, custom);
   const containerScene = joinValues(selected, custom, "containerScene");
   const wallpaper = translateWallpaper(joinValues(selected, custom, "wallpaper", locationType === "indoor" ? "選んだ屋内世界観に自然に合う壁紙や壁面デザイン" : ""));
   const wallDecor = isWallDetailEnabled(selected) ? joinValues(selected, custom, "wallDecor") : "";
@@ -1007,6 +1027,7 @@ function getDisabledPlaceholder(category) {
   if (category.id === "uniformStyle") return "服の形で『制服』を選ぶと使えます";
   if (category.id === "kigurumiAnimal") return "服の形で『着ぐるみ』を選ぶと使えます";
   if (["clothingDecor", "fruitPattern", "flowerPattern", "otherPattern", "outfitColorChips"].includes(category.id)) return "服の形が『なし』以外の時に使えます";
+  if (category.id.endsWith("Items")) return "小物カテゴリを選ぶと使えます";
   if (["wallpaper", "wallDecor"].includes(category.id)) return "背景で『詳細選択』を選ぶと使えます";
   return "この項目は、関連する項目を選ぶと使えます";
 }
@@ -1123,7 +1144,7 @@ function CategorySection({ title, categories, selected, custom, onToggle, onCust
 }
 function App() {
   const [locationType, setLocationType] = useState("indoor");
-  const [locationOption, setLocationOption] = useState("お姫様の部屋");
+  const [locationOption, setLocationOption] = useState("アフタヌーンティーカフェ");
   const [indoorWorldId, setIndoorWorldId] = useState("dreamLolita");
   const [outdoorWorldId, setOutdoorWorldId] = useState("flowerGarden");
   const [selected, setSelected] = useState(initialSelected);
@@ -1213,7 +1234,7 @@ function App() {
   };
   const reset = () => {
     setLocationType("indoor");
-    setLocationOption("お姫様の部屋");
+    setLocationOption("アフタヌーンティーカフェ");
     setIndoorWorldId("dreamLolita");
     setOutdoorWorldId("flowerGarden");
     setSelected(initialSelected);
@@ -1411,6 +1432,7 @@ function App() {
                     customPlaceholder: "例：淡いピンクのバスタオル、藤色の薔薇の花びら"
                   }
                 : category)
+              .filter((category) => !category.dependsOn || (selected[category.dependsOn.id] || []).includes(category.dependsOn.value))
               .filter((category) => !(category.indoorOnly && locationType !== "indoor"))
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
               .filter((category) => !((isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) || isBathScene) && ["containerScene", "gesture"].includes(category.id)))
@@ -1448,31 +1470,34 @@ function App() {
                       <div className="color-chip-help">おまかせ、または最大3色まで選択可能。色の名前はチップにカーソルを重ねると表示されます。</div>
                     </>
                   ) : (
-                    <div className="chips">
-                      {category.options.map((option) => {
-                        const active = selected[category.id]?.includes(option);
-                        return (
-                          <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
-                            {category.id === "color" && getOverallColorSwatch(option) && (
-                              <span
-                                aria-hidden="true"
-                                style={{
-                                  display: "inline-block",
-                                  width: "16px",
-                                  height: "16px",
-                                  borderRadius: "999px",
-                                  marginRight: "6px",
-                                  verticalAlign: "-3px",
-                                  border: "1px solid rgba(100, 116, 139, 0.35)",
-                                  background: getOverallColorSwatch(option),
-                                }}
-                              />
-                            )}
-                            {option}
-                          </button>
-                        );
-                      })}
-                    </div>
+                    <>
+                      <div className="chips">
+                        {category.options.map((option) => {
+                          const active = selected[category.id]?.includes(option);
+                          return (
+                            <button key={option} onClick={() => toggleOption(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
+                              {category.id === "color" && getOverallColorSwatch(option) && (
+                                <span
+                                  aria-hidden="true"
+                                  style={{
+                                    display: "inline-block",
+                                    width: "16px",
+                                    height: "16px",
+                                    borderRadius: "999px",
+                                    marginRight: "6px",
+                                    verticalAlign: "-3px",
+                                    border: "1px solid rgba(100, 116, 139, 0.35)",
+                                    background: getOverallColorSwatch(option),
+                                  }}
+                                />
+                              )}
+                              {option}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      {category.helpText && <div className="color-chip-help">{category.helpText}</div>}
+                    </>
                   )}
                   <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
