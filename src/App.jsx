@@ -490,25 +490,25 @@ function describeAutoFallback(label) {
   return `${label}は、選んだ背景・季節・世界観に合わせて自然におまかせしてください。`;
 }
 function getSizeInstruction(size) {
-  const commonRule =
+  const compositionInstruction =
     "ペットは主役として自然に配置してください。ただしペットだけを大きく拡大せず、背景・建物・家具・風景・小物・舞台ギミックも作品の重要な要素として十分見える構図にしてください。背景がほとんど見えなくなるほどペットを大きくしないでください。逆に、ペットが豆粒のように小さくなる構図も避けてください。絵本の表紙や観光ポスターのように、ペットと背景の両方を楽しめる少し引いた構図にしてください。顔だけの極端なアップは禁止。全身または体の大部分が自然に見え、世界観や奥行きが伝わる構図にしてください。";
+  let sizeInstruction = "";
   if (size.includes("1:1") || size.includes("正方形")) {
-    return `縦横比は必ず1:1の正方形画像にしてください。縦長や横長にはしないでください。${commonRule}`;
+    sizeInstruction = "横縦比は必ず1:1の正方形画像にしてください。";
+  } else if (size.includes("4:5")) {
+    sizeInstruction = "横縦比は必ず4:5の縦長画像にしてください。可能な場合は1080×1350px相当の高品質な4:5縦長画像として作成してください。";
+  } else if (size.includes("9:16")) {
+    sizeInstruction = "横縦比は必ず9:16の縦長画像にしてください。";
+  } else if (size.includes("16:9")) {
+    sizeInstruction = "横縦比は必ず16:9の横長画像にしてください。";
+  } else {
+    sizeInstruction = size ? `横縦比は${size}にしてください。` : "横縦比は選択した比率に合わせてください。";
   }
-  if (size.includes("4:5")) {
-    return `縦横比は必ず4:5の縦長画像にしてください。可能な場合は1080×1350px相当の高品質な4:5縦長画像として作成してください。正方形（1:1）や横長にはしないでください。${commonRule}`;
-  }
-  if (size.includes("9:16")) {
-    return `縦横比は必ず9:16の縦長画像にしてください。正方形（1:1）や横長にはしないでください。${commonRule}`;
-  }
-  if (size.includes("16:9")) {
-    return `縦横比は必ず16:9の横長画像にしてください。正方形（1:1）や縦長にはしないでください。${commonRule}`;
-  }
-  return size ? `横縦比は${size}。${commonRule}` : commonRule;
+  return { sizeInstruction, compositionInstruction };
 }
 function translateOutfit(outfit) {
   if (!outfit) return "";
-  return outfit.split("、").map((item) => outfitTranslations[item] || item).join("、");
+  return outfit.split("、").map((item) => outfitTranslations[item] || item).join("、").replace(/。+$/g, "");
 }
 function normalizeAutoColor(value) {
   const clean = String(value || "").trim();
@@ -528,7 +528,7 @@ function getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }) 
 }
 function makePromptSection(title, body) {
   const cleanBody = String(body || "").trim();
-  return cleanBody ? `\n\n【${title}】\n${cleanBody}` : "";
+  return cleanBody ? `【${title}】\n${cleanBody}` : "";
 }
 function getAutoLightingInstruction({ locationType, indoorWorldId, outdoorWorldId, locationOption, color }) {
   const darkSceneIds = ["gothicIndoor"];
@@ -863,7 +863,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const density = getSingleValue(selected, custom, "density", "おまかせ", { keepAuto: true });
   const textOverlay = getSingleValue(selected, custom, "textOverlay", "なし", { keepAuto: true });
   const size = joinValues(selected, custom, "size", "インスタ投稿用 縦長4:5", { keepAuto: true });
-  const aspectInstruction = getSizeInstruction(size);
+  const { sizeInstruction, compositionInstruction } = getSizeInstruction(size);
   const isMirrorScene = isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption);
   const isBathScene = isDreamLolitaBathScene(locationType, indoorWorldId, locationOption);
   const isVillainessPartyScene = isGothicVillainessPartyScene(locationType, indoorWorldId, locationOption);
@@ -967,29 +967,29 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const gestureDescription = isBathScene ? "" : translateGesture(gesture);
   const gestureSection = gestureDescription ? `ペットのしぐさは${gestureDescription}。` : "";
   const scenePoseSection = [sceneEffectSentence, gestureSection].filter(Boolean).join("\n");
-  const scenePoseBlock = scenePoseSection ? `\n\n【情景演出・ポーズ】\n${scenePoseSection}` : "";
-  return `【最優先：ペット本人の保持】
-${identityRule}
-【世界観・背景】
-${baseScene}
-背景は明るく、やさしい光に包まれていて、可愛いけれどペットの顔を邪魔しない。
-${makePromptSection("服", isBathScene ? "" : clothingSentence)}
-${makePromptSection("頭装備", headSentence)}
-${makePromptSection("アクセサリー", accessorySentence)}
-${makePromptSection("靴・足元", shoeSentence)}
-${makePromptSection("服セットの色合い", outfitColorSentence)}
-${makePromptSection("舞台ギミック", containerSentence)}
-${makePromptSection("小物", `${itemSentence}
-${adaptiveDesignRule}`)}
-${scenePoseBlock}
-${makePromptSection("画像全体の色合い", getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId }))}
-${lighting}
-【仕上げ】
-${densitySentence}
-${translateTextOverlay(textOverlay)}
-【サイズ・構図】
-${aspectInstruction}
-ふんわり上品で夢かわいい一枚にしてください。`;
+  const scenePoseBlock = makePromptSection("情景演出・ポーズ", scenePoseSection);
+  const finalSections = [
+    makePromptSection("最優先：ペット本人の保持", identityRule),
+    makePromptSection("世界観・背景", `${baseScene}
+背景は明るく、やさしい光に包まれていて、可愛いけれどペットの顔を邪魔しない。`),
+    makePromptSection("服", isBathScene ? "" : clothingSentence),
+    makePromptSection("頭装備", headSentence),
+    makePromptSection("アクセサリー", accessorySentence),
+    makePromptSection("靴・足元", shoeSentence),
+    makePromptSection("服セットの色合い", outfitColorSentence),
+    makePromptSection("舞台ギミック", containerSentence),
+    makePromptSection("小物", `${itemSentence}
+${adaptiveDesignRule}`),
+    scenePoseBlock,
+    makePromptSection("画像全体の色合い", getAutoOverallColorInstruction({ color, outfitColors, indoorWorldId })),
+    lighting,
+    makePromptSection("仕上げ", `${densitySentence}
+${translateTextOverlay(textOverlay)}`),
+    makePromptSection("サイズ", sizeInstruction),
+    makePromptSection("構図", compositionInstruction),
+    "ふんわり上品で夢かわいい一枚にしてください。",
+  ].filter(Boolean);
+  return finalSections.join("\n\n");
 }
 async function copyTextSafely(text, fallbackElement) {
   try {
