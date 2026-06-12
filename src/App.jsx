@@ -340,7 +340,7 @@ const initialSelected = Object.fromEntries(
     .map((category) => [category.id, [category.defaultValue]])
 );
 const customFieldLabels = Object.fromEntries(
-  allCategoryDefinitions.map((category) => [category.id, category.title])
+  allCategoryDefinitions.map((category) => [category.id, category.customLabel || `${category.title}を記入`])
 );
 const customPlaceholders = Object.fromEntries(
   allCategoryDefinitions.map((category) => [category.id, category.customPlaceholder || "カンマ、読点、改行で複数追加できます"])
@@ -1532,7 +1532,7 @@ function App() {
                       {category.helpText && <div className="color-chip-help">{category.helpText}</div>}
                     </>
                   )}
-                  <label><PlusCircle size={16} /> {customFieldLabels[category.id]}を記入</label>
+                  <label><PlusCircle size={16} /> {customFieldLabels[category.id]}</label>
                   <input value={custom[category.id] || ""} onChange={(event) => updateCustom(category.id, event.target.value)} placeholder={customPlaceholders[category.id] || "カンマ、読点、改行で複数追加できます"} />
                 </section>
               );
