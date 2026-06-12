@@ -482,7 +482,7 @@ function getSizeInstruction(size) {
   if (size.includes("16:9")) {
     return `縦横比は必ず16:9の横長画像にしてください。正方形（1:1）や縦長にはしないでください。${commonRule}`;
   }
-  return size ? `縦横の比率は${size}。${commonRule}` : commonRule;
+  return size ? `横縦比は${size}。${commonRule}` : commonRule;
 }
 function translateOutfit(outfit) {
   if (!outfit) return "";
