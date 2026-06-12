@@ -315,7 +315,7 @@ const multiCategories = [
   { id: "color", title: "全体の色合い（3個まで選択可能）", type: "colorChips", single: false, maxSelect: 3, defaultValue: "おまかせ", options: colorChipOptions, customPlaceholder: "その他を記入" },
   { id: "density", title: "密度・余白", single: true, defaultValue: "おまかせ", options: ["おまかせ", "すっきり", "普通", "ごちゃかわ", "超ごちゃかわ"], customPlaceholder: "例：余白多め、背景はすっきり" },
   { id: "textOverlay", title: "文字入れ（短い英語推奨・失敗する場合あり）", single: true, defaultValue: "なし", options: ["なし", "Happy Birthday", "Happy Anniversary", "Thank you", "Welcome", "Sweet Dream"], customPlaceholder: "例：Happy Birthday（短い英語推奨）" },
-  { id: "size", title: "縦横の比率", single: true, defaultValue: "インスタ投稿用 縦長4:5", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
+  { id: "size", title: "横縦比", single: true, defaultValue: "インスタ投稿用 縦長4:5", options: ["正方形 1:1", "インスタ投稿用 縦長4:5", "リール・ストーリー用 縦長9:16", "横長16:9"], customPlaceholder: "例：横長3:2、縦長2:3" },
 ];
 const uiSections = [
   { id: "clothing", title: "服", categories: clothingCategories },
@@ -1539,7 +1539,7 @@ function App() {
             })}
             <section className="card">
               <div className="card-head category-card-head">
-                <h2>縦横の比率</h2>
+                <h2>横縦比</h2>
                 <button
                   type="button"
                   className="category-reset"
