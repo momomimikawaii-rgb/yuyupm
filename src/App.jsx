@@ -1160,12 +1160,31 @@ function App() {
   const [outdoorWorldId, setOutdoorWorldId] = useState("flowerGarden");
   const [selected, setSelected] = useState(initialSelected);
   const [custom, setCustom] = useState({});
+  const [aspectW, setAspectW] = useState("4");
+  const [aspectH, setAspectH] = useState("5");
   const [featuredPrompt, setFeaturedPrompt] = useState("");
   const [copyStatus, setCopyStatus] = useState("idle");
   const [modalImage, setModalImage] = useState(null);
   const [recommendedOpen, setRecommendedOpen] = useState(true);
   const [worldOpen, setWorldOpen] = useState(true);
   const textAreaRef = useRef(null);
+  const applyAspect = (w, h) => {
+    setFeaturedPrompt("");
+    setAspectW(w);
+    setAspectH(h);
+    const wTrim = String(w).trim();
+    const hTrim = String(h).trim();
+    if (wTrim && hTrim) {
+      setCustom((prev) => ({ ...prev, size: `${wTrim}:${hTrim}` }));
+      setSelected((prev) => ({ ...prev, size: [] }));
+    } else {
+      setCustom((prev) => {
+        const next = { ...prev };
+        delete next.size;
+        return next;
+      });
+    }
+  };
   const toggleOption = (categoryId, option, single = false, maxSelect = null) => {
     setFeaturedPrompt("");
     setSelected((prev) => {
@@ -1250,6 +1269,8 @@ function App() {
     setOutdoorWorldId("flowerGarden");
     setSelected(initialSelected);
     setCustom({});
+    setAspectW("4");
+    setAspectH("5");
     setFeaturedPrompt("");
     setCopyStatus("idle");
   };
@@ -1448,6 +1469,7 @@ function App() {
               .filter((category) => !(isUpsideDownStairs && category.id === "containerScene"))
               .filter((category) => !((isDreamLolitaMirrorScene(locationType, indoorWorldId, locationOption) || isBathScene) && ["containerScene", "gesture"].includes(category.id)))
               .filter((category) => !(["wallpaper", "wallDecor"].includes(category.id) && !(selected.wallDetail || []).includes("詳細選択")))
+              .filter((category) => category.id !== "size")
               .map((category) => {
               const CategoryIcon = category.icon;
               const displayTitle = getDisplayTitle(category);
@@ -1515,6 +1537,66 @@ function App() {
                 </section>
               );
             })}
+            <section className="card">
+              <div className="card-head category-card-head">
+                <h2>縦横の比率</h2>
+                <button
+                  type="button"
+                  className="category-reset"
+                  onClick={() => applyAspect("4", "5")}
+                >
+                  リセット
+                </button>
+              </div>
+              <div className="chips">
+                {[
+                  { label: "正方形 1:1", w: "1", h: "1" },
+                  { label: "インスタ投稿用 縦長4:5", w: "4", h: "5" },
+                  { label: "リール・ストーリー用 縦長9:16", w: "9", h: "16" },
+                  { label: "横長16:9", w: "16", h: "9" },
+                ].map((preset) => {
+                  const active = aspectW === preset.w && aspectH === preset.h;
+                  return (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => applyAspect(preset.w, preset.h)}
+                      className={`chip ${active ? "active" : ""}`}
+                    >
+                      {preset.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <div style={{ display: "flex", gap: "12px", alignItems: "flex-end", marginTop: "10px", flexWrap: "wrap" }}>
+                <label style={{ display: "grid", gap: "4px" }}>
+                  <span>横</span>
+                  <input
+                    type="number"
+                    min="1"
+                    inputMode="numeric"
+                    value={aspectW}
+                    onChange={(event) => applyAspect(event.target.value, aspectH)}
+                    style={{ width: "90px" }}
+                  />
+                </label>
+                <span style={{ paddingBottom: "10px", fontSize: "18px" }}>：</span>
+                <label style={{ display: "grid", gap: "4px" }}>
+                  <span>縦</span>
+                  <input
+                    type="number"
+                    min="1"
+                    inputMode="numeric"
+                    value={aspectH}
+                    onChange={(event) => applyAspect(aspectW, event.target.value)}
+                    style={{ width: "90px" }}
+                  />
+                </label>
+              </div>
+              <div className="color-chip-help">
+                現在の比率：{aspectW || "?"}：{aspectH || "?"}（横：縦。内部では「{aspectW}:{aspectH}」として扱います）
+              </div>
+            </section>
 </div>
           <div className="right sticky-prompt-column">
             <section className="card instagram-card">
