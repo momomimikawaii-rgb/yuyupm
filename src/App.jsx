@@ -312,7 +312,7 @@ const headCategories = [
   { id: "earType", title: "耳の種類", single: true, defaultValue: "おまかせ", dependsOn: { id: "headDecor", value: "耳" }, options: ["おまかせ", "猫耳", "くま耳", "うさぎ耳", "垂れ耳うさぎ", "狐耳"] },
 ];
 const accessoryCategories = [
-  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ネックレス", "ブレスレット", "スタイ", "ワッペン", "ハートのバッグ", "小さなポシェット"], customLabel: "その他を記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
+  { id: "accessories", title: "アクセサリー", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ネックレス", "ブレスレット", "スタイ", , "ハートのバッグ", "小さなポシェット"], customLabel: "その他を記入", customPlaceholder: "例：フリルがついた可愛いスタイ、パールのブレスレット、ハートのバッグ" },
 ];
 const shoeCategories = [
   { id: "shoeShape", title: "靴の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ローファー", "ブーツ", "スニーカー", "サンダル", "パンプス"], customPlaceholder: "例：白いレース靴、ピンクの長靴" },
@@ -1396,7 +1396,7 @@ function App() {
               </div>
               <div className="notice">
                 <strong>ゆゆ姫ワールドの作り方</strong>
-                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。黒い子・濃い茶色の子・グレー系の子は、背景まで暗く引っ張られやすいので「明るくハイキー」系の光設定推奨です。</span>
+                <span>屋内も屋外も、まず世界観を選んでから場所や装飾を選びます。選んだ世界観に合わせて、背景・小物・光・密度を自然に調整します。</span>
               </div>
             </section>
             <section className="card">
