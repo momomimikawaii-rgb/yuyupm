@@ -206,7 +206,17 @@ const sceneEffects = [
   { id: "effectAmount", title: "演出量", single: true, options: ["少なめ", "適度に", "たくさん"], customPlaceholder: "例：画面の邪魔にならない程度" },
 ];
 const outfitTranslations = {
-  "ピンクハウス系": "ワッペンや刺繍がたくさん付いた、カントリーロマンティックな服。くま・いちご・ひなぎくモチーフ。ゆったりしたブルゾン。段フリルのロングスカート。生成りレースとコットン素材。レトロで可愛い雰囲気。",
+  "ロリータ系": "レースやフリルを使った、上品で華やかなロリータ服。可愛らしさを大切にしつつ、派手すぎる舞台衣装感や巨大パニエ感は避け、自然な美しさを重視してください。",
+  "日常ロリータ系": "レースやフリルを使いつつも、日常でも着られる自然さを大切にしたロリータ服。上品で柔らかい雰囲気を重視し、おでかけやティータイムに似合う可愛さにしてください。",
+  "ピンクハウス系": "花柄、コットン、生成りレース、段フリルを使った、カントリーロマンティックな服。くまやいちごなどの大きめワッペン、アップリケ、刺繍を多く使い、素朴で優しい可愛さを大切にしてください。",
+  "クラシカル系": "アンティークやヨーロッパ映画のような、落ち着いたクラシカルな服。レースや上品な装飾を使い、静かなティールームや古い洋館に似合う、柔らかく上品な雰囲気を大切にしてください。",
+  "お嬢様系": "清楚で上品な、お嬢様風の服。やわらかな色合い、控えめなレースやリボンを使い、落ち着いた可愛らしさを大切にしてください。",
+  "フリル系": "フリルやレースをたっぷり使った、甘く可愛らしい服。盛りすぎず、ペットの顔や体型に自然に合う上品なバランスにしてください。",
+  "プリンセス系": "お姫様のような、華やかで夢かわいい服。上品なドレス感を大切にし、ペットの可愛さを隠さない自然な装飾にしてください。",
+  "エレガント": "落ち着いた上品さを重視した、綺麗めの服。シンプルすぎず、世界観に合う柔らかな華やかさを添えてください。",
+  "カジュアル": "自然で動きやすい、普段着風の可愛い服。気軽なおでかけに似合う、やさしく親しみやすい雰囲気にしてください。",
+  "スポーティ": "スニーカーやパーカーなどを取り入れた、元気で軽やかな服。スポーティでも可愛さを保ち、明るく清潔感のある雰囲気にしてください。",
+  "ゴスロリ系": "黒やレースを使った、ゴシックで可愛いロリータ服。暗くなりすぎず、上品で闇かわいい雰囲気を大切にしてください。",
   "ゴスロリドレス": "ゴスロリドレス",
   "パンクロック衣装": "チェーンがたくさん付いたハードロック風ファッション。黒レザー、スタッズ、シルバーチェーン、少し反抗的でかっこいい雰囲気。",
   "白馬の王子様衣装": "白と金を基調にした上品で神聖な王子様衣装。マント、宝石装飾、クラシカルなプリンス風の雰囲気。",
@@ -269,12 +279,24 @@ const colorChipOptions = [
   { name: "パステル虹色", value: "linear-gradient(90deg, #ff9fb8 0%, #ffb9a6 18%, #fff1a8 38%, #c8f3c8 52%, #9fdcff 72%, #b78cff 100%)" },
   { name: "夢かわ虹色", value: "linear-gradient(90deg, #9fdcff 0%, #c9e7ff 24%, #ffd1e8 50%, #dcbfff 76%, #b78cff 100%)" },
 ];
+const clothingStyleDescriptions = {
+  "ロリータ系": "レースやフリルを使った、華やかで可愛いロリータ服。",
+  "日常ロリータ系": "日常でも着やすい、自然で上品なロリータ服。",
+  "ピンクハウス系": "花柄やコットン、生成りレースを使った、カントリーロマンティックな可愛さ。",
+  "クラシカル系": "アンティークやヨーロッパ映画のような、落ち着いた上品さ。",
+  "プリンセス系": "お姫様のような、華やかで夢かわいい雰囲気。",
+  "フリル系": "フリルやレースをたっぷり使った、甘く可愛らしい服。",
+  "エレガント": "落ち着いた上品さを重視した、大人っぽく綺麗な雰囲気。",
+  "カジュアル": "自然で動きやすい、普段着風の可愛い服。",
+  "スポーティ": "スニーカーやパーカーを使った、元気で軽やかな雰囲気。",
+  "ゴスロリ系": "黒やレースを使った、ゴシックで可愛いロリータ服。",
+};
 const clothingCategories = [
   { id: "clothingSeason", title: "服の季節", single: true, defaultValue: "おまかせ", options: ["おまかせ", "春", "夏", "秋", "冬", "酷寒"] },
   { id: "clothingShape", title: "服の形", single: true, defaultValue: "おまかせ", options: ["おまかせ", "なし", "ワンピース", "ドレス", "エプロンワンピース", "ケープ", "制服", "着ぐるみ", "マント", "コート"], customPlaceholder: "例：ピンクハウス風ワンピース、寄宿学校風制服" },
   { id: "uniformStyle", title: "制服の詳細", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "制服" }, options: ["おまかせ", "イギリス寄宿学校風制服", "白シャツと黒リボンの学院制服", "チェック柄の学院制服", "冬の学院マント", "赤薔薇が似合うクラシカル男子制服", "自由記入"], customPlaceholder: "例：黒を基調とした学院制服、白シャツと黒リボン" },
   { id: "kigurumiAnimal", title: "着ぐるみの動物名", single: true, defaultValue: "おまかせ", dependsOn: { id: "clothingShape", value: "着ぐるみ" }, options: ["おまかせ", "リス", "モモンガ", "ひよこ", "うさぎ", "くま", "猫", "自由記入"], customPlaceholder: "例：白うさぎ、エゾモモンガ、ころんとしたリス" },
-  { id: "clothingStyle", title: "服の系統", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ロリータ系", "ゴスロリ系", "ピンクハウス系", "クラシカル系", "お嬢様系", "フリル系", "プリンセス系", "エレガント", "カジュアル", "スポーティ"], customPlaceholder: "例：クラシカルロリータ、アンティークドール風" },
+  { id: "clothingStyle", title: "服の系統", single: true, defaultValue: "おまかせ", options: ["おまかせ", "ロリータ系", "日常ロリータ系", "ゴスロリ系", "ピンクハウス系", "クラシカル系", "お嬢様系", "フリル系", "プリンセス系", "エレガント", "カジュアル", "スポーティ"], customPlaceholder: "例：クラシカルロリータ、アンティークドール風" },
   { id: "clothingDecor", title: "服の装飾", multi: true, defaultValue: "おまかせ", options: ["おまかせ", "フリル", "レース", "リボン", "チュール", "パール", "刺繍", "スパンコール", "ラインストーン"] },
   { id: "patternType", title: "服の柄", single: true, defaultValue: "おまかせ", options: ["おまかせ", "無地", "柄物"], hideCustom: true },
   { id: "fruitPattern", title: "果物柄", multi: true, defaultValue: "おまかせ", dependsOn: { id: "patternType", value: "柄物" }, options: ["おまかせ", "苺", "さくらんぼ", "苺と白い花"], customPlaceholder: "例：桃、ブルーベリー、野いちご" },
@@ -1117,16 +1139,26 @@ function OptionGroup({ category, selected, custom, onToggle, onCustomChange, res
           <div className="color-chip-help">おまかせ、または最大3色まで選択可能。色の名前はチップにカーソルを重ねると表示されます。</div>
         </>
       ) : (
-        <div className="chips">
-          {category.options.map((option) => {
-            const active = selectedValues.includes(option);
-            return (
-              <button key={option} type="button" disabled={disabled} onClick={() => !disabled && onToggle(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
-                {option}
-              </button>
-            );
-          })}
-        </div>
+        <>
+          <div className="chips">
+            {category.options.map((option) => {
+              const active = selectedValues.includes(option);
+              return (
+                <button key={option} type="button" disabled={disabled} onClick={() => !disabled && onToggle(category.id, option, category.single, category.maxSelect)} className={`chip ${active ? "active" : ""}`}>
+                  {option}
+                </button>
+              );
+            })}
+          </div>
+          {category.id === "clothingStyle" && selectedValues
+            .filter((value) => !["おまかせ", "なし", "自由記入"].includes(value) && clothingStyleDescriptions[value])
+            .map((value) => (
+              <div key={value} className="color-chip-help">
+                <strong>{value}</strong>：{clothingStyleDescriptions[value]}
+              </div>
+            ))}
+          {category.helpText && <div className="color-chip-help">{category.helpText}</div>}
+        </>
       )}
       {!category.hideCustom && (
         <>
