@@ -853,7 +853,7 @@ function buildPrompt({ locationType, locationOption, selected, custom, outdoorWo
   const clothingParts = [];
   if (clothingSeason) clothingParts.push(`季節は${clothingSeason}`);
   if (clothingShape) clothingParts.push(`服の形は${clothingShape}`);
-  if (uniformStyle) clothingParts.push(`制服の詳細は${translateOutfit(uniformStyle)}`);
+  if (uniformStyle) clothingParts.push(translateOutfit(uniformStyle));
   if (kigurumiAnimal) clothingParts.push(`着ぐるみの動物モチーフは${kigurumiAnimal}`);
   const clothingStyle = getSingleValue(selected, custom, "clothingStyle", "");
   if (clothingStyle && clothingStyle !== "おまかせ") clothingParts.push(`服の系統は${translateOutfit(clothingStyle)}`);
